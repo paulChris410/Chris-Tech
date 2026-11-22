@@ -507,7 +507,7 @@
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 550px;
+            max-width: min(550px, 94vw);
         }
 
         .hero-actions {
@@ -542,13 +542,13 @@
         .section-header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: min(600px, 94vw);
             margin: 0 auto;
         }
 
         .timeline-container {
             position: relative;
-            max-width: 900px;
+            max-width: min(900px, 95vw);
             margin: 0 auto;
             padding-left: 3rem;
             border-left: 2px dashed var(--panel-border);
@@ -594,7 +594,7 @@
         .timeline-desc {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            max-width: 750px;
+            max-width: min(750px, 95vw);
         }
 
         /* EXTENDED SECTION: REVIEWS / TESTIMONIALS GRID */
@@ -674,13 +674,13 @@
         .newsletter-card p {
             color: var(--text-secondary);
             font-size: 1.05rem;
-            max-width: 550px;
+            max-width: min(550px, 94vw);
             margin: 0 auto 2.5rem auto;
         }
 
         .newsletter-form {
             display: flex;
-            max-width: 550px;
+            max-width: min(550px, 94vw);
             margin: 0 auto;
             gap: 0.8rem;
         }
@@ -769,7 +769,7 @@
         .menu-top p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: min(600px, 94vw);
             margin: 0 auto;
         }
 
@@ -1045,7 +1045,7 @@
         .gallery-top p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: min(600px, 94vw);
             margin: 0 auto;
         }
 
@@ -1145,7 +1145,7 @@
 
         .lightbox-content {
             position: relative;
-            max-width: 900px;
+            max-width: min(900px, 95vw);
             max-height: 80vh;
             border-radius: 20px;
             overflow: hidden;
@@ -1815,6 +1815,76 @@
             }
         }
     </style>
+
+  <style id="ct-mobile-responsive-fix">
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      -webkit-text-size-adjust: 100%;
+    }
+    img, video, canvas, svg, iframe { max-width: 100% !important; }
+    table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 768px) {
+      header, nav, section, main, footer, .container, [class*="max-w-"] {
+        max-width: 100% !important;
+      }
+      header > div, .navbar, .nav-container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+      }
+      header a, header button {
+        max-width: 100%;
+      }
+      header .serif, header .logo, header h1 {
+        font-size: 1.05rem !important;
+        line-height: 1.1 !important;
+      }
+      header .text-\[10px\], header .tracking-\[0\.22em\] {
+        font-size: 8.5px !important;
+        letter-spacing: 0.08em !important;
+      }
+      header a[href^="#"], header button {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 11px !important;
+      }
+      /* Force fixed desktop grids & widths (e.g. Brew Haven, split heroes, modals) into clean 1-col mobile */
+      .hero-grid, .about-grid, .menu-grid, .footer-grid, .contact-grid, .modal-content, .cart-drawer, .drawer {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      [style*="width: min(550px, 94vw)"], [style*="width: min(600px, 94vw)"], [style*="width: min(750px, 95vw)"], [style*="width: min(900px, 95vw)"] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      section {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+      }
+      h1 { font-size: clamp(1.75rem, 7vw, 2.3rem) !important; line-height: 1.15 !important; word-break: break-word; }
+      h2 { font-size: clamp(1.4rem, 5.8vw, 1.9rem) !important; line-height: 1.2 !important; word-break: break-word; }
+      h3 { font-size: clamp(1.1rem, 4.5vw, 1.4rem) !important; line-height: 1.25 !important; }
+      p, li { font-size: 0.9rem; overflow-wrap: break-word; }
+      .grid { gap: 1rem !important; }
+      /* Ensure hero / card buttons never clip on 360px-390px phones */
+      button, a.btn, .btn-primary, .btn-secondary {
+        white-space: normal !important;
+        text-align: center;
+      }
+      /* Brew Haven specific fixed modal/drawer widths */
+      .modal, .cart-modal, .booking-modal, .inbox-modal, .reservation-modal, .modal-box {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        margin: 0 auto !important;
+      }
+    }
+  </style>
+
 </head>
 <body>
 

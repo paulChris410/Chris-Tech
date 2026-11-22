@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURELIA DELACROIX â€” Galerie d'Art Contemporain, Studio 3D WebGL & Commissions</title>
+  <title>AURELIA DELACROIX — Galerie d'Art Contemporain, Studio 3D WebGL & Commissions</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +51,76 @@
       });
     });
   </script>
+
+  <style id="ct-mobile-responsive-fix">
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      -webkit-text-size-adjust: 100%;
+    }
+    img, video, canvas, svg, iframe { max-width: 100% !important; }
+    table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 768px) {
+      header, nav, section, main, footer, .container, [class*="max-w-"] {
+        max-width: 100% !important;
+      }
+      header > div, .navbar, .nav-container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+      }
+      header a, header button {
+        max-width: 100%;
+      }
+      header .serif, header .logo, header h1 {
+        font-size: 1.05rem !important;
+        line-height: 1.1 !important;
+      }
+      header .text-\[10px\], header .tracking-\[0\.22em\] {
+        font-size: 8.5px !important;
+        letter-spacing: 0.08em !important;
+      }
+      header a[href^="#"], header button {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 11px !important;
+      }
+      /* Force fixed desktop grids & widths (e.g. Brew Haven, split heroes, modals) into clean 1-col mobile */
+      .hero-grid, .about-grid, .menu-grid, .footer-grid, .contact-grid, .modal-content, .cart-drawer, .drawer {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      [style*="width: 550px"], [style*="width: 600px"], [style*="width: 750px"], [style*="width: 900px"] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      section {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+      }
+      h1 { font-size: clamp(1.75rem, 7vw, 2.3rem) !important; line-height: 1.15 !important; word-break: break-word; }
+      h2 { font-size: clamp(1.4rem, 5.8vw, 1.9rem) !important; line-height: 1.2 !important; word-break: break-word; }
+      h3 { font-size: clamp(1.1rem, 4.5vw, 1.4rem) !important; line-height: 1.25 !important; }
+      p, li { font-size: 0.9rem; overflow-wrap: break-word; }
+      .grid { gap: 1rem !important; }
+      /* Ensure hero / card buttons never clip on 360px-390px phones */
+      button, a.btn, .btn-primary, .btn-secondary {
+        white-space: normal !important;
+        text-align: center;
+      }
+      /* Brew Haven specific fixed modal/drawer widths */
+      .modal, .cart-modal, .booking-modal, .inbox-modal, .reservation-modal, .modal-box {
+        width: 94vw !important;
+        max-width: 94vw !important;
+        margin: 0 auto !important;
+      }
+    }
+  </style>
+
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950">
 
@@ -58,9 +128,9 @@
   <div class="bg-[#131722] border-b border-white/10 text-xs py-2.5 px-4">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-slate-300">
       <div class="flex items-center gap-3">
-        <span class="text-amber-400 font-bold">â— Exposition PrivÃ©e & Galerie 3D Interactive</span>
-        <span class="hidden sm:inline">â€¢</span>
-        <span class="hidden sm:inline">Ateliers : Paris IV â€¢ Berlin â€¢ Douala & YaoundÃ©</span>
+        <span class="text-amber-400 font-bold">● Exposition Privée & Galerie 3D Interactive</span>
+        <span class="hidden sm:inline">•</span>
+        <span class="hidden sm:inline">Ateliers : Paris IV • Berlin • Douala & Yaoundé</span>
       </div>
       <div class="text-amber-300 font-semibold">Acquisitions & Commandes Sur-Mesure (Tarifs en FCFA)</div>
     </div>
@@ -77,7 +147,7 @@
         </div>
       </a>
       <nav class="hidden lg:flex items-center gap-8 text-sm text-slate-200 font-medium">
-        <a href="#oeuvres" class="hover:text-amber-400 transition">Å’uvres SÃ©lectionnÃ©es (6)</a>
+        <a href="#oeuvres" class="hover:text-amber-400 transition">Œuvres Sélectionnées (6)</a>
         <a href="#studio-3d" class="hover:text-amber-400 transition">Inspecteur Toile 3D</a>
         <a href="#alchimie" class="hover:text-amber-400 transition">Alchimie des Pigments</a>
         <a href="#calculateur" class="hover:text-amber-400 transition">Simulateur Commission</a>
@@ -97,20 +167,20 @@
           <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
           <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-          <span>SynthÃ¨se des Quatre Pigments MinÃ©raux</span>
+          <span>Synthèse des Quatre Pigments Minéraux</span>
         </div>
 
         <h1 class="text-4xl sm:text-6xl font-bold leading-[1.05] text-white">
-          La RÃ©sonance Optique de la <span class="italic font-normal text-amber-400">Haute Peinture.</span>
+          La Résonance Optique de la <span class="italic font-normal text-amber-400">Haute Peinture.</span>
         </h1>
 
         <p class="text-base sm:text-lg text-slate-200 leading-relaxed">
-          Toiles monumentales Ã  l'huile et cire froide sur lin de Belgique. Explorez nos Å“uvres en haute rÃ©solution, manipulez le chÃ¢ssis 3D en temps rÃ©el et estimez votre commande sur-mesure en FCFA.
+          Toiles monumentales à l'huile et cire froide sur lin de Belgique. Explorez nos œuvres en haute résolution, manipulez le châssis 3D en temps réel et estimez votre commande sur-mesure en FCFA.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
           <a href="#oeuvres" class="py-4 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-sm text-center transition">
-            Explorer la Galerie (6 Toiles) â†’
+            Explorer la Galerie (6 Toiles) →
           </a>
           <a href="#studio-3d" class="py-4 px-6 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm text-center transition">
             Tester le Studio 3D WebGL
@@ -127,7 +197,7 @@
           </div>
           <div id="hero3dBox" class="w-full h-[340px] sm:h-[380px] rounded-2xl bg-[#080A0F] relative overflow-hidden"></div>
           <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300 px-1">
-            <span>Ã‰clairage MusÃ©e : 3200K Warm Halal Spot</span>
+            <span>Éclairage Musée : 3200K Warm Halal Spot</span>
             <div class="flex gap-2">
               <button onclick="setLightColor(0x1837b9)" class="px-2.5 py-1 rounded bg-blue-700 text-white font-semibold">Outremer</button>
               <button onclick="setLightColor(0xffc300)" class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-semibold">Cadmium</button>
@@ -139,13 +209,13 @@
     </div>
   </section>
 
-  <!-- SECTION 2: GALERIE DE 6 Å’UVRES AVEC FILTRES (TARIFS EN FCFA) -->
+  <!-- SECTION 2: GALERIE DE 6 ŒUVRES AVEC FILTRES (TARIFS EN FCFA) -->
   <section id="oeuvres" class="py-20 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
         <div>
           <span class="text-xs uppercase tracking-[0.22em] text-amber-400 font-bold">01 // Collection Permanente</span>
-          <h2 class="text-3xl sm:text-5xl font-bold text-white mt-2">Å’uvres SÃ©lectionnÃ©es</h2>
+          <h2 class="text-3xl sm:text-5xl font-bold text-white mt-2">Œuvres Sélectionnées</h2>
         </div>
         <div class="flex flex-wrap gap-2">
           <button onclick="filterArt('all', this)" class="art-btn px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs">Toutes (6)</button>
@@ -161,17 +231,17 @@
             <img src="../images/work-oil-horizon.jpg" alt="The Deep Horizon" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Huile & Cire Froide sur Lin â€¢ 160 Ã— 120 cm</span>
-                <span class="text-emerald-400">â— Disponible</span>
+                <span>Huile & Cire Froide sur Lin • 160 Ã— 120 cm</span>
+                <span class="text-emerald-400">● Disponible</span>
               </div>
               <h3 class="text-2xl font-bold text-white">L'Horizon Lapis & Viridian</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">450,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Superposition de bleu outremer profond et glacis Ã©meraude rÃ©veillÃ©s par une crÃªte solaire au jaune de cadmium pur.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Superposition de bleu outremer profond et glacis émeraude réveillés par une crête solaire au jaune de cadmium pur.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
             <button onclick="inquireArt('L\'Horizon Lapis & Viridian (450,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -179,20 +249,20 @@
         <!-- 2 -->
         <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="oil">
           <div>
-            <img src="../images/work-gouache-fragments.jpg" alt="Ã‰tude en Garance" class="w-full h-64 object-cover" />
+            <img src="../images/work-gouache-fragments.jpg" alt="Étude en Garance" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Huile & Poudre de Marbre â€¢ 120 Ã— 90 cm</span>
-                <span class="text-emerald-400">â— Disponible</span>
+                <span>Huile & Poudre de Marbre • 120 Ã— 90 cm</span>
+                <span class="text-emerald-400">● Disponible</span>
               </div>
-              <h3 class="text-2xl font-bold text-white">Ã‰tude en Rose Garance & Or</h3>
+              <h3 class="text-2xl font-bold text-white">Étude en Rose Garance & Or</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">320,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">EmpÃ¢tements travaillÃ©s au couteau italien sur fond de gesso crayeux poli Ã  la pierre d'eau.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Empâtements travaillés au couteau italien sur fond de gesso crayeux poli à la pierre d'eau.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
-            <button onclick="inquireArt('Ã‰tude en Rose Garance & Or (320,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+            <button onclick="inquireArt('Étude en Rose Garance & Or (320,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -203,17 +273,17 @@
             <img src="../images/work-monumental-triptych.jpg" alt="Triptyque Solaire" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Triptyque Monumental â€¢ 240 Ã— 150 cm</span>
-                <span class="text-emerald-400">â— PiÃ¨ce MaÃ®tresse</span>
+                <span>Triptyque Monumental • 240 Ã— 150 cm</span>
+                <span class="text-emerald-400">● Pièce Maîtresse</span>
               </div>
               <h3 class="text-2xl font-bold text-white">Triptyque Solaire de Bastos</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">850,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">ConÃ§u pour halls d'hÃ´tels, salons prÃ©sidentiels et rÃ©sidences d'architecte. LivrÃ© avec encadrement chÃªne massif.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Conçu pour halls d'hôtels, salons présidentiels et résidences d'architecte. Livré avec encadrement chêne massif.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
             <button onclick="inquireArt('Triptyque Solaire de Bastos (850,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -221,20 +291,20 @@
         <!-- 4 -->
         <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="oil">
           <div>
-            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80" alt="Nocturne ImpÃ©rial" class="w-full h-64 object-cover" />
+            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80" alt="Nocturne Impérial" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Gouache & Pigments Purs â€¢ 100 Ã— 80 cm</span>
-                <span class="text-emerald-400">â— Disponible</span>
+                <span>Gouache & Pigments Purs • 100 Ã— 80 cm</span>
+                <span class="text-emerald-400">● Disponible</span>
               </div>
-              <h3 class="text-2xl font-bold text-white">Nocturne ImpÃ©rial sur Velin</h3>
+              <h3 class="text-2xl font-bold text-white">Nocturne Impérial sur Velin</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">240,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Contraste dramatique entre le noir d'ivoire, l'ocre dorÃ© et le bleu de Prusse sous verre musÃ©e anti-reflet.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Contraste dramatique entre le noir d'ivoire, l'ocre doré et le bleu de Prusse sous verre musée anti-reflet.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
-            <button onclick="inquireArt('Nocturne ImpÃ©rial sur Velin (240,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+            <button onclick="inquireArt('Nocturne Impérial sur Velin (240,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -242,20 +312,20 @@
         <!-- 5 -->
         <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="triptych">
           <div>
-            <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=800&q=80" alt="Symphonie MinÃ©rale" class="w-full h-64 object-cover" />
+            <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=800&q=80" alt="Symphonie Minérale" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Huile & Feuille d'Or 24K â€¢ 180 Ã— 130 cm</span>
-                <span class="text-emerald-400">â— Disponible</span>
+                <span>Huile & Feuille d'Or 24K • 180 Ã— 130 cm</span>
+                <span class="text-emerald-400">● Disponible</span>
               </div>
-              <h3 class="text-2xl font-bold text-white">Symphonie MinÃ©rale 24 Carats</h3>
+              <h3 class="text-2xl font-bold text-white">Symphonie Minérale 24 Carats</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">620,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Incrustations de vÃ©ritable feuille d'or battue Ã  la main sur glacis de terre d'ombre brÃ»lÃ©e.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Incrustations de véritable feuille d'or battue à la main sur glacis de terre d'ombre brûlée.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
-            <button onclick="inquireArt('Symphonie MinÃ©rale 24 Carats (620,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+            <button onclick="inquireArt('Symphonie Minérale 24 Carats (620,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -263,20 +333,20 @@
         <!-- 6 -->
         <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="triptych">
           <div>
-            <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?auto=format&fit=crop&w=800&q=80" alt="Ã‰quinoxe Ã‰meraude" class="w-full h-64 object-cover" />
+            <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?auto=format&fit=crop&w=800&q=80" alt="Équinoxe Émeraude" class="w-full h-64 object-cover" />
             <div class="p-6">
               <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
-                <span>Diptyque Contemporain â€¢ 200 Ã— 120 cm</span>
-                <span class="text-emerald-400">â— Disponible</span>
+                <span>Diptyque Contemporain • 200 Ã— 120 cm</span>
+                <span class="text-emerald-400">● Disponible</span>
               </div>
-              <h3 class="text-2xl font-bold text-white">Ã‰quinoxe Ã‰meraude & Safran</h3>
+              <h3 class="text-2xl font-bold text-white">Équinoxe Émeraude & Safran</h3>
               <div class="text-xl font-extrabold text-amber-400 mt-2">540,000 FCFA</div>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Exploration lumineuse de la forÃªt Ã©quatoriale aprÃ¨s la pluie, vernis dammar cristallin.</p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Exploration lumineuse de la forêt équatoriale après la pluie, vernis dammar cristallin.</p>
             </div>
           </div>
           <div class="px-6 pb-6">
-            <button onclick="inquireArt('Ã‰quinoxe Ã‰meraude & Safran (540,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
-              AcquÃ©rir cette Å’uvre â†’
+            <button onclick="inquireArt('Équinoxe Émeraude & Safran (540,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              Acquérir cette Œuvre →
             </button>
           </div>
         </article>
@@ -290,21 +360,21 @@
       <!-- Left: Pigment Mixer -->
       <div id="alchimie" class="lg:col-span-6 art-card rounded-3xl p-8">
         <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">02 // Atelier de Couleur</span>
-        <h3 class="text-3xl font-bold text-white mt-1 mb-4">MÃ©langeur Optique de Pigments</h3>
-        <p class="text-xs text-slate-300 mb-6">Cliquez sur une harmonie pigmentaire pour prÃ©visualiser l'atmosphÃ¨re chromatique de votre future toile :</p>
+        <h3 class="text-3xl font-bold text-white mt-1 mb-4">Mélangeur Optique de Pigments</h3>
+        <p class="text-xs text-slate-300 mb-6">Cliquez sur une harmonie pigmentaire pour prévisualiser l'atmosphère chromatique de votre future toile :</p>
 
         <div class="grid grid-cols-2 gap-3 mb-6">
-          <button onclick="setHarmony('#1837b9', 'Outremer & Or Solaire', 'Profondeur spirituelle et Ã©clats de lumiÃ¨re chaude.')" class="p-3.5 rounded-xl bg-blue-900/40 border border-blue-400/40 text-left text-xs font-bold text-white">â— Outremer & Or Solaire</button>
-          <button onclick="setHarmony('#cf385b', 'Garance & Terre d\'Ombre', 'Chaleur organique intense idÃ©ale pour un salon de rÃ©ception.')" class="p-3.5 rounded-xl bg-rose-900/40 border border-rose-400/40 text-left text-xs font-bold text-white">â— Garance & Terre d'Ombre</button>
-          <button onclick="setHarmony('#1b7a58', 'Viridian & Safran', 'Ã‰quilibre minÃ©ral apaisant entre Ã©meraude et ambre.')" class="p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-400/40 text-left text-xs font-bold text-white">â— Viridian & Safran</button>
-          <button onclick="setHarmony('#d97706', 'Ocre Royal 24K', 'Rayonnement solaire pur rÃ©haussÃ© Ã  la feuille d\'or.')" class="p-3.5 rounded-xl bg-amber-900/40 border border-amber-400/40 text-left text-xs font-bold text-white">â— Ocre Royal 24K</button>
+          <button onclick="setHarmony('#1837b9', 'Outremer & Or Solaire', 'Profondeur spirituelle et éclats de lumière chaude.')" class="p-3.5 rounded-xl bg-blue-900/40 border border-blue-400/40 text-left text-xs font-bold text-white">● Outremer & Or Solaire</button>
+          <button onclick="setHarmony('#cf385b', 'Garance & Terre d\'Ombre', 'Chaleur organique intense idéale pour un salon de réception.')" class="p-3.5 rounded-xl bg-rose-900/40 border border-rose-400/40 text-left text-xs font-bold text-white">● Garance & Terre d'Ombre</button>
+          <button onclick="setHarmony('#1b7a58', 'Viridian & Safran', 'Équilibre minéral apaisant entre émeraude et ambre.')" class="p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-400/40 text-left text-xs font-bold text-white">● Viridian & Safran</button>
+          <button onclick="setHarmony('#d97706', 'Ocre Royal 24K', 'Rayonnement solaire pur réhaussé à la feuille d\'or.')" class="p-3.5 rounded-xl bg-amber-900/40 border border-amber-400/40 text-left text-xs font-bold text-white">● Ocre Royal 24K</button>
         </div>
 
         <div class="p-5 rounded-2xl bg-[#090B10] border border-white/10 flex items-center gap-4">
           <div id="swatchCircle" class="w-16 h-16 rounded-full shrink-0 border-2 border-white shadow-lg" style="background-color: #1837b9;"></div>
           <div>
             <h4 id="swatchTitle" class="text-xl font-bold text-white">Outremer & Or Solaire</h4>
-            <p id="swatchDesc" class="text-xs text-slate-300 mt-0.5">Profondeur spirituelle et Ã©clats de lumiÃ¨re chaude.</p>
+            <p id="swatchDesc" class="text-xs text-slate-300 mt-0.5">Profondeur spirituelle et éclats de lumière chaude.</p>
           </div>
         </div>
       </div>
@@ -334,8 +404,8 @@
           <div>
             <label class="text-xs font-semibold block mb-2">Support & Encadrement</label>
             <select id="frameInput" onchange="calcArt()" class="w-full px-4 py-3 rounded-xl bg-[#090B10] border border-white/15 text-white text-xs">
-              <option value="0">Lin de Belgique sur ChÃ¢ssis (Bord Galerie)</option>
-              <option value="65000">Caisse AmÃ©ricaine en ChÃªne Massif (+65,000 FCFA)</option>
+              <option value="0">Lin de Belgique sur Châssis (Bord Galerie)</option>
+              <option value="65000">Caisse Américaine en Chêne Massif (+65,000 FCFA)</option>
               <option value="110000">Finition Prestige + Incrustation Feuille d'Or 24K (+110,000 FCFA)</option>
             </select>
           </div>
@@ -346,7 +416,7 @@
               <span id="artTotal" class="text-2xl sm:text-3xl font-extrabold text-amber-400">345,000 FCFA</span>
             </div>
             <button onclick="orderCommission()" class="px-5 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase">
-              Commander sur WhatsApp â†’
+              Commander sur WhatsApp →
             </button>
           </div>
         </div>
@@ -355,7 +425,7 @@
   </section>
 
   <footer class="py-10 px-4 border-t border-white/10 text-center text-xs text-slate-400">
-    <p>AURELIA DELACROIX FINE ART STUDIO â€¢ Plateforme conÃ§ue par <a href="https://wa.me/237698945916" target="_blank" class="text-amber-400 underline font-semibold">Bashimiki Paul Chris (+237 698 945 916)</a></p>
+    <p>AURELIA DELACROIX FINE ART STUDIO • Plateforme conçue par <a href="https://wa.me/237698945916" target="_blank" class="text-amber-400 underline font-semibold">Bashimiki Paul Chris (+237 698 945 916)</a></p>
   </footer>
 
   <script>
@@ -451,7 +521,7 @@
     }
 
     function inquireArt(title) {
-      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nJe souhaite acquÃ©rir l'Å“uvre :\nâ€¢ *${title}*`;
+      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nJe souhaite acquérir l'œuvre :\n• *${title}*`;
       window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -460,7 +530,7 @@
       const h = document.getElementById('hVal').textContent;
       const tot = document.getElementById('artTotal').textContent;
       const harmony = document.getElementById('swatchTitle').textContent;
-      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nDemande de toile sur-mesure :\nâ€¢ Dimensions : ${w} Ã— ${h}\nâ€¢ Harmonie : ${harmony}\nâ€¢ Budget estimÃ© : ${tot}`;
+      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nDemande de toile sur-mesure :\n• Dimensions : ${w} Ã— ${h}\n• Harmonie : ${harmony}\n• Budget estimé : ${tot}`;
       window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
     }
   </script>
