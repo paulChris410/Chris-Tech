@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "installCommand": "echo Static site - no npm install needed",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/portfolio.html",
+      "permanent": false
+    }
+  ]
+}
