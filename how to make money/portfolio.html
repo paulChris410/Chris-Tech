@@ -86,14 +86,13 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Interactive Three.js 3D Background Canvas */
+    /* Interactive 3D Background Canvas (100% iPhone & Desktop Safe) */
     #three-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
       pointer-events: none;
     }
 
@@ -424,10 +423,10 @@
                   Interactive 3D coffee roastery platform with live dark/light ambiance, filterable espresso menu, and table reservations.
                 </p>
                 <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <button id="heroPrevModalBtn" onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm !min-h-[40px] !py-2 !text-xs w-full">
+                  <button id="heroPrevModalBtn" onclick="openInspector('./demos/brew_haven_demo.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm !min-h-[40px] !py-2 !text-xs w-full">
                     ⚡ Preview Inside Page
                   </button>
-                  <a id="heroPrevTabBtn" href="../brew_haven_backup.html" target="_blank" class="btn-ghost !min-h-[40px] !py-2 !text-xs w-full">
+                  <a id="heroPrevTabBtn" href="./demos/brew_haven_demo.html" target="_blank" class="btn-ghost !min-h-[40px] !py-2 !text-xs w-full">
                     Open Full Tab ↗
                   </a>
                 </div>
@@ -654,7 +653,7 @@
         <!-- 1: BREW HAVEN ARTISANAL CAFÉ -->
         <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="commerce">
           <div>
-            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')">
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/brew_haven_demo.html', 'Brew Haven — Specialty Coffee Roastery')">
               <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="Brew Haven Café" class="proj-thumb w-full h-full object-cover" />
               <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 3D WebGL Cup • Dark/Light • Cart</span>
             </div>
@@ -667,10 +666,10 @@
             </div>
           </div>
           <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm w-full !text-xs">
+            <button onclick="openInspector('./demos/brew_haven_demo.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm w-full !text-xs">
               ⚡ Preview Inside Page
             </button>
-            <a href="../brew_haven_backup.html" target="_blank" class="btn-ghost w-full !text-xs">
+            <a href="./demos/brew_haven_demo.html" target="_blank" class="btn-ghost w-full !text-xs">
               Open Full Tab ↗
             </a>
           </div>
@@ -680,7 +679,7 @@
         <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="luxury">
           <div>
             <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/aurelia_delacroix_demo.html', 'Aurelia Delacroix — Contemporary Art & 3D Studio')">
-              <img src="../images/work-oil-horizon.jpg" alt="Aurelia Delacroix" class="proj-thumb w-full h-full object-cover" />
+              <img src="./images/work-oil-horizon.jpg" alt="Aurelia Delacroix" class="proj-thumb w-full h-full object-cover" />
               <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 3D WebGL Studio • Pigment Mixer • Gallery</span>
             </div>
             <div class="p-6">
@@ -704,7 +703,7 @@
         <!-- 3: MAISON NDAMEN -->
         <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="luxury">
           <div>
-            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('../index.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')">
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/maison_ndamen_demo.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')">
               <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" alt="Maison Ndamen" class="proj-thumb w-full h-full object-cover" />
               <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● Before/After Slider • 3D Rosette • FR/EN</span>
             </div>
@@ -717,10 +716,10 @@
             </div>
           </div>
           <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button onclick="openInspector('../index.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')" class="btn-warm w-full !text-xs">
+            <button onclick="openInspector('./demos/maison_ndamen_demo.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')" class="btn-warm w-full !text-xs">
               ⚡ Preview Inside Page
             </button>
-            <a href="../index.html" target="_blank" class="btn-ghost w-full !text-xs">
+            <a href="./demos/maison_ndamen_demo.html" target="_blank" class="btn-ghost w-full !text-xs">
               Open Full Tab ↗
             </a>
           </div>
@@ -1421,18 +1420,18 @@
 
   </div>
 
-  <!-- IN-PAGE LIVE APPLICATION PREVIEW MODAL -->
-  <div id="inspectorModal" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md p-2 sm:p-6 flex flex-col">
-    <div class="max-w-7xl w-full mx-auto bg-[#16120f] border border-[var(--panel-border)] rounded-t-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+  <!-- IN-PAGE LIVE APPLICATION PREVIEW MODAL (iPhone 12 Pro & Desktop 100dvh Safe) -->
+  <div id="inspectorModal" style="display: none; height: 100dvh;" class="fixed inset-0 z-[140] bg-black/95 backdrop-blur-md p-2 sm:p-6 flex-col">
+    <div class="max-w-7xl w-full mx-auto bg-[#16120f] border border-[var(--panel-border)] rounded-t-2xl px-3 sm:px-4 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-3 shrink-0">
       <div class="flex items-center gap-2 min-w-0">
-        <button onclick="closeInspector()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs shrink-0">✕ Close</button>
+        <button type="button" onclick="closeInspector()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs shrink-0 cursor-pointer">✕ Close</button>
         <span id="modalProjTitle" class="font-bold text-xs sm:text-sm text-white truncate">Live Application Preview</span>
       </div>
 
       <div class="hidden md:flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 mono text-xs">
-        <button onclick="setViewport('100%')" class="px-3 py-1 rounded-lg bg-white/10 text-white font-semibold">Desktop (100%)</button>
-        <button onclick="setViewport('768px')" class="px-3 py-1 rounded-lg text-zinc-300">Tablet (768px)</button>
-        <button onclick="setViewport('390px')" class="px-3 py-1 rounded-lg text-zinc-300">Mobile (390px)</button>
+        <button type="button" onclick="setViewport('100%')" class="px-3 py-1 rounded-lg bg-white/10 text-white font-semibold">Desktop (100%)</button>
+        <button type="button" onclick="setViewport('768px')" class="px-3 py-1 rounded-lg text-zinc-300">Tablet (768px)</button>
+        <button type="button" onclick="setViewport('390px')" class="px-3 py-1 rounded-lg text-zinc-300">Mobile (390px)</button>
       </div>
 
       <div class="flex items-center gap-2 shrink-0">
@@ -1447,13 +1446,13 @@
       </div>
     </div>
 
-    <div class="max-w-7xl w-full mx-auto flex-1 bg-[#090807] border-x border-b border-[var(--panel-border)] rounded-b-2xl overflow-hidden flex justify-center">
-      <iframe id="modalIframe" src="" class="w-full h-full border-0 transition-all duration-300 bg-white"></iframe>
+    <div class="max-w-7xl w-full mx-auto flex-1 bg-[#090807] border-x border-b border-[var(--panel-border)] rounded-b-2xl overflow-hidden flex justify-center" style="-webkit-overflow-scrolling: touch;">
+      <iframe id="modalIframe" src="about:blank" class="w-full h-full border-0 transition-all duration-300 bg-white"></iframe>
     </div>
   </div>
 
   <!-- CLIENT ORDER CAPTURE MODAL (SCROLLABLE ON SMALL PHONES + INTERNATIONAL COUNTRY CODE) -->
-  <div id="orderCaptureModal" class="fixed inset-0 z-[110] hidden bg-black/85 backdrop-blur-md p-3 sm:p-4 flex items-center justify-center overflow-y-auto">
+  <div id="orderCaptureModal" style="display: none;" class="fixed inset-0 z-[145] bg-black/85 backdrop-blur-md p-3 sm:p-4 items-center justify-center overflow-y-auto">
     <div class="max-w-lg w-full max-h-[92vh] overflow-y-auto glass-card p-5 sm:p-8 space-y-4 sm:space-y-5 border-2" style="border-color: var(--accent);">
       <div class="flex items-center justify-between border-b border-[var(--panel-border)] pb-3">
         <div>
@@ -1671,13 +1670,13 @@
         tag: "Three.js 3D Cup • Interactive Menu • Cart",
         desc: "Interactive 3D coffee roastery platform with live dark/light ambiance, filterable espresso menu, and table reservations.",
         img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80",
-        url: "../brew_haven_backup.html"
+        url: "./demos/brew_haven_demo.html"
       },
       {
         title: "Aurelia Delacroix — Contemporary Art & 3D Studio",
         tag: "3D WebGL Sculpture • Pigment Mixer • Gallery",
         desc: "Museum-grade art exhibition platform with an interactive 3D WebGL sculpture, 6 curated paintings, and a commission calculator.",
-        img: "../images/work-oil-horizon.jpg",
+        img: "./images/work-oil-horizon.jpg",
         url: "./demos/aurelia_delacroix_demo.html"
       },
       {
@@ -1685,7 +1684,7 @@
         tag: "Vue 3 • Before/After Slider • 3D Rosette",
         desc: "Bilingual luxury platform with interactive Before/After villa slider, 3D plaster rosette studio, and tropical color simulator.",
         img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-        url: "../index.html"
+        url: "./demos/maison_ndamen_demo.html"
       }
     ];
 
@@ -1718,17 +1717,19 @@
       });
     }
 
-    // 6. Live Modal Inspector
+    // 6. Live Modal Inspector (100% iPhone & Desktop Display-Safe)
     function openInspector(url, title) {
       document.getElementById('modalProjTitle').textContent = title;
       document.getElementById('modalIframe').src = url;
       document.getElementById('modalFullLink').href = url;
-      document.getElementById('inspectorModal').classList.remove('hidden');
+      const modal = document.getElementById('inspectorModal');
+      if (modal) modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
     function closeInspector() {
-      document.getElementById('inspectorModal').classList.add('hidden');
-      document.getElementById('modalIframe').src = '';
+      const modal = document.getElementById('inspectorModal');
+      if (modal) modal.style.display = 'none';
+      document.getElementById('modalIframe').src = 'about:blank';
       document.body.style.overflow = '';
     }
     function setViewport(w) {
@@ -1940,92 +1941,195 @@ Looking forward to your reply!`;
       window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // 9. Brew Haven-Inspired Three.js 3D Ambient Background Engine
+    // 9. iPhone 12 Pro & Desktop 60fps 3D Ambient Background Engine (Three.js + Automatic 2D Canvas 3D Fallback)
     (function initThreeBg() {
       const canvas = document.getElementById('three-bg');
-      if (!canvas || typeof THREE === 'undefined') return;
+      if (!canvas) return;
 
+      function start2DCanvasFallback() {
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        let W = canvas.width = window.innerWidth;
+        let H = canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+          W = canvas.width = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+        });
+
+        const dots = Array.from({ length: 130 }, () => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 1.1 + Math.random() * 2.2,
+          vy: -(0.25 + Math.random() * 0.65),
+          vx: (Math.random() - 0.5) * 0.3,
+          a: 0.35 + Math.random() * 0.55
+        }));
+
+        function drawFrame() {
+          requestAnimationFrame(drawFrame);
+          ctx.clearRect(0, 0, W, H);
+          const t = Date.now() * 0.0008;
+
+          // Glowing floating golden dust particles
+          dots.forEach(d => {
+            d.y += d.vy;
+            d.x += d.vx + Math.sin(t + d.y * 0.015) * 0.25;
+            if (d.y < -10) { d.y = H + 10; d.x = Math.random() * W; }
+            if (d.x < -10) d.x = W + 10;
+            if (d.x > W + 10) d.x = -10;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(243, 190, 142, ${d.a})`;
+            ctx.fill();
+          });
+
+          // Rotating 3D-projected Torus Knot Wireframe Sculpture
+          const cx = W <= 968 ? W * 0.5 : W * 0.72;
+          const cy = W <= 968 ? H * 0.34 : H * 0.48;
+          const scale = W <= 968 ? Math.min(W, H) * 0.24 : Math.min(W, H) * 0.22;
+          ctx.strokeStyle = 'rgba(229, 169, 124, 0.34)';
+          ctx.lineWidth = 1.25;
+          ctx.beginPath();
+          const steps = 160;
+          for (let i = 0; i <= steps; i++) {
+            const u = (i / steps) * Math.PI * 2;
+            const r = Math.cos(3 * u) + 2;
+            let x = r * Math.cos(2 * u) * 0.36;
+            let y = r * Math.sin(2 * u) * 0.36;
+            let z = -Math.sin(3 * u) * 0.45;
+            // Rotate Y & X
+            const x1 = x * Math.cos(t) - z * Math.sin(t);
+            const z1 = x * Math.sin(t) + z * Math.cos(t);
+            const y2 = y * Math.cos(t * 0.6) - z1 * Math.sin(t * 0.6);
+            const z2 = y * Math.sin(t * 0.6) + z1 * Math.cos(t * 0.6);
+            const p = 2.6 / (3.4 - z2);
+            const sx = cx + x1 * scale * p;
+            const sy = cy + y2 * scale * p;
+            if (i === 0) ctx.moveTo(sx, sy);
+            else ctx.lineTo(sx, sy);
+          }
+          ctx.stroke();
+        }
+        drawFrame();
+      }
+
+      if (typeof THREE === 'undefined') {
+        start2DCanvasFallback();
+        return;
+      }
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'default' });
+      } catch (err) {
+        start2DCanvasFallback();
+        return;
+      }
+
+      const isMob = () => window.innerWidth <= 968;
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = 22;
+      const camera = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = isMob() ? 18 : 22;
 
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-      // Floating Golden Dust Particles
-      const count = 110;
+      // Floating Glowing Golden Dust Particles (Concentrated inside mobile viewport!)
+      const count = 165;
       const pGeo = new THREE.BufferGeometry();
       const pos = new Float32Array(count * 3);
+      const spreadX = isMob() ? 14 : 42;
       for (let i = 0; i < count; i++) {
-        pos[i * 3] = (Math.random() - 0.5) * 45;
-        pos[i * 3 + 1] = (Math.random() - 0.5) * 30;
-        pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
+        pos[i * 3] = (Math.random() - 0.5) * spreadX;
+        pos[i * 3 + 1] = (Math.random() - 0.5) * 32;
+        pos[i * 3 + 2] = (Math.random() - 0.5) * 14;
       }
       pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 
       const pMat = new THREE.PointsMaterial({
-        color: theme === 'dark' ? 0xd89f76 : 0x8c4f2b,
-        size: 0.13,
+        color: 0xf3be8e,
+        size: isMob() ? 0.30 : 0.22,
         transparent: true,
-        opacity: theme === 'dark' ? 0.35 : 0.22
+        opacity: isMob() ? 0.82 : 0.65,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
       });
       const particles = new THREE.Points(pGeo, pMat);
       scene.add(particles);
 
-      // Subtle 3D Architectural Torus Knot Sculpture on Right Side
+      // Prominent Rotating 3D Architectural Torus Knot + Orbiting Ring (100% Visible on iPhone 12 Pro & Desktop)
       const sculptureGroup = new THREE.Group();
-      const wireMat = new THREE.MeshPhongMaterial({
-        color: theme === 'dark' ? 0xd89f76 : 0x8c4f2b,
+      const wireMat = new THREE.MeshBasicMaterial({
+        color: 0xe5a97c,
         wireframe: true,
         transparent: true,
-        opacity: 0.14
+        opacity: isMob() ? 0.34 : 0.24
       });
-      const torusMesh = new THREE.Mesh(new THREE.TorusKnotGeometry(2.6, 0.65, 90, 14), wireMat);
+      const torusMesh = new THREE.Mesh(new THREE.TorusKnotGeometry(2.5, 0.62, 84, 14), wireMat);
       sculptureGroup.add(torusMesh);
-      sculptureGroup.position.set(window.innerWidth <= 968 ? 0 : 7, 0.5, -2);
-      scene.add(sculptureGroup);
 
-      const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
-      dirLight.position.set(6, 12, 8);
-      scene.add(dirLight);
-      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0xfde68a,
+        wireframe: true,
+        transparent: true,
+        opacity: isMob() ? 0.22 : 0.16
+      });
+      const haloRing = new THREE.Mesh(new THREE.TorusGeometry(4.1, 0.05, 8, 48), ringMat);
+      haloRing.rotation.x = Math.PI / 3;
+      sculptureGroup.add(haloRing);
+
+      function positionSculpture() {
+        const mob = isMob();
+        camera.position.z = mob ? 18 : 22;
+        sculptureGroup.position.set(mob ? 0 : 6.8, mob ? 1.8 : 0.5, mob ? -1 : -2);
+        sculptureGroup.scale.setScalar(mob ? 0.92 : 1.05);
+        pMat.size = mob ? 0.30 : 0.22;
+        wireMat.opacity = mob ? 0.34 : 0.24;
+      }
+      positionSculpture();
+      scene.add(sculptureGroup);
 
       let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
       window.addEventListener('mousemove', (e) => {
         mouseX = (e.clientX - window.innerWidth / 2) / 120;
         mouseY = (e.clientY - window.innerHeight / 2) / 120;
-      });
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+          mouseX = (e.touches[0].clientX - window.innerWidth / 2) / 90;
+          mouseY = (e.touches[0].clientY - window.innerHeight / 2) / 90;
+        }
+      }, { passive: true });
 
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        sculptureGroup.position.x = window.innerWidth <= 968 ? 0 : 7;
+        positionSculpture();
       });
 
-      window.addEventListener('bpcThemeChanged', (e) => {
-        const isDark = e.detail.theme === 'dark';
-        pMat.color.setHex(isDark ? 0xd89f76 : 0x8c4f2b);
-        wireMat.color.setHex(isDark ? 0xd89f76 : 0x8c4f2b);
+      window.addEventListener('bpcThemeChanged', () => {
+        pMat.color.setHex(0xf3be8e);
+        wireMat.color.setHex(0xe5a97c);
       });
 
       function animate() {
         requestAnimationFrame(animate);
         const arr = particles.geometry.attributes.position.array;
         for (let i = 0; i < arr.length; i += 3) {
-          arr[i + 1] += 0.01;
-          arr[i] += Math.sin(arr[i + 1] * 0.1) * 0.003;
+          arr[i + 1] += 0.018;
+          arr[i] += Math.sin(arr[i + 1] * 0.14) * 0.005;
           if (arr[i + 1] > 16) arr[i + 1] = -16;
         }
         particles.geometry.attributes.position.needsUpdate = true;
 
-        const t = Date.now() * 0.0006;
-        sculptureGroup.rotation.y = t * 0.4;
-        sculptureGroup.rotation.x = Math.sin(t * 0.5) * 0.2;
+        const t = Date.now() * 0.00075;
+        sculptureGroup.rotation.y = t * 0.55;
+        sculptureGroup.rotation.x = Math.sin(t * 0.5) * 0.28 + (window.scrollY || 0) * 0.0006;
+        haloRing.rotation.z = -t * 0.4;
 
-        targetX += (mouseX - targetX) * 0.05;
-        targetY += (mouseY - targetY) * 0.05;
+        targetX += (mouseX - targetX) * 0.06;
+        targetY += (mouseY - targetY) * 0.06;
         camera.position.x = targetX;
         camera.position.y = -targetY;
         camera.lookAt(scene.position);
@@ -2313,12 +2417,14 @@ Looking forward to your reply!`;
       const savedRef = detectIncomingReferralCode();
       const refInput = document.getElementById('ordReferralInput');
       if (refInput) refInput.value = savedRef || '';
-      document.getElementById('orderCaptureModal').classList.remove('hidden');
+      const om = document.getElementById('orderCaptureModal');
+      if (om) om.style.display = 'flex';
       validateModalReferralCode();
     }
 
     function closeOrderModal() {
-      document.getElementById('orderCaptureModal').classList.add('hidden');
+      const om = document.getElementById('orderCaptureModal');
+      if (om) om.style.display = 'none';
     }
 
     function validateModalReferralCode() {
