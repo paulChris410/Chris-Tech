@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURELIA DELACROIX â€” Galerie d'Art Contemporain, Studio 3D WebGL & Commissions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: #0D0F14;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .art-card {
+      background: rgba(20, 24, 34, 0.92);
+      border: 1px solid rgba(255, 195, 0, 0.18);
+      transition: all 0.35s ease;
+    }
+    .art-card:hover {
+      border-color: rgba(255, 195, 0, 0.65);
+      transform: translateY(-4px);
+    }
+  </style>
+  <style>
+    img { max-width: 100%; display: block; }
+    button, a.btn, [onclick] { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.65rem !important; line-height: 1.2 !important; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (!this.dataset.fallbackApplied) {
+            this.dataset.fallbackApplied = 'true';
+            this.src = '../../images/work-oil-horizon.jpg';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body class="antialiased selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- Top Curatorial Bar -->
+  <div class="bg-[#131722] border-b border-white/10 text-xs py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-slate-300">
+      <div class="flex items-center gap-3">
+        <span class="text-amber-400 font-bold">â— Exposition PrivÃ©e & Galerie 3D Interactive</span>
+        <span class="hidden sm:inline">â€¢</span>
+        <span class="hidden sm:inline">Ateliers : Paris IV â€¢ Berlin â€¢ Douala & YaoundÃ©</span>
+      </div>
+      <div class="text-amber-300 font-semibold">Acquisitions & Commandes Sur-Mesure (Tarifs en FCFA)</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#0D0F14]/90 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full border border-amber-400/50 bg-[#151A26] flex items-center justify-center serif font-bold text-xl text-amber-400">AD</div>
+        <div>
+          <span class="serif text-2xl sm:text-3xl font-bold tracking-wider text-white block leading-none">AURELIA DELACROIX</span>
+          <span class="text-[10px] uppercase tracking-[0.22em] text-amber-300 block mt-1">Contemporary Fine Art & 3D Studio</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-slate-200 font-medium">
+        <a href="#oeuvres" class="hover:text-amber-400 transition">Å’uvres SÃ©lectionnÃ©es (6)</a>
+        <a href="#studio-3d" class="hover:text-amber-400 transition">Inspecteur Toile 3D</a>
+        <a href="#alchimie" class="hover:text-amber-400 transition">Alchimie des Pigments</a>
+        <a href="#calculateur" class="hover:text-amber-400 transition">Simulateur Commission</a>
+      </nav>
+      <a href="#calculateur" class="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition">
+        Commander une Toile
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section with Live 3D WebGL Chromodynamic Sculpture -->
+  <section id="top" class="py-16 sm:py-24 border-b border-white/10 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-amber-300 text-xs font-semibold">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          <span>SynthÃ¨se des Quatre Pigments MinÃ©raux</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-bold leading-[1.05] text-white">
+          La RÃ©sonance Optique de la <span class="italic font-normal text-amber-400">Haute Peinture.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-200 leading-relaxed">
+          Toiles monumentales Ã  l'huile et cire froide sur lin de Belgique. Explorez nos Å“uvres en haute rÃ©solution, manipulez le chÃ¢ssis 3D en temps rÃ©el et estimez votre commande sur-mesure en FCFA.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+          <a href="#oeuvres" class="py-4 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-sm text-center transition">
+            Explorer la Galerie (6 Toiles) â†’
+          </a>
+          <a href="#studio-3d" class="py-4 px-6 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm text-center transition">
+            Tester le Studio 3D WebGL
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Live Interactive Three.js 3D Canvas Sculpture -->
+      <div class="lg:col-span-6">
+        <div class="art-card rounded-3xl p-4 shadow-2xl">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-xs">
+            <span class="text-amber-400 font-bold">âœ¦ STUDIO 3D WEBGL EN DIRECT</span>
+            <span class="text-slate-300">Survolez pour faire pivoter</span>
+          </div>
+          <div id="hero3dBox" class="w-full h-[340px] sm:h-[380px] rounded-2xl bg-[#080A0F] relative overflow-hidden"></div>
+          <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300 px-1">
+            <span>Ã‰clairage MusÃ©e : 3200K Warm Halal Spot</span>
+            <div class="flex gap-2">
+              <button onclick="setLightColor(0x1837b9)" class="px-2.5 py-1 rounded bg-blue-700 text-white font-semibold">Outremer</button>
+              <button onclick="setLightColor(0xffc300)" class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-semibold">Cadmium</button>
+              <button onclick="setLightColor(0xcf385b)" class="px-2.5 py-1 rounded bg-rose-600 text-white font-semibold">Garance</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: GALERIE DE 6 Å’UVRES AVEC FILTRES (TARIFS EN FCFA) -->
+  <section id="oeuvres" class="py-20 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-[0.22em] text-amber-400 font-bold">01 // Collection Permanente</span>
+          <h2 class="text-3xl sm:text-5xl font-bold text-white mt-2">Å’uvres SÃ©lectionnÃ©es</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterArt('all', this)" class="art-btn px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs">Toutes (6)</button>
+          <button onclick="filterArt('oil', this)" class="art-btn px-4 py-2 rounded-xl bg-white/10 text-white text-xs">Huile sur Lin (3)</button>
+          <button onclick="filterArt('triptych', this)" class="art-btn px-4 py-2 rounded-xl bg-white/10 text-white text-xs">Grands Formats & Triptyques (3)</button>
+        </div>
+      </div>
+
+      <div id="artGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 1 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="oil">
+          <div>
+            <img src="../../images/work-oil-horizon.jpg" alt="The Deep Horizon" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Huile & Cire Froide sur Lin â€¢ 160 Ã— 120 cm</span>
+                <span class="text-emerald-400">â— Disponible</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">L'Horizon Lapis & Viridian</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">450,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Superposition de bleu outremer profond et glacis Ã©meraude rÃ©veillÃ©s par une crÃªte solaire au jaune de cadmium pur.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('L\'Horizon Lapis & Viridian (450,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="oil">
+          <div>
+            <img src="../../images/work-gouache-fragments.jpg" alt="Ã‰tude en Garance" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Huile & Poudre de Marbre â€¢ 120 Ã— 90 cm</span>
+                <span class="text-emerald-400">â— Disponible</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">Ã‰tude en Rose Garance & Or</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">320,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">EmpÃ¢tements travaillÃ©s au couteau italien sur fond de gesso crayeux poli Ã  la pierre d'eau.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('Ã‰tude en Rose Garance & Or (320,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="triptych">
+          <div>
+            <img src="../../images/work-monumental-triptych.jpg" alt="Triptyque Solaire" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Triptyque Monumental â€¢ 240 Ã— 150 cm</span>
+                <span class="text-emerald-400">â— PiÃ¨ce MaÃ®tresse</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">Triptyque Solaire de Bastos</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">850,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">ConÃ§u pour halls d'hÃ´tels, salons prÃ©sidentiels et rÃ©sidences d'architecte. LivrÃ© avec encadrement chÃªne massif.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('Triptyque Solaire de Bastos (850,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="oil">
+          <div>
+            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=800&q=80" alt="Nocturne ImpÃ©rial" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Gouache & Pigments Purs â€¢ 100 Ã— 80 cm</span>
+                <span class="text-emerald-400">â— Disponible</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">Nocturne ImpÃ©rial sur Velin</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">240,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Contraste dramatique entre le noir d'ivoire, l'ocre dorÃ© et le bleu de Prusse sous verre musÃ©e anti-reflet.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('Nocturne ImpÃ©rial sur Velin (240,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="triptych">
+          <div>
+            <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=800&q=80" alt="Symphonie MinÃ©rale" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Huile & Feuille d'Or 24K â€¢ 180 Ã— 130 cm</span>
+                <span class="text-emerald-400">â— Disponible</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">Symphonie MinÃ©rale 24 Carats</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">620,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Incrustations de vÃ©ritable feuille d'or battue Ã  la main sur glacis de terre d'ombre brÃ»lÃ©e.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('Symphonie MinÃ©rale 24 Carats (620,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="art-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="triptych">
+          <div>
+            <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?auto=format&fit=crop&w=800&q=80" alt="Ã‰quinoxe Ã‰meraude" class="w-full h-64 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between text-xs text-amber-300 font-semibold mb-1">
+                <span>Diptyque Contemporain â€¢ 200 Ã— 120 cm</span>
+                <span class="text-emerald-400">â— Disponible</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white">Ã‰quinoxe Ã‰meraude & Safran</h3>
+              <div class="text-xl font-extrabold text-amber-400 mt-2">540,000 FCFA</div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">Exploration lumineuse de la forÃªt Ã©quatoriale aprÃ¨s la pluie, vernis dammar cristallin.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="inquireArt('Ã‰quinoxe Ã‰meraude & Safran (540,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase transition">
+              AcquÃ©rir cette Å’uvre â†’
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ALCHIMIE DES PIGMENTS & SIMULATEUR DE COMMISSION EN FCFA -->
+  <section id="calculateur" class="py-20 bg-[#111520]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <!-- Left: Pigment Mixer -->
+      <div id="alchimie" class="lg:col-span-6 art-card rounded-3xl p-8">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">02 // Atelier de Couleur</span>
+        <h3 class="text-3xl font-bold text-white mt-1 mb-4">MÃ©langeur Optique de Pigments</h3>
+        <p class="text-xs text-slate-300 mb-6">Cliquez sur une harmonie pigmentaire pour prÃ©visualiser l'atmosphÃ¨re chromatique de votre future toile :</p>
+
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <button onclick="setHarmony('#1837b9', 'Outremer & Or Solaire', 'Profondeur spirituelle et Ã©clats de lumiÃ¨re chaude.')" class="p-3.5 rounded-xl bg-blue-900/40 border border-blue-400/40 text-left text-xs font-bold text-white">â— Outremer & Or Solaire</button>
+          <button onclick="setHarmony('#cf385b', 'Garance & Terre d\'Ombre', 'Chaleur organique intense idÃ©ale pour un salon de rÃ©ception.')" class="p-3.5 rounded-xl bg-rose-900/40 border border-rose-400/40 text-left text-xs font-bold text-white">â— Garance & Terre d'Ombre</button>
+          <button onclick="setHarmony('#1b7a58', 'Viridian & Safran', 'Ã‰quilibre minÃ©ral apaisant entre Ã©meraude et ambre.')" class="p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-400/40 text-left text-xs font-bold text-white">â— Viridian & Safran</button>
+          <button onclick="setHarmony('#d97706', 'Ocre Royal 24K', 'Rayonnement solaire pur rÃ©haussÃ© Ã  la feuille d\'or.')" class="p-3.5 rounded-xl bg-amber-900/40 border border-amber-400/40 text-left text-xs font-bold text-white">â— Ocre Royal 24K</button>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#090B10] border border-white/10 flex items-center gap-4">
+          <div id="swatchCircle" class="w-16 h-16 rounded-full shrink-0 border-2 border-white shadow-lg" style="background-color: #1837b9;"></div>
+          <div>
+            <h4 id="swatchTitle" class="text-xl font-bold text-white">Outremer & Or Solaire</h4>
+            <p id="swatchDesc" class="text-xs text-slate-300 mt-0.5">Profondeur spirituelle et Ã©clats de lumiÃ¨re chaude.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Commission Cost Estimator in FCFA -->
+      <div id="studio-3d" class="lg:col-span-6 art-card rounded-3xl p-8 border-2 border-amber-400/40">
+        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">03 // Commande Sur-Mesure (FCFA)</span>
+        <h3 class="text-3xl font-bold text-white mt-1 mb-5">Simulateur de Toile Sur-Mesure</h3>
+
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-2">
+              <span>Largeur de la Toile (cm)</span>
+              <span id="wVal" class="text-amber-400 font-bold">140 cm</span>
+            </div>
+            <input id="wInput" type="range" min="60" max="260" step="10" value="140" oninput="calcArt()" class="w-full accent-amber-400" />
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-2">
+              <span>Hauteur de la Toile (cm)</span>
+              <span id="hVal" class="text-amber-400 font-bold">110 cm</span>
+            </div>
+            <input id="hInput" type="range" min="60" max="200" step="10" value="110" oninput="calcArt()" class="w-full accent-amber-400" />
+          </div>
+
+          <div>
+            <label class="text-xs font-semibold block mb-2">Support & Encadrement</label>
+            <select id="frameInput" onchange="calcArt()" class="w-full px-4 py-3 rounded-xl bg-[#090B10] border border-white/15 text-white text-xs">
+              <option value="0">Lin de Belgique sur ChÃ¢ssis (Bord Galerie)</option>
+              <option value="65000">Caisse AmÃ©ricaine en ChÃªne Massif (+65,000 FCFA)</option>
+              <option value="110000">Finition Prestige + Incrustation Feuille d'Or 24K (+110,000 FCFA)</option>
+            </select>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#090B10] border border-amber-400/30 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] uppercase text-slate-400 block">Estimation Atelier</span>
+              <span id="artTotal" class="text-2xl sm:text-3xl font-extrabold text-amber-400">345,000 FCFA</span>
+            </div>
+            <button onclick="orderCommission()" class="px-5 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs uppercase">
+              Commander sur WhatsApp â†’
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 px-4 border-t border-white/10 text-center text-xs text-slate-400">
+    <p>AURELIA DELACROIX FINE ART STUDIO â€¢ Plateforme conÃ§ue par <a href="https://wa.me/237698945916" target="_blank" class="text-amber-400 underline font-semibold">Bashimiki Paul Chris (+237 698 945 916)</a></p>
+  </footer>
+
+  <script>
+    // Interactive 3D WebGL Sculpture
+    let mainBlobMat;
+    (function initArt3D() {
+      const box = document.getElementById('hero3dBox');
+      if (!box || typeof THREE === 'undefined') return;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, box.clientWidth / box.clientHeight, 0.1, 100);
+      camera.position.z = 5;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(box.clientWidth, box.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      box.appendChild(renderer.domElement);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      mainBlobMat = new THREE.MeshPhongMaterial({
+        color: 0x1837b9,
+        emissive: 0x091540,
+        shininess: 110,
+        specular: 0xffc300
+      });
+      const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.15, 0.36, 120, 24), mainBlobMat);
+      group.add(knot);
+
+      // Orbiting Golden Sphere
+      const goldOrb = new THREE.Mesh(
+        new THREE.SphereGeometry(0.24, 24, 24),
+        new THREE.MeshPhongMaterial({ color: 0xffc300, emissive: 0xd97706 })
+      );
+      group.add(goldOrb);
+
+      const light1 = new THREE.PointLight(0xffc300, 2.2, 15);
+      light1.position.set(3, 3, 4);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xcf385b, 1.8, 15);
+      light2.position.set(-3, -2, 3);
+      scene.add(light2);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+
+      let mx = 0, my = 0;
+      box.addEventListener('mousemove', (e) => {
+        const r = box.getBoundingClientRect();
+        mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = Date.now() * 0.001;
+        knot.rotation.y = t * 0.45 + mx * 0.8;
+        knot.rotation.x = t * 0.25 + my * 0.8;
+        goldOrb.position.set(Math.cos(t * 1.4) * 2.0, Math.sin(t * 1.1) * 1.3, Math.sin(t * 1.4) * 1.5);
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    function setLightColor(hex) {
+      if (mainBlobMat) mainBlobMat.color.setHex(hex);
+    }
+
+    function filterArt(cat, btn) {
+      document.querySelectorAll('.art-btn').forEach(b => {
+        b.className = 'art-btn px-4 py-2 rounded-xl bg-white/10 text-white text-xs';
+      });
+      btn.className = 'art-btn px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs';
+      document.querySelectorAll('#artGrid > article').forEach(c => {
+        const k = c.getAttribute('data-cat');
+        c.style.display = (cat === 'all' || k === cat) ? 'flex' : 'none';
+      });
+    }
+
+    function setHarmony(hex, title, desc) {
+      document.getElementById('swatchCircle').style.backgroundColor = hex;
+      document.getElementById('swatchTitle').textContent = title;
+      document.getElementById('swatchDesc').textContent = desc;
+    }
+
+    function calcArt() {
+      const w = parseInt(document.getElementById('wInput').value, 10);
+      const h = parseInt(document.getElementById('hInput').value, 10);
+      const extra = parseInt(document.getElementById('frameInput').value, 10);
+      document.getElementById('wVal').textContent = w + ' cm';
+      document.getElementById('hVal').textContent = h + ' cm';
+      const base = Math.round((w * h) * 18) + 65000 + extra;
+      document.getElementById('artTotal').textContent = base.toLocaleString() + ' FCFA';
+    }
+
+    function inquireArt(title) {
+      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nJe souhaite acquÃ©rir l'Å“uvre :\nâ€¢ *${title}*`;
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function orderCommission() {
+      const w = document.getElementById('wVal').textContent;
+      const h = document.getElementById('hVal').textContent;
+      const tot = document.getElementById('artTotal').textContent;
+      const harmony = document.getElementById('swatchTitle').textContent;
+      const msg = `Bonjour Galerie Aurelia Delacroix ! ðŸŽ¨\nDemande de toile sur-mesure :\nâ€¢ Dimensions : ${w} Ã— ${h}\nâ€¢ Harmonie : ${harmony}\nâ€¢ Budget estimÃ© : ${tot}`;
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+

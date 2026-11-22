@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POLYCLINIQUE MEDICARE+ â€” Centre MÃ©dical, Imagerie & Prise de Rendez-Vous en Ligne</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #06101E;
+      color: #F1F5F9;
+    }
+    .clinic-card {
+      background: rgba(13, 27, 46, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      transition: all 0.35s ease;
+    }
+    .clinic-card:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.25);
+    }
+  </style>
+  <style>
+    img { max-width: 100%; display: block; }
+    button, a.btn, [onclick] { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.65rem !important; line-height: 1.2 !important; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (!this.dataset.fallbackApplied) {
+            this.dataset.fallbackApplied = 'true';
+            this.src = '../../images/work-oil-horizon.jpg';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body class="antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Top Emergency & Insurance Bar -->
+  <div class="bg-[#0A192F] border-b border-sky-500/20 text-xs py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-slate-300">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-rose-400 font-bold">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          Urgences, MaternitÃ© & Ambulance 24h/24 â€” 7j/7
+        </span>
+        <span class="hidden md:inline">â€¢</span>
+        <span class="hidden md:inline">Assurances AgrÃ©Ã©es : AXA, Allianz, Activa, Saham, Chanas & CNPS</span>
+      </div>
+      <div class="font-semibold text-sky-400">Standard MÃ©dical : +237 698 945 916</div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header class="sticky top-0 z-40 bg-[#06101E]/90 backdrop-blur-xl border-b border-sky-500/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-teal-500 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-sky-500/25">+</div>
+        <div>
+          <span class="font-extrabold text-xl sm:text-2xl text-white tracking-tight block leading-none">MEDICARE<span class="text-sky-400">+</span></span>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-sky-300/80 block mt-1">Polyclinique & Centre de Diagnostic</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm text-slate-300 font-medium">
+        <a href="#poles" class="hover:text-sky-400 transition">PÃ´les MÃ©dicaux</a>
+        <a href="#medecins" class="hover:text-sky-400 transition">Nos SpÃ©cialistes (6)</a>
+        <a href="#bilans" class="hover:text-sky-400 transition">Bilans & Tarifs</a>
+        <a href="#rendez-vous" class="hover:text-sky-400 transition">Pass Rendez-Vous</a>
+        <a href="#faq" class="hover:text-sky-400 transition">Questions</a>
+      </nav>
+      <a href="#rendez-vous" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm transition shadow-lg shadow-sky-500/20">
+        Prendre Rendez-Vous
+      </a>
+    </div>
+  </header>
+
+  <!-- SECTION 1: HERO & DIGITAL RECEPTION -->
+  <section id="top" class="py-16 sm:py-24 border-b border-sky-500/15 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 text-xs font-semibold">
+          <span>âœ“ Plateau Technique CertifiÃ© ISO â€¢ ZÃ©ro File d'Attente</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold leading-[1.08] tracking-tight text-white">
+          L'Excellence MÃ©dicale, <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-teal-300">Accessible en 30 Secondes.</span>
+        </h1>
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+          Ã‰vitez les longues heures d'attente en salle de rÃ©ception. SÃ©lectionnez votre mÃ©decin spÃ©cialiste, choisissez votre crÃ©neau horaire et recevez votre <strong>Pass Patient Digital</strong> directement sur WhatsApp.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 pt-2">
+          <div class="clinic-card p-4 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold text-sky-400">18+</div>
+            <div class="text-xs text-slate-400 mt-1">MÃ©decins SpÃ©cialistes</div>
+          </div>
+          <div class="clinic-card p-4 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold text-teal-400">100%</div>
+            <div class="text-xs text-slate-400 mt-1">RÃ©sultats Labo DigitalisÃ©s</div>
+          </div>
+          <div class="clinic-card p-4 rounded-2xl">
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">24/7</div>
+            <div class="text-xs text-slate-400 mt-1">Bloc, Urgences & Imagerie</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href="#rendez-vous" class="px-7 py-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-sm transition">
+            Obtenir Mon Pass Consultation â†’
+          </a>
+          <a href="#medecins" class="px-7 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-sky-500/30 text-white font-semibold text-sm transition">
+            Consulter l'Annuaire MÃ©dical
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6">
+        <div class="clinic-card rounded-3xl p-3 shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=85"
+               alt="Plateau Technique Polyclinique MediCare+"
+               class="w-full h-[360px] object-cover rounded-2xl" />
+          <div class="mt-3 p-5 bg-[#06101E] rounded-2xl border border-sky-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-[10px] uppercase tracking-widest text-teal-400 font-bold">Imagerie & Laboratoire Haute PrÃ©cision</span>
+              <h3 class="text-lg font-bold text-white mt-0.5">Scanner 64 Barrettes, Ã‰chographie 4D & Bilans Sanguins</h3>
+              <p class="text-xs text-slate-400">RÃ©sultats transmis par WhatsApp & PDF sÃ©curisÃ© en moins de 2 heures.</p>
+            </div>
+            <a href="#bilans" class="shrink-0 px-4 py-2.5 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500 hover:text-slate-950 font-bold text-xs transition">
+              Voir les Tarifs â†’
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PÃ”LES D'EXCELLENCE MÃ‰DICALE -->
+  <section id="poles" class="py-20 border-b border-sky-500/15 bg-[#040B15]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-14">
+        <span class="text-xs uppercase tracking-[0.22em] text-sky-400 font-bold">01 // DÃ©partements Cliniques</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Nos PÃ´les d'Excellence</h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">Un parcours de soins intÃ©grÃ© rÃ©unissant consultation, imagerie mÃ©dicale, laboratoire d'analyses et hospitalisation VIP.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="clinic-card p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-2xl bg-sky-500/15 text-sky-400 flex items-center justify-center font-extrabold text-lg mb-4">01</div>
+          <h3 class="text-xl font-bold text-white">Cardiologie & Vasculaire</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Ã‰lectrocardiogramme (ECG), Ã‰cho-Doppler cardiaque, Holter tensionnel 24h et suivi de l'hypertension artÃ©rielle.</p>
+        </div>
+        <div class="clinic-card p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-2xl bg-teal-500/15 text-teal-400 flex items-center justify-center font-extrabold text-lg mb-4">02</div>
+          <h3 class="text-xl font-bold text-white">Chirurgie Dentaire & Laser</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Implantologie, facettes cÃ©ramiques, blanchiment laser sans douleur, orthodontie invisible et soins conservateurs.</p>
+        </div>
+        <div class="clinic-card p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-extrabold text-lg mb-4">03</div>
+          <h3 class="text-xl font-bold text-white">MaternitÃ©, GynÃ©co & PÃ©diatrie</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Suivi de grossesse, Ã©chographie morphologique 4D, suites de couches VIP climatisÃ©es et urgences pÃ©diatriques.</p>
+        </div>
+        <div class="clinic-card p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-extrabold text-lg mb-4">04</div>
+          <h3 class="text-xl font-bold text-white">Laboratoire & Check-up</h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">HÃ©matologie, biochimie, hormonologie et bilans annuels complets pour dirigeants et familles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION 3: ANNUAIRE DES 6 SPÃ‰CIALISTES AVEC PHOTOS & FILTRES -->
+  <section id="medecins" class="py-20 border-b border-sky-500/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-[0.22em] text-sky-400 font-bold">02 // Corps MÃ©dical</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Nos MÃ©decins SpÃ©cialistes</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterMed('all', this)" class="med-btn px-4 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs">Tous (6)</button>
+          <button onclick="filterMed('cardio', this)" class="med-btn px-4 py-2 rounded-xl bg-white/5 text-slate-300 text-xs">Cardiologie & MÃ©decine</button>
+          <button onclick="filterMed('dental', this)" class="med-btn px-4 py-2 rounded-xl bg-white/5 text-slate-300 text-xs">Dentaire & Ophtalmo</button>
+          <button onclick="filterMed('peds', this)" class="med-btn px-4 py-2 rounded-xl bg-white/5 text-slate-300 text-xs">PÃ©diatrie & GynÃ©co</button>
+        </div>
+      </div>
+
+      <div id="medGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <!-- Doc 1 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="cardio">
+          <div>
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80" alt="Dr. Samuel Nkodo" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-[11px] font-bold">Cardiologie & ECG</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Disponible</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Samuel Nkodo, MD</h3>
+              <p class="text-xs text-slate-400 mt-1">Ancien Chef de Clinique (Paris & YaoundÃ©) â€¢ 15 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Hypertension, insuffisance cardiaque, Ã‰cho-Doppler couleur et Ã©preuves d'effort.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Samuel Nkodo â€” Cardiologie & ECG (25,000 FCFA)')" class="w-full py-3 rounded-xl bg-sky-500/15 hover:bg-sky-500 hover:text-slate-950 text-sky-300 font-bold text-xs transition">
+              Choisir Dr. Nkodo (25,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- Doc 2 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="dental">
+          <div>
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=80" alt="Dr. Claire Mballa" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-300 text-[11px] font-bold">Chirurgie Dentaire</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Disponible</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Claire Mballa, DDS</h3>
+              <p class="text-xs text-slate-400 mt-1">SpÃ©cialiste EsthÃ©tique du Sourire & Implants â€¢ 11 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Blanchiment laser, facettes cÃ©ramiques, dÃ©tartrage ultrason et prothÃ¨ses sur-mesure.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Claire Mballa â€” Chirurgie Dentaire (20,000 FCFA)')" class="w-full py-3 rounded-xl bg-teal-500/15 hover:bg-teal-500 hover:text-slate-950 text-teal-300 font-bold text-xs transition">
+              Choisir Dr. Mballa (20,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- Doc 3 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="peds">
+          <div>
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=80" alt="Dr. Nadia Ewane" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-[11px] font-bold">PÃ©diatrie & NÃ©onatologie</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Disponible</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Nadia Ewane, MD</h3>
+              <p class="text-xs text-slate-400 mt-1">PÃ©diatre & Nutrition Infantile â€¢ 12 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Suivi du nourrisson, calendrier vaccinal complet, urgences fiÃ¨vres et croissance.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Nadia Ewane â€” PÃ©diatrie (15,000 FCFA)')" class="w-full py-3 rounded-xl bg-indigo-500/15 hover:bg-indigo-500 hover:text-slate-950 text-indigo-300 font-bold text-xs transition">
+              Choisir Dr. Ewane (15,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- Doc 4 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="peds">
+          <div>
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=700&q=80" alt="Pr. Henri Fouda" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 text-[11px] font-bold">GynÃ©cologie-ObstÃ©trique</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Disponible</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Henri Fouda, MD</h3>
+              <p class="text-xs text-slate-400 mt-1">GynÃ©cologue & Ã‰chographie 4D â€¢ 18 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Suivi prÃ©natal, bilan de fertilitÃ©, Ã©chographie morphologique fÅ“tale et maternitÃ© VIP.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Henri Fouda â€” GynÃ©cologie & Ã‰cho 4D (25,000 FCFA)')" class="w-full py-3 rounded-xl bg-rose-500/15 hover:bg-rose-500 hover:text-slate-950 text-rose-300 font-bold text-xs transition">
+              Choisir Dr. Fouda (25,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- Doc 5 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="dental">
+          <div>
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=80" alt="Dr. Marc Tchoua" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-bold">Ophtalmologie & Optique</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Disponible</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Marc Tchoua, MD</h3>
+              <p class="text-xs text-slate-400 mt-1">Chirurgien Ophtalmologue â€¢ 14 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Fond d'Å“il informatisÃ©, mesure tension oculaire, glaucome, cataracte et prescription lunettes.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Marc Tchoua â€” Ophtalmologie (20,000 FCFA)')" class="w-full py-3 rounded-xl bg-amber-500/15 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-xs transition">
+              Choisir Dr. Tchoua (20,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+
+        <!-- Doc 6 -->
+        <article class="clinic-card rounded-3xl overflow-hidden flex flex-col justify-between" data-cat="cardio">
+          <div>
+            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=700&q=80" alt="Dr. Patrick Biloa" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">MÃ©decine GÃ©nÃ©rale & Check-up</span>
+                <span class="text-xs text-emerald-400 font-semibold">â— Sans Attente</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-white">Dr. Patrick Biloa, MD</h3>
+              <p class="text-xs text-slate-400 mt-1">MÃ©decin Interniste & Bilans â€¢ 10 ans d'exp.</p>
+              <p class="text-xs text-slate-300 mt-3 leading-relaxed">Consultations gÃ©nÃ©rales, bilans prÃ©-embauche, certificats mÃ©dicaux et suivi diabÃ¨te.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="selectDoc('Dr. Patrick Biloa â€” MÃ©decine GÃ©nÃ©rale (10,000 FCFA)')" class="w-full py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 font-bold text-xs transition">
+              Choisir Dr. Biloa (10,000 FCFA) â†’
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: BILANS DE SANTÃ‰ & GÃ‰NÃ‰RATEUR DE PASS PATIENT -->
+  <section id="bilans" class="py-20 border-b border-sky-500/15 bg-[#040B15]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-6 space-y-5">
+        <span class="text-xs uppercase tracking-[0.22em] text-sky-400 font-bold">03 // Tarifs & Forfaits PrÃ©vention</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Forfaits Bilans de SantÃ© Annuels</h2>
+        <div class="space-y-4">
+          <div class="clinic-card p-5 rounded-2xl flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-white">Bilan Essentiel VitalitÃ© (18 ParamÃ¨tres)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">NFS, GlycÃ©mie, CholestÃ©rol, Fonction RÃ©nale & HÃ©patique + Consultation</p>
+            </div>
+            <button onclick="selectDoc('Forfait Bilan Essentiel VitalitÃ© (35,000 FCFA)')" class="px-4 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shrink-0">35,000 FCFA</button>
+          </div>
+          <div class="clinic-card p-5 rounded-2xl flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-white">Bilan ExÃ©cutif Cardio & Imagerie</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Bilan sanguin complet + ECG + Ã‰cho Abdominale + Consultation Cardiologue</p>
+            </div>
+            <button onclick="selectDoc('Forfait Bilan ExÃ©cutif Cardio (75,000 FCFA)')" class="px-4 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shrink-0">75,000 FCFA</button>
+          </div>
+          <div class="clinic-card p-5 rounded-2xl flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-white">Forfait Dentaire DÃ©tartrage & Ã‰clat</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Bilan panoramique + DÃ©tartrage ultrason + Polissage aÃ©ropolisseur</p>
+            </div>
+            <button onclick="selectDoc('Forfait Dentaire DÃ©tartrage & Ã‰clat (25,000 FCFA)')" class="px-4 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shrink-0">25,000 FCFA</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Digital Pass Generator -->
+      <div id="rendez-vous" class="lg:col-span-6 clinic-card rounded-3xl p-8 border-2 border-sky-500/40 shadow-2xl">
+        <span class="text-xs uppercase tracking-widest text-sky-400 font-bold">RÃ©ception Digitale</span>
+        <h3 class="text-2xl font-extrabold text-white mt-1 mb-5">GÃ©nÃ©rer Votre Pass Patient Prioritaire</h3>
+        <div class="space-y-4">
+          <input id="pName" type="text" placeholder="Nom & PrÃ©nom du Patient (ex: M. Jean-Marc Essomba)" class="w-full px-4 py-3.5 rounded-xl bg-[#06101E] border border-sky-500/30 text-white text-xs" />
+          <input id="pService" type="text" value="Dr. Samuel Nkodo â€” Cardiologie & ECG (25,000 FCFA)" class="w-full px-4 py-3.5 rounded-xl bg-[#06101E] border border-sky-500/30 text-sky-300 font-bold text-xs" />
+          <div class="grid grid-cols-2 gap-3">
+            <input id="pDay" type="text" placeholder="Date (ex: Demain Matin)" class="px-4 py-3.5 rounded-xl bg-[#06101E] border border-sky-500/30 text-white text-xs" />
+            <select id="pAssurance" class="px-4 py-3.5 rounded-xl bg-[#06101E] border border-sky-500/30 text-white text-xs">
+              <option>Paiement Direct (MoMo / EspÃ¨ces)</option>
+              <option>Prise en Charge Assurance (80%)</option>
+            </select>
+          </div>
+          <button onclick="sendClinicPass()" class="w-full py-4 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition">
+            GÃ©nÃ©rer Mon Pass & Confirmer sur WhatsApp â†’
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="faq" class="py-10 px-4 text-center text-xs text-slate-400">
+    <p>POLYCLINIQUE MEDICARE+ â€¢ Portail MÃ©dical conÃ§u par <a href="https://wa.me/237698945916" target="_blank" class="text-sky-400 underline font-semibold">Atelier BPC â€” Bashimiki Paul Chris (+237 698 945 916)</a></p>
+  </footer>
+
+  <script>
+    function filterMed(cat, btn) {
+      document.querySelectorAll('.med-btn').forEach(b => {
+        b.className = 'med-btn px-4 py-2 rounded-xl bg-white/5 text-slate-300 text-xs';
+      });
+      btn.className = 'med-btn px-4 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs';
+      document.querySelectorAll('#medGrid > article').forEach(card => {
+        const c = card.getAttribute('data-cat');
+        card.style.display = (cat === 'all' || c === cat) ? 'flex' : 'none';
+      });
+    }
+    function selectDoc(val) {
+      document.getElementById('pService').value = val;
+      document.getElementById('rendez-vous').scrollIntoView({ behavior: 'smooth' });
+    }
+    function sendClinicPass() {
+      const name = document.getElementById('pName').value.trim() || 'Patient Prioritaire';
+      const srv = document.getElementById('pService').value;
+      const day = document.getElementById('pDay').value.trim() || 'Demain Ã  09h30';
+      const ins = document.getElementById('pAssurance').value;
+      const code = 'MC-' + Math.floor(100000 + Math.random() * 900000);
+      const msg = `ðŸ¥ *PASS PATIENT PRIORITAIRE (${code})*\nâ€¢ *Patient :* ${name}\nâ€¢ *Consultation :* ${srv}\nâ€¢ *CrÃ©neau :* ${day}\nâ€¢ *Mode :* ${ins}`;
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+

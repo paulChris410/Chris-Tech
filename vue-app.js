@@ -404,8 +404,9 @@ const app = createApp({
     let updateHeroLighting = null;
 
     onMounted(() => {
-      // Restore Theme
-      const saved = localStorage.getItem("delacroix_theme");
+      // Restore Theme safely inside file:// iframes
+      let saved = null;
+      try { saved = localStorage.getItem("delacroix_theme"); } catch (e) {}
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       if (saved === "dark" || (!saved && prefersDark)) {
         isDarkMode.value = true;
@@ -628,11 +629,8 @@ const app = createApp({
       scene.add(canvasMeshGroup);
 
       const canvasGeometry = new THREE.BoxGeometry(2.4, 3.0, 0.12);
-      const textureLoader = new THREE.TextureLoader();
-      const frontTexture = textureLoader.load("images/work-oil-horizon.jpg");
-
       const linenEdge = new THREE.MeshStandardMaterial({ color: 0x223c8a, roughness: 0.8, metalness: 0.05 });
-      const frontArt = new THREE.MeshPhysicalMaterial({ map: frontTexture, roughness: 0.22, metalness: 0.05, clearcoat: 0.85, clearcoatRoughness: 0.15 });
+      const frontArt = new THREE.MeshPhysicalMaterial({ color: 0x1837b9, roughness: 0.22, metalness: 0.05, clearcoat: 0.85, clearcoatRoughness: 0.15 });
       const backLinen = new THREE.MeshStandardMaterial({ color: 0xd9d3c5, roughness: 0.9 });
 
       const canvasMesh = new THREE.Mesh(canvasGeometry, [linenEdge, linenEdge, linenEdge, linenEdge, frontArt, backLinen]);

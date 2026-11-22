@@ -10,7 +10,7 @@
  * - Cool Gesso:       #f2f4f2 (Light) / #111417 (Dark)
  */
 
-const PAINTINGS_DATA = [
+window.PAINTINGS_DATA = [
   {
     id: "work-1",
     title: "The Deep Horizon (Lapis & Viridian)",

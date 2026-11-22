@@ -89,9 +89,9 @@
   --ticker-bg: #15191c;
 }
 
-/* Vue v-cloak to prevent template flicker */
+/* Vue v-cloak - always visible so content never disappears */
 [v-cloak] {
-  display: none !important;
+  display: block !important;
 }
 
 /* Global Reset & Base */
@@ -443,10 +443,8 @@ button {
 
 .char {
   display: inline-block;
-  transform: translateY(115%) rotate(5deg);
-  opacity: 0;
-  animation: letterRise 0.95s var(--ease-editorial) forwards;
-  animation-delay: calc(var(--char-index, 0) * 0.04s + 0.1s);
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
 }
 
 @keyframes letterRise {

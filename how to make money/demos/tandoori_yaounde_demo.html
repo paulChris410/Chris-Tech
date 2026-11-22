@@ -1,0 +1,807 @@
+﻿<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAISON TANDOORI YAOUNDÃ‰ â€” Haute Gastronomie Indienne, Grillades au Charbon & Livraison</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0907;
+      --card: #16100C;
+      --saffron: #E58E26;
+      --gold: #F5C469;
+      --cream: #FAF3EB;
+      --line: rgba(245, 196, 105, 0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--cream);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    button, a {
+      word-break: break-word;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .dish-card {
+      background-color: var(--card);
+      border: 1px solid var(--line);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dish-card:hover {
+      border-color: rgba(229, 142, 38, 0.65);
+      transform: translateY(-4px);
+    }
+    .dish-card img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dish-card:hover img {
+      transform: scale(1.06);
+    }
+  </style>
+  <style>
+    img { max-width: 100%; display: block; }
+    button, a.btn, [onclick] { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.65rem !important; line-height: 1.2 !important; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (!this.dataset.fallbackApplied) {
+            this.dataset.fallbackApplied = 'true';
+            this.src = '../../images/work-oil-horizon.jpg';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body class="antialiased selection:bg-[#E58E26] selection:text-black">
+
+  <!-- Top Hospitality Telemetry Bar -->
+  <div class="bg-[#16100C] border-b border-[#F5C469]/15 text-xs py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-[#FAF3EB]/80">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-[#F5C469] font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Service Ouvert : 11h30 â€“ 23h30 (7j/7)
+        </span>
+        <span class="hidden md:inline">â€¢</span>
+        <span class="hidden md:inline">YaoundÃ© (Quartier Bastos & Centre-Ville) â€” Livraison Express en 35 min</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+237699885522" class="hover:text-[#F5C469] font-semibold">Ligne Directe : +237 699 88 55 22</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Navigation -->
+  <header class="sticky top-0 z-40 bg-[#0D0907]/90 backdrop-blur-xl border-b border-[#F5C469]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full border border-[#F5C469]/40 bg-[#16100C] flex items-center justify-center serif font-bold text-xl text-[#F5C469]">
+          MT
+        </div>
+        <div>
+          <span class="serif text-2xl sm:text-3xl font-bold tracking-wider text-[#FAF3EB] block leading-none">MAISON TANDOORI</span>
+          <span class="text-[10px] uppercase tracking-[0.22em] text-[#F5C469]/80 block mt-1">Haute Cuisine Indienne â€¢ YaoundÃ©</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-[#FAF3EB]/85 font-medium">
+        <a href="#savoir-faire" class="hover:text-[#F5C469] transition">Le Four Tandoor</a>
+        <a href="#carte" class="hover:text-[#F5C469] transition">La Carte (12 SpÃ©cialitÃ©s)</a>
+        <a href="#traiteur" class="hover:text-[#F5C469] transition">Banquets & Ambassades</a>
+        <a href="#salon-vip" class="hover:text-[#F5C469] transition">RÃ©server une Table</a>
+        <a href="#avis" class="hover:text-[#F5C469] transition">Avis Clients</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleCartDrawer()" class="relative px-4 py-2.5 rounded-none border border-[#F5C469]/40 bg-[#16100C] hover:bg-[#F5C469] hover:text-black text-[#F5C469] font-bold text-xs sm:text-sm transition flex items-center gap-2">
+          <span>Panier Commande</span>
+          <span id="navCartCount" class="px-2 py-0.5 bg-[#E58E26] text-black font-extrabold text-xs">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: EDITORIAL HERO -->
+  <section id="top" class="relative py-16 sm:py-24 border-b border-[#F5C469]/15 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 border border-[#F5C469]/30 bg-[#16100C] text-[#F5C469] text-xs uppercase tracking-widest">
+          <span>Institution Gastronomique Ã  YaoundÃ© depuis 2016</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-[4.25rem] font-bold leading-[1.04] text-[#FAF3EB]">
+          Le Feu SacrÃ© du <span class="italic font-normal text-[#F5C469]">Tandoor</span>, la Noblesse des Ã‰pices.
+        </h1>
+
+        <p class="text-base sm:text-lg text-[#FAF3EB]/75 leading-relaxed">
+          Chaque jour, nos maÃ®tres rÃ´tisseurs pÃ©trissent nos pains Naans Ã  la main et marinent nos viandes, volailles et gambas de Kribi pendant 24 heures dans un mÃ©lange secret de safran du Cachemire, cardamome verte et yaourt fermier avant de les saisir Ã  400Â°C au charbon de bois.
+        </p>
+
+        <div class="pt-2 flex flex-wrap gap-4">
+          <a href="#carte" class="px-8 py-4 bg-[#E58E26] hover:bg-[#F5C469] text-black font-bold text-sm uppercase tracking-wider transition">
+            Composer Ma Commande â†’
+          </a>
+          <a href="#salon-vip" class="px-8 py-4 border border-[#F5C469]/35 hover:border-[#F5C469] text-[#FAF3EB] font-semibold text-sm uppercase tracking-wider transition">
+            RÃ©server une Table VIP
+          </a>
+        </div>
+
+        <div class="pt-6 border-t border-[#F5C469]/15 grid grid-cols-3 gap-6 text-xs">
+          <div>
+            <span class="serif text-2xl sm:text-3xl font-bold text-[#F5C469] block">400Â°C</span>
+            <span class="text-[#FAF3EB]/65">Cuisson authentique au four d'argile Tandoor</span>
+          </div>
+          <div>
+            <span class="serif text-2xl sm:text-3xl font-bold text-[#F5C469] block">35 min</span>
+            <span class="text-[#FAF3EB]/65">Livraison chaude Bastos, Golf, Omnisports & Centre</span>
+          </div>
+          <div>
+            <span class="serif text-2xl sm:text-3xl font-bold text-[#F5C469] block">100%</span>
+            <span class="text-[#FAF3EB]/65">Viandes fraÃ®ches Halal & Ã©pices importÃ©es d'Inde</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Hero Visual Collage -->
+      <div class="lg:col-span-6 relative">
+        <div class="relative border border-[#F5C469]/30 bg-[#16100C] p-3 shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1200&q=85"
+               alt="Assortiment Royal Tandoori YaoundÃ©"
+               class="w-full h-[380px] sm:h-[460px] object-cover" />
+          <!-- Floating Signature Dish Overlay -->
+          <div class="mt-3 p-5 bg-[#0D0907] border border-[#F5C469]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-[10px] uppercase tracking-widest text-[#E58E26] font-bold">CrÃ©ation Signature du Chef</span>
+              <h3 class="serif text-2xl font-bold text-white">Plateau Royal Maharaja (Pour 2 Personnes)</h3>
+              <p class="text-xs text-[#FAF3EB]/70">Poulet Tikka, Agneau Seekh Kebab, Gambas GrillÃ©es, Butter Chicken, 2 Cheese Naans & Riz SafranÃ©</p>
+            </div>
+            <div class="shrink-0 text-left sm:text-right">
+              <span class="text-xl font-extrabold text-[#F5C469] block">18,500 FCFA</span>
+              <button onclick="addItem('Plateau Royal Maharaja (2 Pers.)', 18500)"
+                      class="mt-1.5 px-4 py-2 bg-[#E58E26] hover:bg-[#F5C469] text-black font-bold text-xs uppercase transition">
+                + Commander
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: SAVOIR-FAIRE & HERITAGE -->
+  <section id="savoir-faire" class="py-20 border-b border-[#F5C469]/15 bg-[#120C09]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-14">
+        <span class="text-xs uppercase tracking-[0.25em] text-[#E58E26] font-bold">01 // Notre Philosophie Culinaire</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2">Trois Piliers d'Excellence Gastronomique</h2>
+        <p class="text-[#FAF3EB]/70 text-base mt-3">
+          Loin de la restauration rapide standardisÃ©e, la Maison Tandoori perpÃ©tue les techniques ancestrales des cours royales du Nord de l'Inde au cÅ“ur de YaoundÃ©.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="dish-card overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=800&q=80" alt="Ã‰pices Indiennes TorrÃ©fiÃ©es" class="w-full h-56 object-cover" />
+          <div class="p-7">
+            <span class="text-xs text-[#F5C469] uppercase tracking-widest">Pilier â„– 01</span>
+            <h3 class="text-2xl font-bold text-white mt-1">TorrÃ©faction Quotidienne des Ã‰pices</h3>
+            <p class="text-sm text-[#FAF3EB]/70 mt-3 leading-relaxed">
+              Nos graines de cumin, coriandre, clous de girofle et gousses de cardamome sont torrÃ©fiÃ©es Ã  sec et moulues Ã  la pierre chaque matin dans notre cuisine pour prÃ©server leurs huiles essentielles.
+            </p>
+          </div>
+        </div>
+
+        <div class="dish-card overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80" alt="Naan Artisanal au Four Tandoor" class="w-full h-56 object-cover" />
+          <div class="p-7">
+            <span class="text-xs text-[#F5C469] uppercase tracking-widest">Pilier â„– 02</span>
+            <h3 class="text-2xl font-bold text-white mt-1">Le Four Tandoor en Terre Cuite</h3>
+            <p class="text-sm text-[#FAF3EB]/70 mt-3 leading-relaxed">
+              Nos pains Naans au fromage fondant et Ã  l'ail frais sont plaquÃ©s Ã  la minute contre la paroi brÃ»lante du four Tandoor, garantissant une croÃ»te croustillante et un cÅ“ur moelleux inimitable.
+            </p>
+          </div>
+        </div>
+
+        <div class="dish-card overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Cadre FeutrÃ© & Livraison Thermique" class="w-full h-56 object-cover" />
+          <div class="p-7">
+            <span class="text-xs text-[#F5C469] uppercase tracking-widest">Pilier â„– 03</span>
+            <h3 class="text-2xl font-bold text-white mt-1">Cadre FeutrÃ© & Livraison Thermique</h3>
+            <p class="text-sm text-[#FAF3EB]/70 mt-3 leading-relaxed">
+              Que vous dÃ®niez dans notre salon climatisÃ© ou commandiez Ã  domicile Ã  Bastos, Golf ou Omnisports, nos emballages isothermes scellÃ©s maintiennent vos plats fumants jusqu'Ã  votre table.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: LA CARTE INTERACTIVE (12 DISHES WITH REAL PHOTOS & CATEGORY TABS) -->
+  <section id="carte" class="py-20 border-b border-[#F5C469]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-[#E58E26] font-bold">02 // Menu Digital & Commande Directe</span>
+          <h2 class="text-3xl sm:text-5xl font-bold mt-2">La Carte de la Maison Tandoori</h2>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterMenu('all', this)" class="menu-tab px-5 py-2.5 bg-[#E58E26] text-black font-bold text-xs uppercase tracking-wider transition">
+            Toute la Carte (12)
+          </button>
+          <button onclick="filterMenu('naans', this)" class="menu-tab px-5 py-2.5 border border-[#F5C469]/30 text-[#FAF3EB] hover:border-[#F5C469] text-xs uppercase tracking-wider transition">
+            EntrÃ©es & Cheese Naans (3)
+          </button>
+          <button onclick="filterMenu('tandoor', this)" class="menu-tab px-5 py-2.5 border border-[#F5C469]/30 text-[#FAF3EB] hover:border-[#F5C469] text-xs uppercase tracking-wider transition">
+            Grillades Tandoor (3)
+          </button>
+          <button onclick="filterMenu('currys', this)" class="menu-tab px-5 py-2.5 border border-[#F5C469]/30 text-[#FAF3EB] hover:border-[#F5C469] text-xs uppercase tracking-wider transition">
+            Currys Royaux (3)
+          </button>
+          <button onclick="filterMenu('biryani', this)" class="menu-tab px-5 py-2.5 border border-[#F5C469]/30 text-[#FAF3EB] hover:border-[#F5C469] text-xs uppercase tracking-wider transition">
+            Biryanis & Douceurs (3)
+          </button>
+        </div>
+      </div>
+
+      <!-- 12 Dishes Grid -->
+      <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+        <!-- 1 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="naans">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=80" alt="Garlic Cheese Naan" class="w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-2.5 py-1 bg-black/80 text-[#F5C469] text-[10px] uppercase font-bold">Incontournable</span>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Garlic & Cheese Naan</h3>
+                <span class="font-extrabold text-[#F5C469]">2,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Pain levÃ© artisanal garni de fromage affinÃ© fondant, beurre clarifiÃ© (Ghee), ail frais et coriandre ciselÃ©e.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Garlic & Cheese Naan', 2500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="naans">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=700&q=80" alt="Samosas ImpÃ©riaux" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Samosas ImpÃ©riaux (x4)</h3>
+                <span class="font-extrabold text-[#F5C469]">3,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Chaussons croustillants farcis au bÅ“uf hachÃ© aux Ã©pices douces ou pommes de terre & petits pois, chutney menthe-tamarin.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Samosas ImpÃ©riaux (x4)', 3500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="naans">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80" alt="Beignets Pakoras" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Prawn & Onion Bhaji</h3>
+                <span class="font-extrabold text-[#F5C469]">4,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Beignets dorÃ©s Ã  la farine de pois chiches torrÃ©fiÃ©e, crevettes fraÃ®ches, oignons caramÃ©lisÃ©s et graines d'ajwain.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Prawn & Onion Bhaji', 4500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="tandoor">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=80" alt="Poulet Tandoori" class="w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-2.5 py-1 bg-[#E58E26] text-black text-[10px] uppercase font-bold">Four Tandoor</span>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Poulet Tikka Fumant</h3>
+                <span class="font-extrabold text-[#F5C469]">7,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                SuprÃªmes de poulet marinÃ©s 24h au yaourt, paprika du Cachemire et gingembre frais, rÃ´tis Ã  la braise sur broche.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Poulet Tikka Fumant', 7500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="tandoor">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=700&q=80" alt="Seekh Kebab Agneau" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Agneau Seekh Kebab Royal</h3>
+                <span class="font-extrabold text-[#F5C469]">8,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Brochettes d'agneau hachÃ© au couteau avec menthe fraÃ®che, piment doux, coriandre et garam masala maison.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Agneau Seekh Kebab Royal', 8500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="tandoor">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=700&q=80" alt="Gambas Tandoori" class="w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-2.5 py-1 bg-black/80 text-[#F5C469] text-[10px] uppercase font-bold">PÃªche de Kribi</span>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Gambas GÃ©antes Tandoori</h3>
+                <span class="font-extrabold text-[#F5C469]">13,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Gambas sauvages marinÃ©es au citron vert, curcuma, ail et moutarde douce, saisies Ã  la flamme du Tandoor.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Gambas GÃ©antes Tandoori', 13500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="currys">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=80" alt="Butter Chicken" class="w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-2.5 py-1 bg-[#E58E26] text-black text-[10px] uppercase font-bold">NÂ°1 des Ventes</span>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Butter Chicken ImpÃ©rial</h3>
+                <span class="font-extrabold text-[#F5C469]">8,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Poulet grillÃ© au tandoor mijotÃ© dans un veloutÃ© de tomates fraÃ®ches, beurre fermier, noix de cajou et fenugrec (servi avec riz Basmati).
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Butter Chicken ImpÃ©rial (+ Riz)', 8000)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="currys">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=700&q=80" alt="Agneau Rogan Josh" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Agneau Rogan Josh du Cachemire</h3>
+                <span class="font-extrabold text-[#F5C469]">9,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Ã‰paule d'agneau confite 4 heures dans une sauce parfumÃ©e Ã  la cardamome noire, cannelle, clous de girofle et safran.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Agneau Rogan Josh (+ Riz)', 9500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="currys">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=700&q=80" alt="Palak Paneer" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Palak Paneer Artisanal</h3>
+                <span class="font-extrabold text-[#F5C469]">7,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Fromage indien Paneer fait maison poÃªlÃ© au beurre, nappÃ© d'un veloutÃ© d'Ã©pinards frais Ã  l'ail rÃ´ti et crÃ¨me douce.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Palak Paneer Artisanal (+ Riz)', 7000)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="biryani">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=700&q=80" alt="Biryani Royal" class="w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-2.5 py-1 bg-[#E58E26] text-black text-[10px] uppercase font-bold">Cuisson Ã‰touffÃ©e</span>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Hyderabadi Dum Biryani Agneau</h3>
+                <span class="font-extrabold text-[#F5C469]">9,500 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Riz Basmati grand grain vieilli 2 ans, cuit Ã  l'Ã©touffÃ©e avec agneau tendre, pistaches, amandes effilÃ©es, safran et sauce Raita.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Hyderabadi Dum Biryani Agneau', 9500)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="biryani">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=700&q=80" alt="Biryani Poulet" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Biryani ImpÃ©rial Poulet & Gambas</h3>
+                <span class="font-extrabold text-[#F5C469]">11,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Alliance gÃ©nÃ©reuse de poulet tikka et gambas grillÃ©es sur lit de riz safranÃ© aux raisins dorÃ©s et oignons frits.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Biryani ImpÃ©rial Poulet & Gambas', 11000)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="dish-card flex flex-col justify-between" data-cat="biryani">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=700&q=80" alt="Mango Lassi & Gulab Jamun" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Duo Gulab Jamun & Lassi Mangue</h3>
+                <span class="font-extrabold text-[#F5C469]">4,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#FAF3EB]/70 mt-2 leading-relaxed">
+                Perles de lait caramÃ©lisÃ©es au sirop de rose et cardamome, accompagnÃ©es de notre onctueux Lassi Ã  la mangue fraÃ®che.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addItem('Duo Gulab Jamun & Lassi Mangue', 4000)" class="w-full py-3 border border-[#E58E26] hover:bg-[#E58E26] hover:text-black text-[#F5C469] font-bold text-xs uppercase tracking-wider transition">
+              + Ajouter au Panier
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SIMULATEUR DE BANQUET, TRAITEUR & RÃ‰CEPTIONS DIPLOMATIQUES -->
+  <section id="traiteur" class="py-20 border-b border-[#F5C469]/15 bg-[#120C09]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6">
+        <span class="text-xs uppercase tracking-[0.25em] text-[#E58E26] font-bold">03 // Service Traiteur & Ã‰vÃ©nementiel</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2 leading-tight">
+          RÃ©ceptions Diplomatiques, Mariages & DÃ®ners d'Affaires Ã  YaoundÃ©.
+        </h2>
+        <p class="text-sm sm:text-base text-[#FAF3EB]/75 mt-4 leading-relaxed">
+          La Maison Tandoori dÃ©ploie ses brigades, ses chauffes-plats en cuivre martelÃ© et son service maÃ®tre d'hÃ´tel pour vos rÃ©ceptions privÃ©es Ã  Bastos, Golf, Mont FÃ©bÃ© ou dans nos salons privatisables.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm text-[#FAF3EB]/85">
+          <li class="flex items-center gap-3"><span class="text-[#F5C469]">âœ¦</span> Buffet Royal Indien & International avec dÃ©coupe minute</li>
+          <li class="flex items-center gap-3"><span class="text-[#F5C469]">âœ¦</span> Vaisselle de prestige, nappage et brigade de serveurs dÃ©diÃ©s</li>
+          <li class="flex items-center gap-3"><span class="text-[#F5C469]">âœ¦</span> Devis officiel immÃ©diat pour ambassades, ONG et entreprises</li>
+        </ul>
+      </div>
+
+      <!-- Interactive Banquet Quote Simulator -->
+      <div class="lg:col-span-6 p-8 bg-[#16100C] border border-[#F5C469]/30 shadow-2xl">
+        <span class="text-xs uppercase tracking-widest text-[#F5C469] font-bold">Simulateur de Devis Traiteur</span>
+        <h3 class="text-2xl font-bold text-white mt-1 mb-6">Estimez Votre RÃ©ception en Direct</h3>
+
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-2">
+              <span>Nombre de Convives</span>
+              <span id="guestCountLabel" class="text-[#F5C469] font-bold">40 Convives</span>
+            </div>
+            <input id="guestSlider" type="range" min="10" max="200" step="5" value="40" oninput="calcBanquet()" class="w-full accent-[#E58E26]" />
+          </div>
+
+          <div>
+            <label class="text-xs font-semibold block mb-2">Formule Gastronomique</label>
+            <select id="banquetTier" onchange="calcBanquet()" class="w-full px-4 py-3 bg-[#0D0907] border border-[#F5C469]/30 text-white text-sm">
+              <option value="12500">Buffet DÃ©couverte Ã‰pices & Naans (12,500 FCFA / pers.)</option>
+              <option value="18000" selected>Banquet Prestige Ambassadeur â€” Grillades & Currys (18,000 FCFA / pers.)</option>
+              <option value="25000">Gala Royal Maharaja + Gambas & Service MaÃ®tre d'HÃ´tel (25,000 FCFA / pers.)</option>
+            </select>
+          </div>
+
+          <div class="p-5 bg-[#0D0907] border border-[#F5C469]/25 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] uppercase text-[#FAF3EB]/60 block">Budget Traiteur EstimÃ©</span>
+              <span id="banquetTotal" class="text-3xl font-extrabold text-[#F5C469]">720,000 FCFA</span>
+            </div>
+            <button onclick="sendBanquetWhatsApp()" class="px-5 py-3 bg-[#E58E26] hover:bg-[#F5C469] text-black font-bold text-xs uppercase tracking-wider transition">
+              Demander ce Devis â†’
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: AVIS CLIENTS VÃ‰RIFIÃ‰S & TABLE RESERVATION -->
+  <section id="avis" class="py-20 border-b border-[#F5C469]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-[0.25em] text-[#E58E26] font-bold">04 // Livre d'Or & TÃ©moignages</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2">Ce Que Disent Nos Convives Ã  YaoundÃ©</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-20">
+        <div class="p-7 bg-[#16100C] border border-[#F5C469]/20">
+          <div class="text-[#F5C469] text-sm mb-3">â˜…â˜…â˜…â˜…â˜…</div>
+          <p class="text-sm text-[#FAF3EB]/85 italic leading-relaxed">
+            Â« Le meilleur Butter Chicken et Cheese Naan de tout YaoundÃ©, sans aucune hÃ©sitation. Nous commandons chaque vendredi soir au cabinet Ã  Bastos et la livraison arrive toujours brÃ»lante. Â»
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/10 text-xs">
+            <strong class="text-white block">Me Christian Abega</strong>
+            <span class="text-[#F5C469]/70">Quartier Bastos, YaoundÃ©</span>
+          </div>
+        </div>
+
+        <div class="p-7 bg-[#16100C] border border-[#F5C469]/20">
+          <div class="text-[#F5C469] text-sm mb-3">â˜…â˜…â˜…â˜…â˜…</div>
+          <p class="text-sm text-[#FAF3EB]/85 italic leading-relaxed">
+            Â« Nous avons confiÃ© Ã  la Maison Tandoori le buffet de rÃ©ception pour 65 invitÃ©s au Golf. PrÃ©sentation digne d'un palace, gambas tandoori exceptionnelles et service irrÃ©prochable. Â»
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/10 text-xs">
+            <strong class="text-white block">Mme Clarisse & Dr. Etoa</strong>
+            <span class="text-[#F5C469]/70">Quartier Golf, YaoundÃ©</span>
+          </div>
+        </div>
+
+        <div class="p-7 bg-[#16100C] border border-[#F5C469]/20">
+          <div class="text-[#F5C469] text-sm mb-3">â˜…â˜…â˜…â˜…â˜…</div>
+          <p class="text-sm text-[#FAF3EB]/85 italic leading-relaxed">
+            Â« Enfin un restaurant avec un vrai menu digital oÃ¹ l'on voit exactement les plats et les prix avant de commander sur WhatsApp en 30 secondes. Â»
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/10 text-xs">
+            <strong class="text-white block">Jean-Philippe N.</strong>
+            <span class="text-[#F5C469]/70">Omnisports, YaoundÃ©</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP Table Reservation Block -->
+      <div id="salon-vip" class="p-8 sm:p-12 bg-[#16100C] border border-[#F5C469]/35 grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5">
+          <span class="text-xs uppercase tracking-widest text-[#E58E26] font-bold">RÃ©servation de Table</span>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white mt-1">RÃ©server Votre Table ou Salon PrivÃ©</h3>
+          <p class="text-xs sm:text-sm text-[#FAF3EB]/70 mt-2">
+            Confirmation immÃ©diate par notre maÃ®tre d'hÃ´tel sur WhatsApp au +237 699 88 55 22.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid sm:grid-cols-3 gap-4">
+          <input id="tName" type="text" placeholder="Votre Nom (ex: M. Ndongo)" class="px-4 py-3.5 bg-[#0D0907] border border-[#F5C469]/30 text-white text-sm" />
+          <select id="tGuests" class="px-4 py-3.5 bg-[#0D0907] border border-[#F5C469]/30 text-white text-sm">
+            <option>Table 2 Personnes</option>
+            <option>Table 4 Personnes</option>
+            <option>Salon VIP (6 Ã  12 Pers.)</option>
+          </select>
+          <input id="tDate" type="text" placeholder="Jour & Heure (ex: Ce soir 20h)" class="px-4 py-3.5 bg-[#0D0907] border border-[#F5C469]/30 text-white text-sm" />
+          <button onclick="reserveTableWhatsApp()" class="sm:col-span-3 py-4 bg-[#E58E26] hover:bg-[#F5C469] text-black font-extrabold text-sm uppercase tracking-wider transition">
+            Confirmer ma Table sur WhatsApp (+237 699 88 55 22) â†’
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-4 border-t border-[#F5C469]/15 bg-[#090605] text-xs text-[#FAF3EB]/60">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <strong class="text-[#F5C469] serif text-lg">MAISON TANDOORI YAOUNDÃ‰</strong> â€” TÃ©l / WhatsApp : +237 699 88 55 22 â€¢ Instagram : @tandooriyaounde
+      </div>
+      <div>
+        Architecture & Plateforme Digitale par <a href="https://wa.me/237698945916" target="_blank" class="text-[#F5C469] underline font-semibold">Atelier BPC â€” Bashimiki Paul Chris (+237 698 945 916)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SLIDE-OUT WHATSAPP ORDER CART DRAWER -->
+  <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-[#16100C] border-l border-[#F5C469]/30 shadow-2xl translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-[#F5C469]/20">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest text-[#E58E26] font-bold">Commande Express</span>
+          <h3 class="serif text-2xl font-bold text-white">Votre Panier Gourmand</h3>
+        </div>
+        <button onclick="toggleCartDrawer()" class="px-3 py-1 border border-[#F5C469]/30 text-xs text-[#FAF3EB]">âœ• Fermer</button>
+      </div>
+
+      <div id="drawerItems" class="mt-6 space-y-3 max-h-[50vh] overflow-y-auto pr-1 text-sm">
+        <p class="text-xs text-[#FAF3EB]/50 italic">Votre panier est vide. Cliquez sur "+ Ajouter au Panier" sur nos plats.</p>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-[#F5C469]/20 space-y-4">
+      <div>
+        <label class="text-xs text-[#FAF3EB]/70 block mb-1">Quartier de Livraison ou Retrait</label>
+        <input id="delivArea" type="text" placeholder="Ex: Livraison Ã  Bastos (Rue des Ambassades)" class="w-full px-3.5 py-2.5 bg-[#0D0907] border border-[#F5C469]/30 text-white text-xs" />
+      </div>
+      <div class="flex items-center justify-between text-lg font-bold">
+        <span>Total Commande :</span>
+        <span id="drawerTotal" class="text-[#F5C469] text-2xl">0 FCFA</span>
+      </div>
+      <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-[#E58E26] hover:bg-[#F5C469] text-black font-extrabold text-xs uppercase tracking-wider transition">
+        Valider & Envoyer sur WhatsApp â†’
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const basket = [];
+
+    function filterMenu(cat, btn) {
+      document.querySelectorAll('.menu-tab').forEach(b => {
+        b.className = 'menu-tab px-5 py-2.5 border border-[#F5C469]/30 text-[#FAF3EB] hover:border-[#F5C469] text-xs uppercase tracking-wider transition';
+      });
+      btn.className = 'menu-tab px-5 py-2.5 bg-[#E58E26] text-black font-bold text-xs uppercase tracking-wider transition';
+
+      document.querySelectorAll('#menuGrid > article').forEach(card => {
+        const c = card.getAttribute('data-cat');
+        card.style.display = (cat === 'all' || c === cat) ? 'flex' : 'none';
+      });
+    }
+
+    function toggleCartDrawer() {
+      const dr = document.getElementById('cartDrawer');
+      dr.classList.toggle('translate-x-full');
+    }
+
+    function addItem(name, price) {
+      basket.push({ name, price });
+      document.getElementById('navCartCount').textContent = basket.length;
+      renderDrawer();
+      const dr = document.getElementById('cartDrawer');
+      dr.classList.remove('translate-x-full');
+    }
+
+    function removeItem(idx) {
+      basket.splice(idx, 1);
+      document.getElementById('navCartCount').textContent = basket.length;
+      renderDrawer();
+    }
+
+    function renderDrawer() {
+      const container = document.getElementById('drawerItems');
+      const totalEl = document.getElementById('drawerTotal');
+      if (basket.length === 0) {
+        container.innerHTML = '<p class="text-xs text-[#FAF3EB]/50 italic">Votre panier est vide.</p>';
+        totalEl.textContent = '0 FCFA';
+        return;
+      }
+      container.innerHTML = basket.map((item, i) => `
+        <div class="flex items-center justify-between p-3 bg-[#0D0907] border border-[#F5C469]/15">
+          <div>
+            <div class="font-bold text-white text-xs">${item.name}</div>
+            <div class="text-xs text-[#F5C469]">${item.price.toLocaleString()} FCFA</div>
+          </div>
+          <button onclick="removeItem(${i})" class="text-xs text-rose-400 hover:underline">Retirer</button>
+        </div>
+      `).join('');
+      const sum = basket.reduce((a, b) => a + b.price, 0);
+      totalEl.textContent = sum.toLocaleString() + ' FCFA';
+    }
+
+    function checkoutWhatsApp() {
+      const area = document.getElementById('delivArea').value.trim() || 'Ã€ prÃ©ciser';
+      const lines = basket.length > 0
+        ? basket.map(b => `â€¢ ${b.name} (${b.price.toLocaleString()} FCFA)`).join('\n')
+        : 'â€¢ Plateau Royal Maharaja (18,500 FCFA)';
+      const sum = basket.reduce((a, b) => a + b.price, 0) || 18500;
+      const msg = `Bonjour Maison Tandoori YaoundÃ© ! ðŸ›\n\nNouvelle commande depuis votre site web :\n${lines}\n\n*Total : ${sum.toLocaleString()} FCFA*\n*Livraison / Retrait :* ${area}`;
+      window.open(`https://wa.me/237699885522?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function calcBanquet() {
+      const guests = parseInt(document.getElementById('guestSlider').value, 10);
+      const rate = parseInt(document.getElementById('banquetTier').value, 10);
+      document.getElementById('guestCountLabel').textContent = guests + ' Convives';
+      document.getElementById('banquetTotal').textContent = (guests * rate).toLocaleString() + ' FCFA';
+    }
+
+    function sendBanquetWhatsApp() {
+      const guests = document.getElementById('guestSlider').value;
+      const total = document.getElementById('banquetTotal').textContent;
+      const msg = `Bonjour Maison Tandoori YaoundÃ© ! âœ¨\nDemande de devis Traiteur / Banquet :\nâ€¢ Convives : ${guests} personnes\nâ€¢ Budget estimÃ© : ${total}`;
+      window.open(`https://wa.me/237699885522?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function reserveTableWhatsApp() {
+      const name = document.getElementById('tName').value.trim() || 'Client VIP';
+      const guests = document.getElementById('tGuests').value;
+      const date = document.getElementById('tDate').value.trim() || 'Ce soir 20h00';
+      const msg = `Bonjour Maison Tandoori YaoundÃ© ! ðŸ¥‚\nDemande de rÃ©servation de table :\nâ€¢ Nom : ${name}\nâ€¢ Table : ${guests}\nâ€¢ CrÃ©neau : ${date}`;
+      window.open(`https://wa.me/237699885522?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+

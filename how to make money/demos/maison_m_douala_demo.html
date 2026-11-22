@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAISON M AESTHETICS & SPA â€” Haute Coiffure, Nail Bar & Clinique EsthÃ©tique Douala</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #120B10;
+      --card: #1C1219;
+      --rose: #E899B5;
+      --champagne: #F5E6D3;
+      --line: rgba(232, 153, 181, 0.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--champagne);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .ritual-card {
+      background-color: var(--card);
+      border: 1px solid var(--line);
+      transition: all 0.35s ease;
+    }
+    .ritual-card:hover {
+      border-color: rgba(232, 153, 181, 0.7);
+      transform: translateY(-4px);
+    }
+  </style>
+  <style>
+    img { max-width: 100%; display: block; }
+    button, a.btn, [onclick] { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.65rem !important; line-height: 1.2 !important; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (!this.dataset.fallbackApplied) {
+            this.dataset.fallbackApplied = 'true';
+            this.src = '../../images/work-oil-horizon.jpg';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body class="antialiased selection:bg-[#E899B5] selection:text-black">
+
+  <!-- Top Beauty Lounge Info Bar -->
+  <div class="bg-[#1C1219] border-b border-[#E899B5]/20 text-xs py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-[#F5E6D3]/80">
+      <div>â— Douala, Quartier Bonapriso (Rue des Palmiers) â€¢ Mardi au Dimanche : 09h00 â€“ 20h30</div>
+      <div>Instagram : <strong>@maison_m_douala</strong> â€¢ Conciergerie VIP & Voiturier</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#120B10]/90 backdrop-blur-xl border-b border-[#E899B5]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full border border-[#E899B5]/50 bg-[#1C1219] flex items-center justify-center serif font-bold text-xl text-[#E899B5]">M</div>
+        <div>
+          <span class="serif text-2xl sm:text-3xl font-bold tracking-wider text-white block leading-none">MAISON M</span>
+          <span class="text-[10px] uppercase tracking-[0.22em] text-[#E899B5] block mt-1">Aesthetics â€¢ Hair Couture â€¢ Spa â€” Douala</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-[#F5E6D3]/80 font-medium">
+        <a href="#carte-soins" class="hover:text-[#E899B5] transition">Carte des Prestations</a>
+        <a href="#rituel" class="hover:text-[#E899B5] transition">Composer Mon Rituel</a>
+        <a href="#mariee" class="hover:text-[#E899B5] transition">Loge MariÃ©e & VIP</a>
+        <a href="#avis-clientes" class="hover:text-[#E899B5] transition">TÃ©moignages</a>
+      </nav>
+      <a href="#rituel" class="px-5 py-2.5 bg-[#E899B5] hover:bg-[#f3b0c8] text-black font-bold text-xs uppercase tracking-wider transition">
+        Prendre Rendez-Vous
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="top" class="py-16 sm:py-24 border-b border-[#E899B5]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 space-y-6">
+        <span class="inline-block px-3.5 py-1 border border-[#E899B5]/35 bg-[#1C1219] text-[#E899B5] text-xs uppercase tracking-widest">
+          Institut de Haute BeautÃ© & Bien-ÃŠtre Ã  Bonapriso
+        </span>
+        <h1 class="text-4xl sm:text-6xl font-bold leading-[1.05] text-white">
+          L'Art du Soin Sur-Mesure & de la <span class="italic font-normal text-[#E899B5]">Haute Coiffure.</span>
+        </h1>
+        <p class="text-base sm:text-lg text-[#F5E6D3]/75 leading-relaxed">
+          Un sanctuaire feutrÃ© au cÅ“ur de Bonapriso oÃ¹ l'expertise dermo-esthÃ©tique (Hydrafacial MD, Microneedling), la pose de Lace HD invisible, le Nail Bar russe et le Spa oriental se rencontrent.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href="#carte-soins" class="px-8 py-4 bg-[#E899B5] hover:bg-[#f3b0c8] text-black font-bold text-xs sm:text-sm uppercase tracking-wider transition">
+            Explorer Nos Tarifs & Soins â†’
+          </a>
+          <a href="#rituel" class="px-8 py-4 border border-[#E899B5]/40 text-white font-semibold text-xs sm:text-sm uppercase tracking-wider transition">
+            Composer Mon Rendez-Vous
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6">
+        <div class="border border-[#E899B5]/35 bg-[#1C1219] p-3 shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85"
+               alt="Maison M Aesthetics Salon Bonapriso"
+               class="w-full h-[380px] object-cover" />
+          <div class="mt-3 p-4 bg-[#120B10] border border-[#E899B5]/20 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase tracking-widest text-[#E899B5] font-bold">Offre Signature Bonapriso</span>
+              <h3 class="serif text-2xl font-bold text-white">Forfait Ã‰clat Royal (Hydrafacial + Manucure Russe)</h3>
+            </div>
+            <button onclick="addRitual('Forfait Ã‰clat Royal (Hydrafacial + Manucure)', 35000)" class="px-4 py-2 bg-[#E899B5] text-black font-bold text-xs uppercase shrink-0">
+              35,000 FCFA â€¢ Choisir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION 2: CARTE DES PRESTATIONS (9 SOINS AVEC PHOTOS) -->
+  <section id="carte-soins" class="py-20 border-b border-[#E899B5]/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-[0.25em] text-[#E899B5] font-bold">01 // Menu des Soins & Tarifs</span>
+          <h2 class="text-3xl sm:text-5xl font-bold mt-2">Nos DÃ©partements BeautÃ©</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterSalon('all', this)" class="salon-tab px-4 py-2 bg-[#E899B5] text-black font-bold text-xs uppercase">Tous les Soins (6)</button>
+          <button onclick="filterSalon('hair', this)" class="salon-tab px-4 py-2 border border-[#E899B5]/30 text-white text-xs uppercase">Hair & Lace Studio</button>
+          <button onclick="filterSalon('nails', this)" class="salon-tab px-4 py-2 border border-[#E899B5]/30 text-white text-xs uppercase">Luxury Nail Bar</button>
+          <button onclick="filterSalon('spa', this)" class="salon-tab px-4 py-2 border border-[#E899B5]/30 text-white text-xs uppercase">Visage & Spa</button>
+        </div>
+      </div>
+
+      <div id="salonGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <!-- 1 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="hair">
+          <div>
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&q=80" alt="Pose Lace HD" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Pose Lace HD Invisible & Styling</h3>
+                <span class="font-extrabold text-[#E899B5]">25,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">Customisation de la ligne frontale, blanchiment des nÅ“uds, pose sans colle ou colle mÃ©dicale et coiffage wavy ou lisse miroir.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Pose Lace HD Invisible & Styling', 25000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="hair">
+          <div>
+            <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=700&q=80" alt="Soin KÃ©ratine" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Rituel KÃ©ratine & Botox Capillaire</h3>
+                <span class="font-extrabold text-[#E899B5]">30,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">Reconstruction profonde de la fibre sous vapeur d'ozone, massage crÃ¢nien aux huiles prÃ©cieuses et brushing soyeux.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Rituel KÃ©ratine & Botox Capillaire', 30000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="nails">
+          <div>
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=700&q=80" alt="Manucure Russe" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Manucure Russe & Gel BIAB</h3>
+                <span class="font-extrabold text-[#E899B5]">18,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">PrÃ©paration haute prÃ©cision des cuticules Ã  l'embout diamant, gainage fortifiant BIAB et finition French ou Chrome.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Manucure Russe & Gel BIAB', 18000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="nails">
+          <div>
+            <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=700&q=80" alt="PÃ©dicure Spa" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Jelly Spa PÃ©dicure & Paraffine</h3>
+                <span class="font-extrabold text-[#E899B5]">15,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">Bain thermal en gelÃ©e parfumÃ©e Ã  la rose, soin anti-callositÃ©s, enveloppement chaud Ã  la paraffine et pose vernis gel.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Jelly Spa PÃ©dicure & Paraffine', 15000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="spa">
+          <div>
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80" alt="Hydrafacial MD" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Soin Hydrafacial Ã‰clat 7 Ã‰tapes</h3>
+                <span class="font-extrabold text-[#E899B5]">30,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">Nettoyage profond par hydro-dermabrasion, extraction douce des comÃ©dons, infusion d'acide hyaluronique et luminothÃ©rapie LED.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Soin Hydrafacial Ã‰clat 7 Ã‰tapes', 30000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="ritual-card flex flex-col justify-between" data-cat="spa">
+          <div>
+            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=700&q=80" alt="Massage & Hammam" class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-bold text-white">Hammam Royal & Massage Pierres Chaudes</h3>
+                <span class="font-extrabold text-[#E899B5]">35,000 FCFA</span>
+              </div>
+              <p class="text-xs text-[#F5E6D3]/70 mt-2">Gommage au savon noir Ã  l'eucalyptus, enveloppement au rhassoul de l'Atlas suivi d'un massage relaxant d'une heure.</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6">
+            <button onclick="addRitual('Hammam Royal & Massage 1h', 35000)" class="w-full py-3 border border-[#E899B5] hover:bg-[#E899B5] hover:text-black text-[#E899B5] font-bold text-xs uppercase transition">
+              + Ajouter Ã  Mon Rendez-Vous
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: COMPOSITEUR DE RITUEL & PRISE DE RENDEZ-VOUS -->
+  <section id="rituel" class="py-20 border-b border-[#E899B5]/15 bg-[#170F15]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-12 bg-[#1C1219] border border-[#E899B5]/40 shadow-2xl grid lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-6 space-y-4">
+          <span class="text-xs uppercase tracking-widest text-[#E899B5] font-bold">02 // Agenda VIP en Ligne</span>
+          <h2 class="text-3xl font-bold text-white">Votre SÃ©ance PersonnalisÃ©e</h2>
+          <div id="ritualList" class="space-y-2 text-xs">
+            <div class="p-3 bg-[#120B10] border border-[#E899B5]/20 flex justify-between">
+              <span>Pose Lace HD Invisible & Styling</span>
+              <span class="text-[#E899B5] font-bold">25,000 FCFA</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-[#E899B5]/20 flex justify-between items-baseline">
+            <span class="text-xs uppercase text-[#F5E6D3]/70">Total Prestations :</span>
+            <span id="ritualTotal" class="text-2xl font-extrabold text-[#E899B5]">25,000 FCFA</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-4">
+          <input id="mClient" type="text" placeholder="Votre PrÃ©nom & Nom (ex: Clarisse E.)" class="w-full px-4 py-3.5 bg-[#120B10] border border-[#E899B5]/30 text-white text-xs" />
+          <div class="grid grid-cols-2 gap-3">
+            <select id="mStylist" class="px-3 py-3.5 bg-[#120B10] border border-[#E899B5]/30 text-white text-xs">
+              <option>Expert : Mireille (Master Stylist)</option>
+              <option>Expert : Sonia (Nail Artist Russe)</option>
+              <option>Expert : Dr. Estelle (Dermo-Spa)</option>
+            </select>
+            <input id="mSlot" type="text" placeholder="Jour & Heure (ex: Samedi 14h)" class="px-3 py-3.5 bg-[#120B10] border border-[#E899B5]/30 text-white text-xs" />
+          </div>
+          <button onclick="bookMaisonM()" class="w-full py-4 bg-[#E899B5] hover:bg-[#f3b0c8] text-black font-extrabold text-xs uppercase tracking-wider transition">
+            Confirmer Mon CrÃ©neau sur WhatsApp â†’
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="avis-clientes" class="py-10 px-4 text-center text-xs text-[#F5E6D3]/60">
+    <p>MAISON M AESTHETICS & SPA (BONAPRISO, DOUALA) â€¢ Plateforme conÃ§ue par <a href="https://wa.me/237698945916" target="_blank" class="text-[#E899B5] underline font-semibold">Atelier BPC â€” Bashimiki Paul Chris (+237 698 945 916)</a></p>
+  </footer>
+
+  <script>
+    const rituals = [{ name: 'Pose Lace HD Invisible & Styling', price: 25000 }];
+
+    function filterSalon(cat, btn) {
+      document.querySelectorAll('.salon-tab').forEach(b => {
+        b.className = 'salon-tab px-4 py-2 border border-[#E899B5]/30 text-white text-xs uppercase';
+      });
+      btn.className = 'salon-tab px-4 py-2 bg-[#E899B5] text-black font-bold text-xs uppercase';
+      document.querySelectorAll('#salonGrid > article').forEach(card => {
+        const c = card.getAttribute('data-cat');
+        card.style.display = (cat === 'all' || c === cat) ? 'flex' : 'none';
+      });
+    }
+
+    function addRitual(name, price) {
+      rituals.push({ name, price });
+      renderRituals();
+      document.getElementById('rituel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderRituals() {
+      const el = document.getElementById('ritualList');
+      el.innerHTML = rituals.map(r => `
+        <div class="p-3 bg-[#120B10] border border-[#E899B5]/20 flex justify-between">
+          <span>${r.name}</span>
+          <span class="text-[#E899B5] font-bold">${r.price.toLocaleString()} FCFA</span>
+        </div>
+      `).join('');
+      const sum = rituals.reduce((a, b) => a + b.price, 0);
+      document.getElementById('ritualTotal').textContent = sum.toLocaleString() + ' FCFA';
+    }
+
+    function bookMaisonM() {
+      const client = document.getElementById('mClient').value.trim() || 'Cliente VIP';
+      const stylist = document.getElementById('mStylist').value;
+      const slot = document.getElementById('mSlot').value.trim() || 'Samedi 14h00';
+      const list = rituals.map(r => `â€¢ ${r.name} (${r.price.toLocaleString()} FCFA)`).join('\n');
+      const total = document.getElementById('ritualTotal').textContent;
+      const msg = `Bonjour Maison M Aesthetics (Bonapriso) ! ðŸ’…âœ¨\n\nRÃ©servation de rendez-vous :\nâ€¢ *Cliente :* ${client}\nâ€¢ *${stylist}*\nâ€¢ *CrÃ©neau :* ${slot}\n*Prestations :*\n${list}\n*Total : ${total}*`;
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+

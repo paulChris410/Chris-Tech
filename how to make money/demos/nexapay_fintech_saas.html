@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaPay Africa â€” Smart Invoicing, Mobile Money & E-Commerce Checkout Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #07070A;
+      color: #F4F4F6;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .saas-card {
+      background: rgba(18, 18, 24, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+    .saas-card:hover {
+      border-color: rgba(168, 85, 247, 0.55);
+      transform: translateY(-4px);
+    }
+  </style>
+  <style>
+    img { max-width: 100%; display: block; }
+    button, a.btn, [onclick] { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.65rem !important; line-height: 1.2 !important; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('error', function() {
+          if (!this.dataset.fallbackApplied) {
+            this.dataset.fallbackApplied = 'true';
+            this.src = '../../images/work-oil-horizon.jpg';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body class="antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Client Pitch Banner -->
+  <div class="bg-gradient-to-r from-purple-600 via-indigo-500 to-emerald-500 text-white px-4 py-2.5 text-center text-xs sm:text-sm font-bold flex flex-wrap items-center justify-center gap-3 sticky top-0 z-50 shadow-lg">
+    <span>âš¡ Live FinTech & SaaS Web Application Demo Engineered by <strong>Bashimiki Paul Chris</strong></span>
+    <a href="https://wa.me/237698945916?text=Hi%20Paul%20Chris%2C%20I%20tested%20your%20NexaPay%20FinTech%20SaaS%20app%20and%20want%20to%20build%20a%20custom%20web%20platform." target="_blank"
+       class="px-3.5 py-1 rounded-full bg-slate-950 text-emerald-300 hover:bg-slate-900 transition text-xs font-extrabold">
+      Hire Paul Chris for Your SaaS (+237 698 945 916) â†’
+    </a>
+  </div>
+
+  <!-- Navbar -->
+  <header class="border-b border-white/10 bg-[#07070A]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-black text-white text-lg">N</div>
+        <div>
+          <span class="font-extrabold text-xl tracking-tight text-white">NexaPay<span class="text-purple-400">.io</span></span>
+          <span class="block text-[10px] mono uppercase tracking-widest text-slate-400">Unified Mobile Money & Card Checkout</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300 font-medium">
+        <a href="#invoice-tool" class="hover:text-purple-400 transition">Live Invoice Generator</a>
+        <a href="#analytics" class="hover:text-purple-400 transition">Merchant Dashboard</a>
+      </nav>
+      <a href="#invoice-tool" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm transition">
+        Try Interactive Invoice Tool
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero + Interactive SaaS Dashboard -->
+  <section class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs mono font-semibold mb-5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> v2.4 Production Release â€¢ Orange Money â€¢ MTN MoMo â€¢ Visa/Mastercard
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.12]">
+        Create Instant Payment Links & <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-emerald-400">Collect Revenue Globally.</span>
+      </h1>
+      <p class="mt-5 text-base sm:text-lg text-slate-400">
+        Test our live interactive invoice generator below. Type any client name, line item, and price to generate a shareable WhatsApp payment link in real time.
+      </p>
+    </div>
+
+    <!-- Live Interactive Invoice Builder & Preview Split View -->
+    <div id="invoice-tool" class="grid lg:grid-cols-12 gap-8 items-start">
+      <!-- Left: Interactive Controls -->
+      <div class="lg:col-span-6 saas-card rounded-3xl p-6 sm:p-8">
+        <span class="text-xs mono uppercase text-purple-400 font-semibold">Interactive SaaS Component</span>
+        <h2 class="text-2xl font-extrabold text-white mt-1 mb-6">Create Instant Client Invoice</h2>
+
+        <div class="space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">Client / Company Name</label>
+              <input id="invClient" type="text" value="Groupe SABC / Client VIP" oninput="updateInvoicePreview()" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">Currency</label>
+              <select id="invCurr" onchange="updateInvoicePreview()" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm">
+                <option value="FCFA">FCFA (XAF)</option>
+                <option value="USD ($)">USD ($)</option>
+                <option value="EUR (â‚¬)">EUR (â‚¬)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Service / Product Description</label>
+            <input id="invDesc" type="text" value="Full-Stack Web Platform + Mobile Money Checkout" oninput="updateInvoicePreview()" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm" />
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">Amount</label>
+              <input id="invAmount" type="number" value="250000" oninput="updateInvoicePreview()" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">Accepted Payment Methods</label>
+              <select id="invMethod" onchange="updateInvoicePreview()" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm">
+                <option value="Orange Money â€¢ MTN MoMo â€¢ Visa">Orange Money â€¢ MTN MoMo â€¢ Visa</option>
+                <option value="Stripe â€¢ Apple Pay â€¢ Wise">Stripe â€¢ Apple Pay â€¢ Wise</option>
+                <option value="Bank Wire & Mobile Money">Bank Wire & Mobile Money</option>
+              </select>
+            </div>
+          </div>
+
+          <button onclick="sendLiveInvoice()" class="w-full mt-2 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-sm transition shadow-lg shadow-purple-600/25">
+            Share Live Payment Link via WhatsApp â†’
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Live Real-Time Rendered Invoice Receipt -->
+      <div class="lg:col-span-6 saas-card rounded-3xl p-6 sm:p-8 border-2 border-purple-500/40 relative overflow-hidden">
+        <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 text-xs mono font-bold">â— VERIFIED CHECKOUT LINK</span>
+            <h3 class="text-xl font-extrabold text-white mt-2">Invoice #NXP-2026-884</h3>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block">Issued by</span>
+            <span class="text-sm font-bold text-purple-300">BPC Digital Studio</span>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-sm">
+          <div class="flex justify-between py-2 border-b border-white/5">
+            <span class="text-slate-400">Billed To:</span>
+            <span id="prevClient" class="font-bold text-white">Groupe SABC / Client VIP</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-white/5">
+            <span class="text-slate-400">Deliverable:</span>
+            <span id="prevDesc" class="font-semibold text-slate-200 text-right max-w-xs">Full-Stack Web Platform + Mobile Money Checkout</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-white/5">
+            <span class="text-slate-400">Payment Channels:</span>
+            <span id="prevMethod" class="mono text-xs text-emerald-400">Orange Money â€¢ MTN MoMo â€¢ Visa</span>
+          </div>
+        </div>
+
+        <div class="mt-8 p-5 rounded-2xl bg-black/60 border border-purple-500/30 flex items-center justify-between">
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Total Due</span>
+          <span id="prevTotal" class="text-3xl font-extrabold text-emerald-400 mono">250,000 FCFA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: LIVE MERCHANT ANALYTICS & PAYOUT TELEMETRY -->
+  <section id="analytics" class="py-20 border-t border-white/10 bg-[#0B0B10]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-12">
+        <span class="text-xs mono uppercase tracking-widest text-purple-400 font-bold">02 // Real-Time Treasury & Analytics</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Unified Mobile Money & Card Settlement</h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">Monitor Orange Money, MTN MoMo, and international Visa/Mastercard transactions from one single dashboard with instant T+0 settlement.</p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6 mb-12">
+        <div class="saas-card p-6 rounded-3xl">
+          <span class="text-xs mono text-slate-400">MONTHLY VOLUME (XAF)</span>
+          <div class="text-3xl font-extrabold text-white mt-2 mono">48,250,000</div>
+          <span class="text-xs text-emerald-400 font-semibold mt-1 block">â–² +24.8% vs last month</span>
+        </div>
+        <div class="saas-card p-6 rounded-3xl">
+          <span class="text-xs mono text-slate-400">MTN MOMO / ORANGE MONEY</span>
+          <div class="text-3xl font-extrabold text-amber-400 mt-2 mono">68.4%</div>
+          <span class="text-xs text-slate-400 mt-1 block">Instant USSD Push Success</span>
+        </div>
+        <div class="saas-card p-6 rounded-3xl">
+          <span class="text-xs mono text-slate-400">INTERNATIONAL CARDS</span>
+          <div class="text-3xl font-extrabold text-purple-400 mt-2 mono">31.6%</div>
+          <span class="text-xs text-slate-400 mt-1 block">3D-Secure Visa / Mastercard</span>
+        </div>
+        <div class="saas-card p-6 rounded-3xl">
+          <span class="text-xs mono text-slate-400">SETTLEMENT LATENCY</span>
+          <div class="text-3xl font-extrabold text-emerald-400 mt-2 mono">&lt; 4.2s</div>
+          <span class="text-xs text-slate-400 mt-1 block">99.98% API Uptime</span>
+        </div>
+      </div>
+
+      <!-- Developer API & Webhook Section -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center saas-card rounded-3xl p-8">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs mono font-bold">REST API & Webhooks</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Integrate Mobile Money Checkout in 12 Lines of Code</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Built for SaaS founders, e-commerce stores, and schools in Cameroon and Central/West Africa. Trigger instant USSD payment prompts on your customer's phone and receive verified webhook callbacks.
+          </p>
+        </div>
+        <div class="lg:col-span-7 bg-[#050508] border border-white/10 rounded-2xl p-5 mono text-xs text-slate-300 overflow-x-auto">
+<pre><code>// POST https://api.nexapay.io/v2/checkout/ussd-push
+const payment = await nexapay.charges.create({
+  amount: 150000,
+  currency: "XAF",
+  channels: ["ORANGE_MONEY_CM", "MTN_MOMO_CM", "CARD"],
+  customer: { phone: "+237698945916", name: "Enterprise Client" },
+  webhook_url: "https://yourdomain.com/api/webhooks/nexapay"
+});
+// Returns instant WhatsApp & USSD checkout session</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SAAS PRICING TIERS -->
+  <section class="py-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs mono uppercase tracking-widest text-purple-400 font-bold">03 // Transparent Merchant Pricing</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Scale Without Monthly Lock-In</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="saas-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs text-slate-400">STARTER MERCHANT</span>
+            <h3 class="text-2xl font-bold text-white mt-1">Freelancers & Boutiques</h3>
+            <div class="text-3xl font-extrabold text-white my-5 mono">1.5% <span class="text-sm font-normal text-slate-400">/ transaction</span></div>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li>âœ“ Unlimited WhatsApp Invoice Links</li>
+              <li>âœ“ Orange Money & MTN MoMo Checkout</li>
+              <li>âœ“ Automated PDF Receipt Generation</li>
+            </ul>
+          </div>
+          <button onclick="sendLiveInvoice()" class="mt-8 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs">Start Free Account â†’</button>
+        </div>
+
+        <div class="saas-card p-8 rounded-3xl border-2 border-purple-500 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs text-purple-400 font-bold">GROWTH BUSINESS</span>
+            <h3 class="text-2xl font-bold text-white mt-1">E-Commerce & Clinics</h3>
+            <div class="text-3xl font-extrabold text-purple-400 my-5 mono">25,000 FCFA <span class="text-sm font-normal text-slate-400">/ month</span></div>
+            <ul class="space-y-2.5 text-xs text-slate-200">
+              <li>âœ“ Reduced 1.0% Fee on Mobile Money</li>
+              <li>âœ“ International Visa & Mastercard Acceptance</li>
+              <li>âœ“ Multi-User Team & Accountant Access</li>
+              <li>âœ“ Custom Branded Checkout Domain</li>
+            </ul>
+          </div>
+          <button onclick="sendLiveInvoice()" class="mt-8 w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs">Activate Growth Plan â†’</button>
+        </div>
+
+        <div class="saas-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs text-emerald-400">ENTERPRISE API</span>
+            <h3 class="text-2xl font-bold text-white mt-1">Schools, SaaS & Marketplaces</h3>
+            <div class="text-3xl font-extrabold text-white my-5 mono">Custom <span class="text-sm font-normal text-slate-400">Volume Rate</span></div>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li>âœ“ Dedicated REST API & Webhook Sandbox</li>
+              <li>âœ“ Automated Bulk Payouts & Payroll</li>
+              <li>âœ“ 24/7 Dedicated Technical Engineer</li>
+            </ul>
+          </div>
+          <button onclick="sendLiveInvoice()" class="mt-8 w-full py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs">Contact Enterprise Sales â†’</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 border-t border-white/10 text-center text-xs text-slate-400">
+    <p>NexaPay SaaS Engine â€” Full-Stack FinTech Architecture by <a href="https://wa.me/237698945916" target="_blank" class="text-purple-400 underline font-semibold">Bashimiki Paul Chris (+237 698 945 916)</a></p>
+  </footer>
+
+  <script>
+    function updateInvoicePreview() {
+      const client = document.getElementById('invClient').value || 'Client VIP';
+      const curr = document.getElementById('invCurr').value;
+      const desc = document.getElementById('invDesc').value || 'Custom Software Project';
+      const amount = Number(document.getElementById('invAmount').value || 0);
+      const method = document.getElementById('invMethod').value;
+
+      document.getElementById('prevClient').textContent = client;
+      document.getElementById('prevDesc').textContent = desc;
+      document.getElementById('prevMethod').textContent = method;
+      document.getElementById('prevTotal').textContent = amount.toLocaleString() + ' ' + curr;
+    }
+    function sendLiveInvoice() {
+      const client = document.getElementById('prevClient').textContent;
+      const desc = document.getElementById('prevDesc').textContent;
+      const total = document.getElementById('prevTotal').textContent;
+      const method = document.getElementById('prevMethod').textContent;
+      const msg = `ðŸ’³ *NexaPay Instant Invoice (#NXP-2026-884)*\nâ€¢ *Client:* ${client}\nâ€¢ *Service:* ${desc}\nâ€¢ *Amount Due:* ${total}\nâ€¢ *Pay via:* ${method}\n\n(Interactive SaaS Demo built by Bashimiki Paul Chris)`;
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+

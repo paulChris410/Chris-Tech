@@ -1,0 +1,2688 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>CHRIS TECH | Bashimiki Paul Chris — Full-Stack Developer & Streaming Store</title>
+  <meta name="description" content="Official portfolio & streaming storefront of CHRIS TECH (Bashimiki Paul Chris). Custom business websites, interactive live apps, WhatsApp commerce, and On-Demand Netflix & Crunchyroll in FCFA." />
+  <meta name="theme-color" content="#070605" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./favicon.png" />
+  <link rel="apple-touch-icon" href="./favicon.png" />
+  <meta property="og:title" content="CHRIS TECH — Bashimiki Paul Chris | Full-Stack Developer & Streaming Store" />
+  <meta property="og:description" content="Custom websites, 8 live interactive apps, WhatsApp commerce, and On-Demand Netflix & Crunchyroll subscriptions in FCFA." />
+  <meta property="og:image" content="./favicon.png" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --transition-speed: 0.4s;
+      --transition-timing: cubic-bezier(0.25, 0.8, 0.25, 1);
+      --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --font-headings: 'Playfair Display', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+
+      /* Modest, Warm & Refined Dark Theme (Brew Haven Inspired) */
+      --bg-base: radial-gradient(circle at 15% 20%, #15120f 0%, #070605 90%);
+      --bg-solid: #090807;
+      --bg-grid: rgba(255, 255, 255, 0.02);
+      --panel-bg: rgba(20, 17, 14, 0.85);
+      --panel-border: rgba(216, 159, 118, 0.25);
+      --panel-border-hover: rgba(216, 159, 118, 0.55);
+      --text-primary: #ffffff;
+      --text-secondary: #ede5d8;
+      --text-muted: #c8bba8;
+      --accent: #e5a97c;
+      --accent-glow: rgba(229, 169, 124, 0.16);
+      --accent-solid: #b47346;
+      --shadow-primary: 0 14px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    [data-theme="light"] {
+      --bg-base: radial-gradient(circle at 15% 20%, #050505 0%, #000000 95%);
+      --bg-solid: #000000;
+      --bg-grid: rgba(255, 255, 255, 0.03);
+      --panel-bg: rgba(10, 10, 12, 0.92);
+      --panel-border: rgba(229, 169, 124, 0.28);
+      --panel-border-hover: rgba(229, 169, 124, 0.65);
+      --text-primary: #ffffff;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.16);
+      --accent-solid: #d97706;
+      --shadow-primary: 0 14px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+      background-color: var(--bg-solid);
+      background-image: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.65;
+      transition: background var(--transition-speed) var(--transition-timing),
+                  color var(--transition-speed) var(--transition-timing);
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: var(--font-headings);
+      letter-spacing: -0.015em;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Interactive Three.js 3D Background Canvas */
+    #three-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Subtle Architectural Grid Overlay */
+    .ambient-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background-size: 64px 64px;
+      background-image: linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
+                        linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+      pointer-events: none;
+    }
+
+    /* Modest, Clean Glass Card */
+    .glass-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-primary);
+      border-radius: 22px;
+      transition: border-color 0.35s var(--transition-timing),
+                  transform 0.4s var(--spring),
+                  box-shadow 0.35s var(--transition-timing);
+    }
+    .glass-card:hover {
+      border-color: var(--panel-border-hover);
+      transform: translateY(-4px);
+    }
+
+    /* Always 100% Visible Text & Smooth Scroll Motion */
+    .reveal-up {
+      opacity: 1 !important;
+      transform: translateY(0);
+      transition: transform 0.6s var(--spring);
+    }
+    .reveal-up.visible {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    /* Subtle Floating Animation */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    .float-slow {
+      animation: gentleFloat 6s ease-in-out infinite;
+    }
+
+    /* Unified Modest Button Styles */
+    .btn-warm {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 46px;
+      padding: 0.7rem 1.4rem;
+      border-radius: 14px;
+      background: var(--accent-solid);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-align: center;
+      transition: all 0.3s var(--spring);
+      box-shadow: 0 8px 20px -4px rgba(180, 115, 70, 0.35);
+      cursor: pointer;
+    }
+    .btn-warm:hover {
+      background: var(--accent);
+      color: #090807;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 46px;
+      padding: 0.7rem 1.4rem;
+      border-radius: 14px;
+      background: var(--accent-glow);
+      border: 1px solid var(--panel-border);
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .proj-thumb {
+      transition: transform 0.65s var(--transition-timing);
+    }
+    .glass-card:hover .proj-thumb {
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Interactive Three.js 3D Floating Canvas & Grid (Brew Haven style) -->
+  <canvas id="three-bg"></canvas>
+  <div class="ambient-grid"></div>
+
+  <!-- Main Content Wrapper -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Fixed Sticky Glass Navigation Header (Ultra-Clean & 100% Responsive on All Phones) -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-[90] px-2.5 sm:px-6 lg:px-8 pt-2.5 sm:pt-3 pointer-events-none">
+      <div class="max-w-7xl mx-auto pointer-events-auto">
+        <div class="glass-card !rounded-2xl sm:!rounded-[22px] px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+          <!-- Clean Typography Brand: CHRIS TECH (Never squished on small phones) -->
+          <a href="#/" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="flex flex-col min-w-0 shrink group">
+            <span class="serif font-bold text-lg sm:text-2xl tracking-wider block leading-none truncate">
+              CHRIS <span style="color: var(--accent);">TECH</span>
+            </span>
+            <span class="text-[9.5px] sm:text-[11px] block mt-0.5 truncate" style="color: var(--text-muted);" data-i18n="nav_role">
+              Bashimiki Paul Chris • Full-Stack Dev
+            </span>
+          </a>
+
+          <!-- Desktop Links (Clean & Responsive — No Admin Link) -->
+          <nav class="hidden lg:flex items-center gap-1 text-xs xl:text-sm font-medium" style="color: var(--text-secondary);">
+            <a href="#about" onclick="switchAppRoute('portfolio')" class="px-3 py-2 rounded-xl hover:bg-[var(--accent-glow)] transition" data-i18n="nav_about">About Me</a>
+            <a href="#services" onclick="switchAppRoute('portfolio')" class="px-3 py-2 rounded-xl hover:bg-[var(--accent-glow)] transition" data-i18n="nav_services">Services</a>
+            <a href="#projects" onclick="switchAppRoute('portfolio')" class="px-3 py-2 rounded-xl hover:bg-[var(--accent-glow)] transition" data-i18n="nav_work">8 Live Projects</a>
+            <a href="#packages" onclick="switchAppRoute('portfolio')" class="px-3 py-2 rounded-xl hover:bg-[var(--accent-glow)] transition" data-i18n="nav_pricing">My Process</a>
+            <a href="#contact" onclick="switchAppRoute('portfolio')" class="px-3 py-2 rounded-xl hover:bg-[var(--accent-glow)] transition" data-i18n="nav_contact">Contact</a>
+            <a href="#/subscriptions" onclick="switchAppRoute('subscriptions')" class="ml-1 px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold transition flex items-center gap-1.5 shadow-md">
+              <span data-i18n="nav_stream_btn">🎬 Open Streaming Store</span>
+            </a>
+          </nav>
+
+          <!-- Right Controls (Spacious 2-Button Phone Bar; Full Controls on Tablet/Desktop) -->
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a href="#/subscriptions" onclick="switchAppRoute('subscriptions'); closeMobMenu();" class="lg:hidden px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-[11px] sm:text-xs shadow-md flex items-center gap-1 whitespace-nowrap">
+              <span>🎬</span><span>Store</span>
+            </a>
+            <button type="button" onclick="toggleLang()" class="hidden sm:inline-flex items-center justify-center px-2.5 py-2 rounded-xl border border-[var(--panel-border)] text-xs font-semibold mono transition hover:border-[var(--accent)]">
+              EN | FR
+            </button>
+            <button type="button" onclick="toggleThemeMode()" id="themeBtn" class="hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[var(--panel-border)] items-center justify-center transition hover:border-[var(--accent)]" title="Switch Pitch Black / Warm Obsidian Background">
+              ☀
+            </button>
+            <button type="button" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Toggle Menu" aria-expanded="false" class="lg:hidden w-10 h-10 rounded-xl border border-[var(--panel-border)] bg-white/5 hover:border-[var(--accent)] flex items-center justify-center text-base font-bold transition">
+              ☰
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Slide-Down Drawer Menu (All Links + EN/FR + Theme + Streaming + WhatsApp) -->
+        <div id="mobMenu" class="hidden lg:hidden glass-card !rounded-2xl mt-2 p-4 space-y-3 text-xs sm:text-sm max-h-[82vh] overflow-y-auto border border-[#e5a97c]/35 shadow-2xl">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="#top" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition">🏠 Home</a>
+            <a href="#about" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition" data-i18n="nav_about">About Me</a>
+            <a href="#services" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition" data-i18n="nav_services">Services</a>
+            <a href="#projects" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition" data-i18n="nav_work">8 Live Projects</a>
+            <a href="#packages" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition" data-i18n="nav_pricing">My Process</a>
+            <a href="#contact" onclick="switchAppRoute('portfolio'); closeMobMenu();" class="p-3 rounded-xl bg-[var(--accent-glow)] border border-white/5 font-semibold text-center active:scale-95 transition" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <a href="#/subscriptions" onclick="switchAppRoute('subscriptions'); closeMobMenu();" class="block p-3.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-center shadow-lg" data-i18n="nav_stream_btn">
+            🎬 Open Streaming Store (Netflix & Crunchyroll) →
+          </a>
+
+          <!-- Mobile Language & Theme Switcher Row (Accessible on Every Phone) -->
+          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-[var(--panel-border)]">
+            <button type="button" onclick="toggleLang()" class="p-2.5 rounded-xl bg-black/50 border border-[var(--panel-border)] font-semibold mono text-xs flex items-center justify-center gap-1.5">
+              <span>🌐</span><span>EN | FR</span>
+            </button>
+            <button type="button" onclick="toggleThemeMode()" id="mobThemeBtn" class="p-2.5 rounded-xl bg-black/50 border border-[var(--panel-border)] font-semibold text-xs flex items-center justify-center gap-1.5">
+              <span>☀</span><span>Theme</span>
+            </button>
+          </div>
+
+          <a href="https://wa.me/237698945916" target="_blank" class="btn-warm w-full !min-h-[44px]">
+            WhatsApp: +237 698 945 916 ↗
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top spacer for fixed navbar -->
+    <div class="h-20 sm:h-24"></div>
+
+    <!-- GLOBAL ADMIN-ACTIVATED 2-DAY DISCOUNT LIVE ALERT BAR (Mobile-Stacked & Visible Only When Admin Activates) -->
+    <div id="globalPromoAlertBar" class="hidden mt-2 mb-4 glass-card px-4 py-3 border-2 border-rose-500 bg-gradient-to-r from-rose-950/90 via-black/90 to-orange-950/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 shadow-2xl">
+      <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+        <span class="px-2.5 py-0.5 rounded-full bg-rose-600 text-white mono text-[10px] font-extrabold uppercase animate-pulse shrink-0">🔥 2-DAY PROMO LIVE</span>
+        <span class="text-white font-semibold">48h Discount: <strong class="text-rose-300">Netflix 2,500F (-500F)</strong> • <strong class="text-orange-300">Crunchyroll 1,700F (-300F)</strong></span>
+      </div>
+      <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+        <span id="globalPromoTimerText" class="mono text-xs font-extrabold text-amber-400">01d 23h 59m 59s</span>
+        <button type="button" onclick="handlePromoBannerClick('Top Global Alert Bar')" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition cursor-pointer shrink-0">Claim Discount →</button>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         ROUTE 1: `/` MAIN DEVELOPER PORTFOLIO & WEB SERVICES VIEW
+         ===================================================================== -->
+    <div id="view-portfolio">
+
+    <!-- HERO SECTION (Clean, Modest & Animated) -->
+    <section id="top" class="py-14 sm:py-20 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- Left 7 Cols -->
+        <div class="lg:col-span-7 space-y-6 reveal-up visible">
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[var(--panel-border)] bg-[var(--accent-glow)] text-xs font-medium" style="color: var(--accent);">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span data-i18n="hero_badge">Available for Freelance & Client Projects • Cameroon & International</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-[3.65rem] font-bold leading-[1.12]">
+            <span data-i18n="hero_h1_1">Crafting Clean, Reliable Websites &</span>
+            <span class="italic font-normal block mt-1" style="color: var(--accent);" data-i18n="hero_h1_2">Digital Systems That Grow Your Business.</span>
+          </h1>
+
+          <p class="text-sm sm:text-lg leading-relaxed max-w-2xl" style="color: var(--text-secondary);" data-i18n="hero_p">
+            Hello, I’m <strong style="color: var(--text-primary);">Bashimiki Paul Chris</strong>. I design and develop custom websites, interactive ordering menus, medical & real estate portals, and business automation tools—complete with direct WhatsApp ordering and Mobile Money (Orange Money / MTN MoMo) integration.
+          </p>
+
+          <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-lg">
+            <a href="#projects" class="btn-warm w-full">
+              <span data-i18n="hero_cta1">Explore My 8 Live Projects</span>
+              <span>↓</span>
+            </a>
+            <a href="https://wa.me/237698945916?text=Bonjour%20Bashimiki%20Paul%20Chris%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+               target="_blank"
+               class="btn-ghost w-full">
+              <span data-i18n="hero_cta2">Discuss a Project on WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Modest Trust Strip -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-[var(--panel-border)] max-w-lg">
+            <div>
+              <span class="serif text-2xl sm:text-3xl font-bold block" style="color: var(--accent);">08+</span>
+              <span class="text-xs" style="color: var(--text-muted);">Live Playable Platforms</span>
+            </div>
+            <div>
+              <span class="serif text-2xl sm:text-3xl font-bold block" style="color: var(--accent);">48–72h</span>
+              <span class="text-xs" style="color: var(--text-muted);">Fast Project Delivery</span>
+            </div>
+            <div>
+              <span class="serif text-2xl sm:text-3xl font-bold block" style="color: var(--accent);">EN & FR</span>
+              <span class="text-xs" style="color: var(--text-muted);">Bilingual Architecture</span>
+            </div>
+          </div>
+
+          <!-- Personal Developer Credentials Bar (Email, Phone, GitHub, Based In — No LinkedIn, No Languages) -->
+          <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
+            <a href="mailto:bashimikipaulchris992@gmail.com" class="glass-card p-3.5 flex items-center gap-3 hover:border-[var(--accent)] transition">
+              <div class="w-9 h-9 rounded-xl bg-[var(--accent-glow)] border border-[var(--panel-border)] flex items-center justify-center shrink-0">
+                <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" class="w-4 h-4" />
+              </div>
+              <div class="min-w-0">
+                <span class="mono text-[10px] uppercase tracking-wider block" style="color: var(--text-muted);">Email</span>
+                <span class="text-xs font-semibold truncate block" style="color: var(--text-primary);">bashimikipaulchris992@gmail.com</span>
+              </div>
+            </a>
+
+            <a href="tel:+237698945916" class="glass-card p-3.5 flex items-center gap-3 hover:border-[var(--accent)] transition">
+              <div class="w-9 h-9 rounded-xl bg-[var(--accent-glow)] border border-[var(--panel-border)] flex items-center justify-center shrink-0">
+                <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="Phone" class="w-4 h-4" />
+              </div>
+              <div class="min-w-0">
+                <span class="mono text-[10px] uppercase tracking-wider block" style="color: var(--text-muted);">Phone</span>
+                <span class="text-xs font-semibold truncate block" style="color: var(--text-primary);">+237 698 945 916</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/paulChris410" target="_blank" class="glass-card p-3.5 flex items-center gap-3 hover:border-[var(--accent)] transition">
+              <div class="w-9 h-9 rounded-xl bg-[var(--accent-glow)] border border-[var(--panel-border)] flex items-center justify-center shrink-0">
+                <img src="https://cdn.simpleicons.org/github/F7F3EE" alt="GitHub" class="w-4 h-4" />
+              </div>
+              <div class="min-w-0">
+                <span class="mono text-[10px] uppercase tracking-wider block" style="color: var(--text-muted);">GitHub</span>
+                <span class="text-xs font-semibold truncate block" style="color: var(--text-primary);">github.com/paulChris410</span>
+              </div>
+            </a>
+
+            <div class="glass-card p-3.5 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[var(--accent-glow)] border border-[var(--panel-border)] flex items-center justify-center shrink-0 text-sm">
+                📍
+              </div>
+              <div class="min-w-0">
+                <span class="mono text-[10px] uppercase tracking-wider block" style="color: var(--text-muted);">Based in</span>
+                <span class="text-xs font-semibold truncate block" style="color: var(--text-primary);">Yaoundé, Cameroon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Floating Interactive Showcase Card -->
+        <aside class="lg:col-span-5 float-slow">
+          <div class="glass-card p-5 sm:p-6">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-[var(--panel-border)]">
+              <span class="text-xs font-semibold" style="color: var(--accent);">✦ Featured Live Platforms</span>
+              <span class="mono text-[11px]" style="color: var(--text-muted);">Click to Switch</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-1.5 mb-4">
+              <button onclick="setHeroPreview(0)" class="h-tab py-2 px-2 rounded-xl bg-[#b47346] text-white font-semibold text-xs truncate">1. Café Roastery</button>
+              <button onclick="setHeroPreview(1)" class="h-tab py-2 px-2 rounded-xl bg-[var(--accent-glow)] text-xs truncate">2. Fine Art 3D</button>
+              <button onclick="setHeroPreview(2)" class="h-tab py-2 px-2 rounded-xl bg-[var(--accent-glow)] text-xs truncate">3. Architecture</button>
+            </div>
+
+            <div class="rounded-2xl overflow-hidden border border-[var(--panel-border)] bg-black/30">
+              <div class="h-48 overflow-hidden relative">
+                <img id="heroPrevImg" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="Featured Project" class="w-full h-full object-cover transition duration-500" />
+                <span id="heroPrevTag" class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-medium" style="color: var(--accent);">
+                  Three.js 3D Cup • Interactive Menu • Cart
+                </span>
+              </div>
+              <div class="p-4 sm:p-5">
+                <h3 id="heroPrevTitle" class="text-lg sm:text-xl font-bold">Brew Haven — Specialty Coffee Roastery</h3>
+                <p id="heroPrevDesc" class="text-xs mt-1.5 leading-relaxed" style="color: var(--text-secondary);">
+                  Interactive 3D coffee roastery platform with live dark/light ambiance, filterable espresso menu, and table reservations.
+                </p>
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <button id="heroPrevModalBtn" onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm !min-h-[40px] !py-2 !text-xs w-full">
+                    ⚡ Preview Inside Page
+                  </button>
+                  <a id="heroPrevTabBtn" href="../brew_haven_backup.html" target="_blank" class="btn-ghost !min-h-[40px] !py-2 !text-xs w-full">
+                    Open Full Tab ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <!-- SECTION 1: ABOUT BASHIMIKI PAUL CHRIS (WITH CENTERED CROPPED PORTRAIT & OFFICIAL TECH LOGOS) -->
+    <section id="about" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- Left 5 Cols: Centered Official Cropped Portrait Frame -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center">
+          <div class="glass-card p-5 sm:p-6 relative max-w-sm w-full mx-auto border-2 border-[#e5a97c]/45 shadow-[0_24px_65px_rgba(0,0,0,0.65)]">
+            <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#14110f] border-2 border-[#e5a97c]/35 shadow-2xl mx-auto">
+              <img id="authorPortrait"
+                   src="./paul-chris-photo.jpg?v=4"
+                   alt="Bashimiki Paul Chris — Full-Stack Software Developer"
+                   class="w-full h-full object-cover object-center transition duration-700 hover:scale-105 mx-auto block" style="image-rendering: -webkit-optimize-contrast;" />
+              <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/65 to-transparent pointer-events-none"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3.5 py-2 rounded-xl bg-black/80 backdrop-blur-md border border-[#e5a97c]/30 text-xs">
+                <span class="flex items-center gap-1.5 font-semibold text-white">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Verified Full-Stack Builder
+                </span>
+                <span class="mono text-[11px]" style="color: var(--accent);">Yaoundé, CM</span>
+              </div>
+            </div>
+
+            <div class="mt-4 text-center space-y-1">
+              <strong class="block text-base serif tracking-wide">Bashimiki Paul Chris</strong>
+              <span class="block text-xs" style="color: var(--text-muted);">Self-Taught Full-Stack Software Engineer</span>
+              <div class="pt-1 flex items-center justify-center gap-3 text-xs mono">
+                <a href="mailto:bashimikipaulchris992@gmail.com" class="hover:underline" style="color: var(--accent);">bashimikipaulchris992@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: Personal Story (No Diploma — Learned by Building Real Projects) & Official Online Tech Logos -->
+        <div class="lg:col-span-7 space-y-5">
+          <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">01 // About Me</span>
+          <h2 class="text-3xl sm:text-5xl font-bold leading-tight" data-i18n="about_title">
+            Proof Through Real Projects, Not Paper Diplomas.
+          </h2>
+          <p class="text-sm sm:text-base leading-relaxed" style="color: var(--text-secondary);" data-i18n="about_p1">
+            I am <strong style="color: var(--text-primary);">Bashimiki Paul Chris</strong>, a full-stack web developer and software builder based in Yaoundé, Cameroon. I do not hold a traditional university diploma—instead, I forged every single one of my engineering skills through relentless hands-on practice, building real-world production projects from scratch, debugging complex systems, and solving practical business problems.
+          </p>
+          <p class="text-sm sm:text-base leading-relaxed" style="color: var(--text-secondary);" data-i18n="about_p2">
+            Because I learned by doing, my focus is 100% practical: what actually works, what loads fast, and what helps a business owner win customers. Whether a restaurant needs an interactive digital menu that sends orders straight to WhatsApp, a clinic needs an online appointment system, or a founder needs a custom web application—I engineer and ship complete systems from start to finish.
+          </p>
+
+          <!-- Official Online Tech Stack Logos Bar -->
+          <div class="pt-2">
+            <span class="mono text-[11px] uppercase tracking-wider block mb-2.5" style="color: var(--accent);">Core Technologies & Stack</span>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/vuedotjs/4FC08D" alt="Vue 3" class="w-4 h-4" />
+                <span>Vue.js 3</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS" class="w-4 h-4" />
+                <span>Tailwind CSS</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" class="w-4 h-4" />
+                <span>Node.js & Express</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/sqlite/003B57" alt="SQLite" class="w-4 h-4" />
+                <span>SQLite / Postgres</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="w-4 h-4" />
+                <span>React</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/threedotjs/FFFFFF" alt="Three.js" class="w-4 h-4" />
+                <span>Three.js 3D</span>
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center gap-2 text-xs font-semibold">
+                <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="w-4 h-4" />
+                <span>Python Automation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 flex flex-wrap gap-3">
+            <a href="#services" class="btn-warm">Explore My Services ↓</a>
+            <a href="https://wa.me/237698945916?text=Hello%20Bashimiki%20Paul%20Chris%2C%20I%20read%20your%20profile%20and%20would%20like%20to%20work%20with%20you." target="_blank" class="btn-ghost">
+              Contact Me Directly ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WHAT I DO — COMPREHENSIVE SERVICES (100% PERSONAL CAPABILITIES) -->
+    <section id="services" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="max-w-3xl mb-12">
+        <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">02 // My Services & Capabilities</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2" data-i18n="srv_title">How I Can Help Your Business Grow</h2>
+        <p class="text-sm sm:text-base mt-2" style="color: var(--text-secondary);">
+          From launching your first professional website to engineering custom software tools and automating repetitive workflows, here are the services I provide:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service 1 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 01</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Custom Business Websites & Landing Pages</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Modern, fast-loading websites tailored for restaurants, clinics, hotels, salons, real estate agencies, and contractors—optimized for mobile phones, Google Maps, and local search.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20need%20a%20Custom%20Business%20Website." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Inquire About a Business Website →
+          </a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 02</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Full-Stack Web Applications & Startup MVPs</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              End-to-end development of custom web platforms, client portals, booking engines, and SaaS prototypes complete with user login, database management, and admin dashboards.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20want%20to%20build%20a%20Custom%20Web%20Application%20or%20MVP." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Discuss a Web App / MVP →
+          </a>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 03</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">WhatsApp Commerce & Mobile Money Integration</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Interactive digital catalogs and shopping carts that send structured customer orders straight to your WhatsApp or process payments via Orange Money, MTN MoMo, and bank cards.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20want%20a%20WhatsApp%20Ordering%20or%20Mobile%20Money%20system." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Set Up Online Ordering →
+          </a>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 04</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Web Scraping, Lead Extraction & Automation</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Custom Python and Node.js scripts that automatically extract business leads, monitor competitor pricing, organize spreadsheets, and automate repetitive daily office tasks.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20need%20a%20Custom%20Web%20Scraper%20or%20Automation%20Script." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Request Custom Automation →
+          </a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 05</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Code Debugging, Redesign & Speed Optimization</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Have an existing website with broken mobile layouts, slow loading speed, or API bugs? I diagnose, refactor, and modernize existing codebases quickly and cleanly.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20need%20help%20fixing%20or%20redesigning%20an%20existing%20website." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Fix or Upgrade My Site →
+          </a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="glass-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-semibold" style="color: var(--accent);">SERVICE 06</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Interactive Calculators, Digital Flyers & Bio Sites</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Custom price estimators, mortgage calculators, QR table menus, and high-resolution promotional digital flyers designed for WhatsApp and social media campaigns.
+            </p>
+          </div>
+          <a href="https://wa.me/237698945916?text=Hello%20Paul%20Chris%2C%20I%20need%20a%20Promotional%20Landing%20Page%20or%20Digital%20Flyer." target="_blank" class="btn-ghost w-full mt-6 !text-xs">
+            Order Promo Page / Flyer →
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 3: ALL 8 LIVE PLAYABLE PRODUCTION PROJECTS -->
+    <section id="projects" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+        <div>
+          <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">03 // Live Portfolio Showcase</span>
+          <h2 class="text-3xl sm:text-5xl font-bold mt-2">Click & Test All 8 Live Applications</h2>
+          <p class="text-xs sm:text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">
+            Every project below is a complete, multi-section production platform. Click <strong style="color: var(--accent);">"⚡ Preview Inside Page"</strong> to test any application live.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterPortfolio('all', this)" class="p-tab px-4 py-2 rounded-xl bg-[#b47346] text-white font-semibold text-xs transition">
+            All Projects (8)
+          </button>
+          <button onclick="filterPortfolio('commerce', this)" class="p-tab px-4 py-2 rounded-xl bg-[var(--accent-glow)] text-xs transition">
+            Cafés, Restaurants & Salons (3)
+          </button>
+          <button onclick="filterPortfolio('luxury', this)" class="p-tab px-4 py-2 rounded-xl bg-[var(--accent-glow)] text-xs transition">
+            Architecture, Art & Real Estate (3)
+          </button>
+          <button onclick="filterPortfolio('systems', this)" class="p-tab px-4 py-2 rounded-xl bg-[var(--accent-glow)] text-xs transition">
+            Clinic & FinTech SaaS (2)
+          </button>
+        </div>
+      </div>
+
+      <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+
+        <!-- 1: BREW HAVEN ARTISANAL CAFÉ -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="commerce">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="Brew Haven Café" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 3D WebGL Cup • Dark/Light • Cart</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Specialty Coffee & Hospitality</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Brew Haven — Artisanal Coffee Roastery</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Interactive 3D coffee roastery platform featuring a floating Three.js espresso cup, dark/light ambiance toggle, filterable menu, customer inbox, and table reservations.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('../brew_haven_backup.html', 'Brew Haven — Specialty Coffee Roastery')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="../brew_haven_backup.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 2: AURELIA DELACROIX FINE ART (REAL LOCAL IMAGE & SELF-CONTAINED 3D LIVE DEMO) -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="luxury">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/aurelia_delacroix_demo.html', 'Aurelia Delacroix — Contemporary Art & 3D Studio')">
+              <img src="../images/work-oil-horizon.jpg" alt="Aurelia Delacroix" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 3D WebGL Studio • Pigment Mixer • Gallery</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Fine Art & Interactive 3D Exhibition</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Aurelia Delacroix — Contemporary Art & 3D Studio</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Museum-grade exhibition platform featuring a live 3D WebGL chromodynamic sculpture, curated oil & gouache canvases, an optical pigment mixer, and a custom canvas commission estimator.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/aurelia_delacroix_demo.html', 'Aurelia Delacroix — Contemporary Art & 3D Studio')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/aurelia_delacroix_demo.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 3: MAISON NDAMEN -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="luxury">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('../index.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" alt="Maison Ndamen" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● Before/After Slider • 3D Rosette • FR/EN</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Architectural Craft & Interior Finishing</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Maison Ndamen — Master Painter & Staff Artisan</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Bilingual luxury platform built for Cameroon's premier architectural painter & plaster artisan, featuring a Before/After villa transformation slider and tropical color simulator.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('../index.html', 'Maison Ndamen — Master Painter & 3D Staff Studio')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="../index.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 4: MAISON TANDOORI YAOUNDÉ -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="commerce">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/tandoori_yaounde_demo.html', 'Maison Tandoori Yaoundé — Fine Dining & Delivery')">
+              <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1000&q=80" alt="Maison Tandoori" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 12-Dish Menu • FCFA Cart Drawer • Banquet Sim</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Fine Dining & WhatsApp Delivery</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Maison Tandoori Yaoundé — Restaurant & Catering</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Complete culinary ordering platform with 12 illustrated dishes across 4 filterable categories, a slide-out FCFA delivery cart drawer, and a diplomatic catering calculator.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/tandoori_yaounde_demo.html', 'Maison Tandoori Yaoundé — Fine Dining & Delivery')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/tandoori_yaounde_demo.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 5: PRESTIGE IMMO CAMEROUN -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="luxury">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/prestige_immo_luxury_real_estate.html', 'Prestige Immo — Luxury Villas & Financing Engine')">
+              <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80" alt="Prestige Immo" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 6 Titled Estates • FCFA/USD/EUR • Mortgage Sim</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Real Estate & Diaspora Investment</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Prestige Immo — Luxury Villas & Notary Portal</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Showcases 6 verified titled properties in Bonapriso, Bastos, Denver, Golf, and Kribi with instant multi-currency conversion and an interactive payment-plan & rental yield simulator.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/prestige_immo_luxury_real_estate.html', 'Prestige Immo — Luxury Villas & Financing Engine')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/prestige_immo_luxury_real_estate.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 6: POLYCLINIQUE MEDICARE+ -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="systems">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/medicare_plus_clinic.html', 'Polyclinique MediCare+ — Patient Triage & Specialist Portal')">
+              <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=80" alt="MediCare+" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● 6 Specialists • Checkup Tariffs • Patient Pass</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Private Healthcare & Diagnostics</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Polyclinique MediCare+ — Digital Patient Portal</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Clinical platform featuring 4 departments, 6 filterable specialist doctors with consultation prices in FCFA, annual checkup packages, and a Priority Patient Pass generator.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/medicare_plus_clinic.html', 'Polyclinique MediCare+ — Patient Triage & Specialist Portal')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/medicare_plus_clinic.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 7: MAISON M AESTHETICS DOUALA -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="commerce">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/maison_m_douala_demo.html', 'Maison M Aesthetics & Spa — Luxury Beauty Lounge')">
+              <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=80" alt="Maison M" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● Multi-Service Ritual Composer • FCFA Menu</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">Luxury Beauty Salon & Spa</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">Maison M Aesthetics (Bonapriso) — Hair, Nails & Spa</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Beauty institute platform where clients browse HD Lace installations, Russian manicures, and Hydrafacial treatments, combine services into a custom ritual, and book via WhatsApp.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/maison_m_douala_demo.html', 'Maison M Aesthetics & Spa — Luxury Beauty Lounge')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/maison_m_douala_demo.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- 8: NEXAPAY FINTECH SAAS -->
+        <article class="glass-card overflow-hidden flex flex-col justify-between" data-cat="systems">
+          <div>
+            <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openInspector('./demos/nexapay_fintech_saas.html', 'NexaPay.io — FinTech Invoicing & Mobile Money SaaS')">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="NexaPay" class="proj-thumb w-full h-full object-cover" />
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/80 text-xs font-semibold" style="color: var(--accent);">● Live FCFA Invoice Builder • MoMo API</span>
+            </div>
+            <div class="p-6">
+              <span class="mono text-[11px] uppercase font-semibold" style="color: var(--accent);">FinTech SaaS & Merchant Checkout</span>
+              <h3 class="text-xl sm:text-2xl font-bold mt-1">NexaPay.io — Smart Invoicing & Mobile Money Engine</h3>
+              <p class="text-xs sm:text-sm mt-2 leading-relaxed" style="color: var(--text-secondary);">
+                Interactive FinTech SaaS platform featuring a real-time client invoice generator in FCFA, live treasury settlement telemetry, and USSD Mobile Money REST API preview.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="openInspector('./demos/nexapay_fintech_saas.html', 'NexaPay.io — FinTech Invoicing & Mobile Money SaaS')" class="btn-warm w-full !text-xs">
+              ⚡ Preview Inside Page
+            </button>
+            <a href="./demos/nexapay_fintech_saas.html" target="_blank" class="btn-ghost w-full !text-xs">
+              Open Full Tab ↗
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: MY ENGINEERING WORKFLOW & QUALITY STANDARDS (REPLACES PRICING) -->
+    <section id="packages" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="max-w-3xl mb-12">
+        <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">04 // My Engineering Process & Guarantees</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2">How We Go From Your Idea to a Live Platform</h2>
+        <p class="text-xs sm:text-base mt-2" style="color: var(--text-secondary);">
+          Every business is unique, so I tailor every build to your exact goals and workflow. Here is my 4-step process for delivering a reliable, high-converting digital platform:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-bold" style="color: var(--accent);">STEP 01 // DISCOVERY</span>
+            <h3 class="text-xl font-bold mt-2">Understanding Your Business Model</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              We discuss your products, services, target customers, and how you prefer to receive orders or bookings (WhatsApp, Mobile Money, phone, or email).
+            </p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[var(--panel-border)] mono text-[11px]" style="color: var(--accent);">
+            Direct Consultation on WhatsApp
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-bold" style="color: var(--accent);">STEP 02 // LIVE PROTOTYPE</span>
+            <h3 class="text-xl font-bold mt-2">Interactive Preview Before You Commit</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              I build a working interactive mockup tailored to your brand so you can test the design, navigation, and mobile responsiveness on your own phone first.
+            </p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[var(--panel-border)] mono text-[11px]" style="color: var(--accent);">
+            100% Risk-Free Preview
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-bold" style="color: var(--accent);">STEP 03 // FULL ENGINEERING</span>
+            <h3 class="text-xl font-bold mt-2">Custom Features, Carts & Calculators</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              I wire up your full product catalog, FCFA shopping cart, appointment booking forms, bilingual FR/EN switcher, and any custom calculator or automation script.
+            </p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[var(--panel-border)] mono text-[11px]" style="color: var(--accent);">
+            Clean, Fast & Mobile-First Code
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="mono text-xs font-bold" style="color: var(--accent);">STEP 04 // LAUNCH & SUPPORT</span>
+            <h3 class="text-xl font-bold mt-2">Domain, SSL Security & Handover</h3>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Your platform goes live on fast global servers with HTTPS security, Google Maps integration, and ongoing technical support whenever you need updates.
+            </p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[var(--panel-border)] mono text-[11px]" style="color: var(--accent);">
+            48h – 72h Turnaround
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: BEFORE VS AFTER IMPACT + NETFLIX & CRUNCHYROLL STREAMING STORE HYPERLINK (ZERO WEBSITE PRICING) -->
+    <section id="why-hire-me" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="max-w-3xl mb-12">
+        <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">05 // Business Impact & Digital Entertainment</span>
+        <h2 class="text-3xl sm:text-5xl font-bold mt-2" data-i18n="impact_title">Why Businesses Switch to a Custom BPC Platform</h2>
+        <p class="text-xs sm:text-base mt-2" style="color: var(--text-secondary);" data-i18n="impact_sub">
+          See the difference between relying only on social media messages versus owning an automated 24/7 digital platform built specifically for your business.
+        </p>
+      </div>
+
+      <!-- Before vs After Comparison Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="glass-card p-6 sm:p-8 border border-rose-500/25">
+          <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold uppercase" data-i18n="before_badge">✕ Without a Modern Platform</span>
+          <h3 class="text-xl sm:text-2xl font-bold mt-4" data-i18n="before_title">Losing 70% of Impatient Mobile Buyers</h3>
+          <ul class="mt-4 space-y-2.5 text-xs sm:text-sm" style="color: var(--text-secondary);">
+            <li>✕ Customers ask for details in DMs and leave when you reply hours later.</li>
+            <li>✕ No interactive menu, custom calculator, or instant appointment slot picker.</li>
+            <li>✕ Your business does not appear when high-paying clients search on Google.</li>
+            <li>✕ Competitors with professional websites look more trustworthy and win the deal.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6 sm:p-8 border-2" style="border-color: var(--accent);">
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase" data-i18n="after_badge">✓ With Your Custom BPC Platform</span>
+          <h3 class="text-xl sm:text-2xl font-bold mt-4" data-i18n="after_title">Automated 24/7 Orders, Bookings & Credibility</h3>
+          <ul class="mt-4 space-y-2.5 text-xs sm:text-sm" style="color: var(--text-secondary);">
+            <li>✓ Customers browse your full catalog and place orders or bookings in 1 tap.</li>
+            <li>✓ Structured orders and booking passes arrive directly on your WhatsApp ready to fulfill.</li>
+            <li>✓ Fast mobile performance, bilingual FR/EN toggle, and Mobile Money ready.</li>
+            <li>✓ Tailored architecture engineered specifically around your business goals.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Netflix & Crunchyroll Digital Storefront Cross-Link Card (With Real Official Online Brand Logos) -->
+      <div class="glass-card p-6 sm:p-8 border-2 border-rose-500/45 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div class="space-y-3 max-w-2xl">
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- Authentic Inline Netflix Ribbon & Wordmark SVG (Never fails to load) -->
+            <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black border border-rose-500/50 shadow-md">
+              <svg class="w-4 h-5 shrink-0" viewBox="0 0 111 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H36.6V190H0V0Z" fill="#B1060F"/>
+                <path d="M74.4 0H111V190H74.4V0Z" fill="#B1060F"/>
+                <path d="M0 0H36.8L111 190H74.2L0 0Z" fill="#E50914"/>
+              </svg>
+              <span class="font-black text-sm tracking-[0.18em] text-[#E50914] leading-none" style="font-family: Impact, 'Arial Black', sans-serif;">NETFLIX</span>
+            </div>
+            <!-- Official Crunchyroll Brand Logo (Wikimedia + Instant Fallback) -->
+            <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black border border-orange-500/50 shadow-md">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Crunchyroll_Logo.svg" referrerpolicy="no-referrer" alt="Crunchyroll" class="w-5 h-5 object-contain" onerror="this.style.display='none'" />
+              <span class="font-extrabold text-sm tracking-wide text-[#F47521] leading-none">crunchyroll</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">🎁 + Free 1-Month Netflix Bonus on Website Orders</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-bold" data-i18n="stream_card_title">Looking for On-Demand Netflix & Crunchyroll Subscriptions?</h3>
+          <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-secondary);" data-i18n="stream_card_desc">
+            Visit our dedicated On-Demand Streaming Storefront to get instant 1-month Netflix (3,000 FCFA), Crunchyroll Mega Fan (2,000 FCFA), or the "Otaku & Chill" Duo Pack (4,500 FCFA) with easy Orange Money & MTN MoMo activation—plus our 3-Invite Referral Discount!
+          </p>
+        </div>
+        <a href="#/subscriptions" onclick="switchAppRoute('subscriptions')" class="btn-warm !bg-rose-600 hover:!bg-rose-500 !text-white shrink-0 w-full lg:w-auto">
+          <span data-i18n="stream_card_cta">Open Netflix & Crunchyroll Store →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CONTACT & INSTANT BRIEF BUILDER (PRE-WRITTEN WHATSAPP REQUEST + CRM SYNC) -->
+    <section id="contact" class="py-16 sm:py-20 border-t border-[var(--panel-border)] reveal-up">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-7 glass-card p-6 sm:p-10">
+          <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">06 // Start Your Project</span>
+          <h2 class="text-2xl sm:text-4xl font-bold mt-1" data-i18n="contact_h2">Request Your Free Live Mockup</h2>
+          <p class="text-xs sm:text-sm mt-2 mb-6" style="color: var(--text-secondary);" data-i18n="contact_sub">
+            Fill in your details below — we automatically generate a complete pre-written WhatsApp message with all your requirements and send it straight to +237 698 945 916.
+          </p>
+
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs font-medium block mb-1.5" data-i18n="lbl_name">Your Name *</label>
+                <input id="qName" type="text" placeholder="e.g., M. Kamga / Dr. Samuel" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);" />
+              </div>
+              <div>
+                <label class="text-xs font-medium block mb-1.5">Your WhatsApp Phone *</label>
+                <input id="qPhone" type="tel" placeholder="e.g., +237 6XX XXX XXX" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs font-medium block mb-1.5" data-i18n="lbl_biz">Business Name & City *</label>
+                <input id="qBiz" type="text" placeholder="e.g., Royal Lounge Yaoundé" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);" />
+              </div>
+              <div>
+                <label class="text-xs font-medium block mb-1.5">Preferred Language</label>
+                <select id="qPkg" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);">
+                  <option>Bilingual (Français & English)</option>
+                  <option>Français</option>
+                  <option>English</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-medium block mb-1.5" data-i18n="lbl_srv">Service Needed</label>
+              <select id="qDemo" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);">
+                <option>Custom Business Website & Digital Catalog</option>
+                <option>Restaurant / Café Digital Menu & WhatsApp Cart</option>
+                <option>Medical Clinic / Real Estate / Custom Web Portal</option>
+                <option>Full-Stack Web Application / Startup MVP</option>
+                <option>Web Scraping / Workflow Automation Script</option>
+                <option>Website Bug Fixing / Redesign & Optimization</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-xs font-medium block mb-1.5" data-i18n="lbl_notes">Project Details & Features Wanted</label>
+              <textarea id="qNotes" rows="3" placeholder="Describe your business, pages needed, WhatsApp cart, booking form, deadline, etc..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-[var(--panel-border)] text-sm" style="color: var(--text-primary);"></textarea>
+            </div>
+
+            <button onclick="sendWhatsAppBrief()" class="btn-warm w-full">
+              <span data-i18n="btn_send_brief">Send Pre-Written Request to Bashimiki Paul Chris on WhatsApp →</span>
+            </button>
+
+            <div id="qBriefStatus" class="hidden p-4 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-xs space-y-2">
+              <strong class="text-emerald-300 block">✓ Request Saved & Pre-Written WhatsApp Brief Ready!</strong>
+              <pre id="qBriefPreview" class="whitespace-pre-wrap font-sans text-zinc-200 bg-black/50 p-3 rounded-lg border border-white/10"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="glass-card p-6">
+            <span class="mono text-xs uppercase font-semibold" style="color: var(--accent);">Direct Contact</span>
+            <h3 class="text-2xl font-bold mt-1">Bashimiki Paul Chris</h3>
+            <p class="text-xs mt-1" style="color: var(--text-secondary);">Full-Stack Software Developer • Yaoundé, Cameroon</p>
+            <div class="mt-5 pt-4 border-t border-[var(--panel-border)] space-y-2.5 text-xs sm:text-sm">
+              <div><strong>Email:</strong> <a href="mailto:bashimikipaulchris992@gmail.com" class="hover:underline" style="color: var(--accent);">bashimikipaulchris992@gmail.com</a></div>
+              <div><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/237698945916" target="_blank" class="hover:underline" style="color: var(--accent);">+237 698 945 916</a></div>
+              <div><strong>GitHub:</strong> <a href="https://github.com/paulChris410" target="_blank" class="hover:underline" style="color: var(--accent);">github.com/paulChris410</a></div>
+              <div><strong>Based in:</strong> Yaoundé, Cameroon</div>
+            </div>
+          </div>
+
+          <div class="glass-card p-6">
+            <h4 class="font-bold text-base">Why Work With Me?</h4>
+            <ul class="mt-3 space-y-2.5 text-xs leading-relaxed" style="color: var(--text-secondary);">
+              <li>✓ <strong>Free Mockup First:</strong> Preview how your business looks online before committing.</li>
+              <li>✓ <strong>Fast 48h–72h Turnaround:</strong> No waiting months for an agency.</li>
+              <li>✓ <strong>Built for Sales:</strong> Direct WhatsApp carts, booking forms, and Mobile Money ready.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- END OF ROUTE 1: view-portfolio -->
+
+    <!-- =====================================================================
+         ROUTE 2: `/subscriptions` DEDICATED ON-DEMAND STREAMING STOREFRONT
+         ===================================================================== -->
+    <div id="view-subscriptions" class="hidden py-8 space-y-10">
+
+      <!-- TOP BANNER: ADMIN-ONLY 2-DAY DISCOUNT COUNTDOWN (-500 FCFA Netflix / -300 FCFA Crunchyroll) -->
+      <!-- Only visible when Bashimiki Paul Chris activates it in admin-dashboard.html -->
+      <div id="flashBannerActive" class="hidden glass-card p-6 sm:p-8 border-2 border-rose-500 bg-gradient-to-r from-rose-950/90 via-black/90 to-orange-950/90 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-[0_0_45px_rgba(225,29,72,0.35)]">
+        <div class="space-y-2">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-600 text-white mono text-xs font-extrabold uppercase animate-pulse">
+            🔥 2-DAY LIMITED DISCOUNT EVENT LIVE NOW
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-white" data-i18n="store_flash_active_t">
+            Subscribe Now: -500 FCFA Off Netflix (2,500F) & -300 FCFA Off Crunchyroll (1,700F)!
+          </h3>
+          <p class="text-xs sm:text-sm" style="color: var(--text-secondary);" data-i18n="store_flash_active_d">
+            Special 48-hour discount unlocked by Chris Tech! Subscribe before the 2-day clock hits zero to lock in Netflix at 2,500 FCFA, Crunchyroll at 1,700 FCFA, or the Duo Pack at 4,000 FCFA.
+          </p>
+        </div>
+
+        <!-- 4-Block Live Clocking Countdown: DAYS : HRS : MIN : SEC -->
+        <div class="flex flex-wrap items-center gap-4 w-full lg:w-auto justify-between lg:justify-end shrink-0">
+          <div class="grid grid-cols-4 gap-2 text-center mono">
+            <div class="px-3 py-2.5 rounded-xl bg-black/95 border border-rose-500/60 shadow-inner">
+              <span id="cdDays" class="text-xl sm:text-2xl font-extrabold text-amber-400 block">01</span>
+              <span class="text-[10px] uppercase text-rose-300">Days</span>
+            </div>
+            <div class="px-3 py-2.5 rounded-xl bg-black/95 border border-rose-500/60 shadow-inner">
+              <span id="cdHrs" class="text-xl sm:text-2xl font-extrabold text-amber-400 block">23</span>
+              <span class="text-[10px] uppercase text-rose-300">Hrs</span>
+            </div>
+            <div class="px-3 py-2.5 rounded-xl bg-black/95 border border-rose-500/60 shadow-inner">
+              <span id="cdMin" class="text-xl sm:text-2xl font-extrabold text-amber-400 block">59</span>
+              <span class="text-[10px] uppercase text-rose-300">Min</span>
+            </div>
+            <div class="px-3 py-2.5 rounded-xl bg-black/95 border border-rose-500/60 shadow-inner">
+              <span id="cdSec" class="text-xl sm:text-2xl font-extrabold text-amber-400 block">59</span>
+              <span class="text-[10px] uppercase text-rose-300">Sec</span>
+            </div>
+          </div>
+          <button type="button" onclick="handlePromoBannerClick('Streaming Top 2-Day Banner')" class="btn-warm !bg-rose-600 hover:!bg-rose-500 !text-white w-full sm:w-auto">
+            <span data-i18n="store_flash_claim">Claim Promo Deal Now →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROMINENT VIP BONUS BANNER (High Visibility for Arriving Clients) -->
+      <div class="glass-card p-6 sm:p-7 border-2 border-amber-400/70 bg-gradient-to-r from-amber-950/50 via-black/70 to-rose-950/50 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 shadow-2xl">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs uppercase">
+            <span>🎁 Special VIP Client Bonus</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white" data-i18n="store_vip_banner">
+            Order Any Custom Business Website & Get 1 Month of Netflix FREE!
+          </h2>
+          <p class="text-xs sm:text-sm" style="color: var(--text-secondary);">
+            Every client who commissions a website or custom platform from Chris Tech automatically receives 30 days of Netflix Ultra HD 4K at 0 FCFA.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
+          <button onclick="openOrderModal('WEBSITE', 'Custom Business Website (+ 1 Month Free Netflix Bonus)', 150000, true)" class="btn-warm !bg-amber-400 hover:!bg-amber-300 !text-slate-950 !font-extrabold flex-1 lg:flex-none">
+            <span data-i18n="store_vip_btn">Order Website (+ Free Netflix) →</span>
+          </button>
+          <a href="#/" onclick="switchAppRoute('portfolio')" class="btn-ghost flex-1 lg:flex-none">
+            <span data-i18n="store_back_btn">← Back to Portfolio</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ?ref=CODE INVITED BANNER (Auto-detected from URL ?ref=CODE or localStorage) -->
+      <div id="invitedRefBanner" class="hidden glass-card p-4 sm:p-5 border-2 border-emerald-400/70 bg-emerald-950/40 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-extrabold flex items-center justify-center shrink-0">🎟️</span>
+          <div>
+            <strong class="text-sm sm:text-base text-emerald-300 block">
+              Invited via Referral Code <span id="invitedRefCodeBadge" class="mono px-2 py-0.5 rounded bg-black/70 text-white">PAU-482</span> — Ready to Order!
+            </strong>
+            <span class="text-xs" style="color: var(--text-secondary);">Your referral ID is automatically saved and will be pre-filled at checkout so your friend gets credit once your order is activated.</span>
+          </div>
+        </div>
+        <button onclick="clearSavedRefCode()" class="px-3 py-1.5 rounded-lg bg-white/10 text-xs hover:bg-white/20">Clear Code</button>
+      </div>
+
+      <!-- Storefront Hero Header & Bulletproof Official Brand Logos -->
+      <div class="text-center max-w-3xl mx-auto space-y-4">
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <!-- Authentic Inline Netflix Ribbon + Wordmark -->
+          <div class="flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-black border border-rose-500/55 shadow-xl">
+            <svg class="w-5 h-6 shrink-0" viewBox="0 0 111 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0H36.6V190H0V0Z" fill="#B1060F"/>
+              <path d="M74.4 0H111V190H74.4V0Z" fill="#B1060F"/>
+              <path d="M0 0H36.8L111 190H74.2L0 0Z" fill="#E50914"/>
+            </svg>
+            <span class="font-black text-xl tracking-[0.18em] text-[#E50914] leading-none" style="font-family: Impact, 'Arial Black', sans-serif;">NETFLIX</span>
+          </div>
+          <span class="text-xl font-bold" style="color: var(--accent);">+</span>
+          <!-- Official Crunchyroll Brand Badge -->
+          <div class="flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-black border border-orange-500/55 shadow-xl">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Crunchyroll_Logo.svg" referrerpolicy="no-referrer" alt="Crunchyroll" class="w-6 h-6 object-contain" onerror="this.style.display='none'" />
+            <span class="font-extrabold text-xl tracking-wide text-[#F47521] leading-none">crunchyroll</span>
+          </div>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-bold" data-i18n="store_h1">Netflix & Crunchyroll Subscriptions in FCFA</h1>
+        <p class="text-sm sm:text-base" style="color: var(--text-secondary);" data-i18n="store_sub">
+          No international bank card required. Pay securely via Orange Money or MTN MoMo and receive your private profile login & PIN directly on WhatsApp within 5 minutes.
+        </p>
+      </div>
+
+      <!-- Clear 3-Step Client Activation Guide -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="glass-card p-5 flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-xl bg-rose-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0">01</div>
+          <div>
+            <h4 class="font-bold text-sm text-white">Choose Your Streaming Plan</h4>
+            <p class="text-xs mt-1" style="color: var(--text-secondary);">Click any plan below (Netflix, Crunchyroll, or Duo Pack) and enter your Name & WhatsApp number.</p>
+          </div>
+        </div>
+        <div class="glass-card p-5 flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-extrabold text-xs flex items-center justify-center shrink-0">02</div>
+          <div>
+            <h4 class="font-bold text-sm text-white">Send Orange Money / MTN MoMo</h4>
+            <p class="text-xs mt-1" style="color: var(--text-secondary);">Send the amount to <strong>+237 698 945 916 (Bashimiki Paul Chris)</strong> and reply on WhatsApp with a screenshot (capture) of your payment.</p>
+          </div>
+        </div>
+        <div class="glass-card p-5 flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs flex items-center justify-center shrink-0">03</div>
+          <div>
+            <h4 class="font-bold text-sm text-white">Instant Login & 30-Day Warranty</h4>
+            <p class="text-xs mt-1" style="color: var(--text-secondary);">Your account email, password, and private profile PIN are delivered immediately on WhatsApp with full 30-day support.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Core Streaming Offers Grid (100% Visible Netflix & Crunchyroll Logos + Live 2-Day Promo Discounts) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Offer 1: Netflix -->
+        <div class="glass-card p-7 flex flex-col justify-between border border-rose-500/45">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-11 h-11 rounded-xl bg-black border border-rose-500/60 flex items-center justify-center shadow-md p-2">
+                  <svg class="w-5 h-7" viewBox="0 0 111 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H36.6V190H0V0Z" fill="#B1060F"/>
+                    <path d="M74.4 0H111V190H74.4V0Z" fill="#B1060F"/>
+                    <path d="M0 0H36.8L111 190H74.2L0 0Z" fill="#E50914"/>
+                  </svg>
+                </div>
+                <div>
+                  <span class="font-black text-base tracking-[0.16em] text-[#E50914] block leading-none" style="font-family: Impact, 'Arial Black', sans-serif;">NETFLIX</span>
+                  <span class="text-[10px] text-rose-300 font-semibold block mt-1">ULTRA HD 4K</span>
+                </div>
+              </div>
+              <span id="badgeNetflixPromo" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 mono text-[11px] font-bold">● Instant</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-5">Netflix (1 Month On Demand)</h3>
+            <div id="priceNetflixDisplay" class="serif text-4xl font-bold my-4 text-rose-400">3,000 FCFA <span class="text-xs font-normal" style="color: var(--text-muted);">/ 30 Days</span></div>
+            <ul class="space-y-2.5 text-xs sm:text-sm" style="color: var(--text-secondary);">
+              <li>✓ Dedicated private profile & personal 4-digit PIN</li>
+              <li>✓ Watch on Phone, Laptop, Tablet & Smart TV</li>
+              <li>✓ Ultra HD 4K + Offline mobile downloads</li>
+              <li>✓ <strong>2-Day Flash / 3-Invite Price:</strong> 2,500 FCFA (-500F)!</li>
+            </ul>
+          </div>
+          <button id="btnNetflixOrder" onclick="orderNetflixCard()" class="btn-warm w-full mt-8 !bg-rose-600 hover:!bg-rose-500 !text-white">
+            Order Netflix (3,000 FCFA) →
+          </button>
+        </div>
+
+        <!-- Offer 2: Otaku & Chill Duo Pack (Featured with BOTH Guaranteed Visible Logos) -->
+        <div class="glass-card p-7 flex flex-col justify-between border-2" style="border-color: var(--accent);">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <div class="w-10 h-10 rounded-xl bg-black border border-rose-500/60 flex items-center justify-center p-2">
+                  <svg class="w-4 h-6" viewBox="0 0 111 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H36.6V190H0V0Z" fill="#B1060F"/>
+                    <path d="M74.4 0H111V190H74.4V0Z" fill="#B1060F"/>
+                    <path d="M0 0H36.8L111 190H74.2L0 0Z" fill="#E50914"/>
+                  </svg>
+                </div>
+                <span class="font-bold text-xs">+</span>
+                <div class="w-10 h-10 rounded-xl bg-black border border-orange-500/60 flex items-center justify-center p-2">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Crunchyroll_Logo.svg" referrerpolicy="no-referrer" alt="Crunchyroll" class="w-full h-full object-contain" onerror="this.outerHTML='<span style=&quot;color:#F47521;font-weight:900;font-size:14px;&quot;>CR</span>'" />
+                </div>
+              </div>
+              <span id="badgeDuoPromo" class="px-3 py-1 rounded-full bg-[#b47346] text-white text-[11px] font-extrabold">★ SAVE 500 FCFA</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-5">The "Otaku & Chill" Duo Pack</h3>
+            <div id="priceDuoDisplay" class="serif text-4xl font-bold my-4" style="color: var(--accent);">4,500 FCFA <span class="text-xs font-normal line-through opacity-60">5,000 FCFA</span></div>
+            <ul class="space-y-2.5 text-xs sm:text-sm" style="color: var(--text-secondary);">
+              <li>✓ <strong>1 Full Month Netflix 4K</strong> (Private Profile + PIN)</li>
+              <li>✓ <strong>1 Full Month Crunchyroll Mega Fan</strong> (Ad-Free Anime)</li>
+              <li>✓ Save 500 FCFA every month (1,000F during 2-Day Promo!)</li>
+              <li>✓ Full 30-day warranty & priority WhatsApp support</li>
+            </ul>
+          </div>
+          <button id="btnDuoOrder" onclick="orderDuoCard()" class="btn-warm w-full mt-8">
+            Order Duo Pack (4,500 FCFA) →
+          </button>
+        </div>
+
+        <!-- Offer 3: Crunchyroll -->
+        <div class="glass-card p-7 flex flex-col justify-between border border-orange-500/45">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-11 h-11 rounded-xl bg-black border border-orange-500/60 flex items-center justify-center shadow-md p-2">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Crunchyroll_Logo.svg" referrerpolicy="no-referrer" alt="Crunchyroll Official Eye Logo" class="w-full h-full object-contain" onerror="this.outerHTML='<span style=&quot;color:#F47521;font-weight:900;font-size:16px;&quot;>CR</span>'" />
+                </div>
+                <div>
+                  <span class="font-extrabold text-base tracking-wide text-[#F47521] block leading-none">crunchyroll</span>
+                  <span class="text-[10px] text-orange-300 font-semibold block mt-1">MEGA FAN ANIME</span>
+                </div>
+              </div>
+              <span id="badgeCrunchyPromo" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 mono text-[11px] font-bold">● Instant</span>
+            </div>
+            <h3 class="text-2xl font-bold mt-5">Crunchyroll (1 Month On Demand)</h3>
+            <div id="priceCrunchyDisplay" class="serif text-4xl font-bold my-4 text-orange-400">2,000 FCFA <span class="text-xs font-normal" style="color: var(--text-muted);">/ 30 Days</span></div>
+            <ul class="space-y-2.5 text-xs sm:text-sm" style="color: var(--text-secondary);">
+              <li>✓ 100% Ad-free anime streaming in Full HD</li>
+              <li>✓ Simulcast episodes 1 hour after Japan broadcast</li>
+              <li>✓ Offline episode downloads on mobile & tablet</li>
+              <li>✓ <strong>2-Day Flash / 3-Invite Price:</strong> 1,700 FCFA (-300F)!</li>
+            </ul>
+          </div>
+          <button id="btnCrunchyOrder" onclick="orderCrunchyrollCard()" class="btn-ghost w-full mt-8">
+            Order Crunchyroll (2,000 FCFA) →
+          </button>
+        </div>
+      </div>
+
+      <!-- COMPREHENSIVE STREAMING, REFERRAL & SERVICES FAQ SECTION -->
+      <section id="streaming-faq" class="glass-card p-6 sm:p-9 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[var(--panel-border)] pb-5">
+          <div>
+            <span class="mono text-xs uppercase tracking-widest font-semibold" style="color: var(--accent);">Help Center & Support</span>
+            <h3 class="text-2xl sm:text-4xl font-bold mt-1" data-i18n="faq_title">Frequently Asked Questions (FAQ)</h3>
+            <p class="text-xs sm:text-sm mt-1.5" style="color: var(--text-secondary);">
+              Everything you need to know about our Netflix & Crunchyroll subscriptions, Mobile Money payments, 3-Invite Referral rewards, and Chris Tech web development services.
+            </p>
+          </div>
+          <button onclick="togglePaulXChat(true)" class="btn-warm !py-2.5 !px-4 !text-xs shrink-0">
+            🤖 Ask Paul_x.01 Chatbot →
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group" open>
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>1. How do I pay and how fast do I receive my account?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Click any plan to generate your Order ID and open WhatsApp. Send the exact FCFA amount via <strong>Orange Money or MTN MoMo</strong> to <strong>+237 698 945 916 (Bashimiki Paul Chris)</strong> and send a screenshot (capture) of your payment. Your account login, password, and private profile PIN are delivered within <strong>5 minutes</strong>!
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>2. Which devices work with Netflix & Crunchyroll?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Both Netflix (Ultra HD 4K) and Crunchyroll Mega Fan work smoothly on <strong>Android & iPhone smartphones, laptops (Windows/Mac), iPads/tablets, PlayStation/Xbox consoles, and Smart TVs</strong>—including offline downloads on mobile devices.
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>3. Is my Netflix profile private and guaranteed for 30 days?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Yes! You receive your own <strong>dedicated private profile protected by a personal 4-digit PIN</strong> so nobody touches your watch history. Every subscription includes a <strong>full 30-day replacement & technical support guarantee</strong> via WhatsApp.
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>4. How does the 3-Invite Referral & Loyalty Discount work?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Once your first paid order is activated by Admin, you get a unique Referral Code (like <code class="text-amber-300">PAU-482</code>) and personal invite link. When <strong>3 new friends</strong> buy and activate a subscription using your code, you unlock a reward discount on your next renewal: <strong>Netflix drops to 2,500 FCFA (-500 FCFA)</strong> or <strong>Crunchyroll drops to 1,700 FCFA (-300 FCFA)</strong>!
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>5. What is the "Otaku & Chill" Duo Pack & 48h Flash Drop?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              The <strong>Otaku & Chill Duo Pack (4,500 FCFA)</strong> combines 1 month of Netflix 4K + 1 month of Crunchyroll Mega Fan (saving 500 FCFA every month). During special admin-activated <strong>48-Hour Flash Drops</strong>, a live 2-day countdown appears and drops the Duo Pack price to only <strong>4,000 FCFA</strong>!
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>6. How do I claim 1 Month of Netflix FREE with a Website?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Every client who commissions a custom website, restaurant WhatsApp menu, clinic/real estate portal, or web app from <strong>Chris Tech (Bashimiki Paul Chris)</strong> automatically receives <strong>1 full month of Netflix Ultra HD 4K at 0 FCFA</strong> upon project launch!
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>7. How long does Chris Tech take to build a custom website?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Standard business websites, digital menus, and landing pages are delivered in <strong>48 to 72 hours</strong>, and you always get to preview a free interactive mockup on your phone first before committing. Larger full-stack portals with databases take 5 to 10 days.
+            </p>
+          </details>
+
+          <details class="p-4 sm:p-5 rounded-2xl bg-black/45 border border-[var(--panel-border)] group">
+            <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex items-center justify-between gap-2 text-white">
+              <span>8. Can I pay from outside Cameroon (Diaspora / International)?</span>
+              <span class="text-amber-400 font-bold group-open:rotate-45 transition">+</span>
+            </summary>
+            <p class="text-xs sm:text-sm mt-3 leading-relaxed" style="color: var(--text-secondary);">
+              Yes! Our checkout modal supports international country codes (+237, +225, +241, +221, +33, +32, +44, +1, +49, +971). International clients can pay via Mobile Money remittance (Sendwave, TapTap Send, Wave) or direct transfer arranged on WhatsApp.
+            </p>
+          </details>
+        </div>
+      </section>
+
+    </div><!-- END OF ROUTE 2: view-subscriptions -->
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-[var(--panel-border)] text-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left" style="color: var(--text-muted);">
+      <div>© 2026 <strong style="color: var(--text-primary);">CHRIS TECH</strong> — Bashimiki Paul Chris • Full-Stack Developer.</div>
+      <div class="flex flex-wrap items-center justify-center gap-5">
+        <a href="#about" onclick="switchAppRoute('portfolio')" class="hover:underline">About</a>
+        <a href="#services" onclick="switchAppRoute('portfolio')" class="hover:underline">Services</a>
+        <a href="#projects" onclick="switchAppRoute('portfolio')" class="hover:underline">8 Live Projects</a>
+        <a href="https://wa.me/237698945916" target="_blank" class="font-semibold hover:underline" style="color: var(--accent);">WhatsApp: +237 698 945 916</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- IN-PAGE LIVE APPLICATION PREVIEW MODAL -->
+  <div id="inspectorModal" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md p-2 sm:p-6 flex flex-col">
+    <div class="max-w-7xl w-full mx-auto bg-[#16120f] border border-[var(--panel-border)] rounded-t-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 min-w-0">
+        <button onclick="closeInspector()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs shrink-0">✕ Close</button>
+        <span id="modalProjTitle" class="font-bold text-xs sm:text-sm text-white truncate">Live Application Preview</span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 mono text-xs">
+        <button onclick="setViewport('100%')" class="px-3 py-1 rounded-lg bg-white/10 text-white font-semibold">Desktop (100%)</button>
+        <button onclick="setViewport('768px')" class="px-3 py-1 rounded-lg text-zinc-300">Tablet (768px)</button>
+        <button onclick="setViewport('390px')" class="px-3 py-1 rounded-lg text-zinc-300">Mobile (390px)</button>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a id="modalFullLink" href="#" target="_blank" class="px-3 py-1.5 rounded-lg bg-white/10 text-white text-xs font-semibold">
+          Full Tab ↗
+        </a>
+        <a href="https://wa.me/237698945916?text=Bonjour%20Bashimiki%20Paul%20Chris%2C%20I%20tested%20your%20live%20project%20and%20want%20a%20similar%20platform!"
+           target="_blank"
+           class="px-3.5 py-1.5 rounded-lg bg-[#b47346] text-white text-xs font-bold">
+          Order This →
+        </a>
+      </div>
+    </div>
+
+    <div class="max-w-7xl w-full mx-auto flex-1 bg-[#090807] border-x border-b border-[var(--panel-border)] rounded-b-2xl overflow-hidden flex justify-center">
+      <iframe id="modalIframe" src="" class="w-full h-full border-0 transition-all duration-300 bg-white"></iframe>
+    </div>
+  </div>
+
+  <!-- CLIENT ORDER CAPTURE MODAL (SCROLLABLE ON SMALL PHONES + INTERNATIONAL COUNTRY CODE) -->
+  <div id="orderCaptureModal" class="fixed inset-0 z-[110] hidden bg-black/85 backdrop-blur-md p-3 sm:p-4 flex items-center justify-center overflow-y-auto">
+    <div class="max-w-lg w-full max-h-[92vh] overflow-y-auto glass-card p-5 sm:p-8 space-y-4 sm:space-y-5 border-2" style="border-color: var(--accent);">
+      <div class="flex items-center justify-between border-b border-[var(--panel-border)] pb-3">
+        <div>
+          <span id="ordModalCatBadge" class="px-2.5 py-0.5 rounded-full bg-rose-600 text-white text-[11px] font-bold uppercase">ON-DEMAND ORDER</span>
+          <h3 id="ordModalTitle" class="text-xl sm:text-2xl font-bold mt-1">Complete Your Order</h3>
+        </div>
+        <button onclick="closeOrderModal()" class="w-8 h-8 rounded-lg bg-white/10 text-sm font-bold">✕</button>
+      </div>
+
+      <!-- Quick 2-Day Promo Plan Switcher (Visible when user clicks the 2-Day Discount Banner) -->
+      <div id="ordPromoPlanPicker" class="hidden grid grid-cols-3 gap-2 text-center">
+        <button type="button" onclick="selectPromoModalPlan('Netflix (2-Day Discount -500 FCFA)', 2500)" class="p-2.5 rounded-xl bg-rose-600/25 border border-rose-500/60 hover:bg-rose-600/40 text-xs font-bold text-white cursor-pointer">
+          Netflix<br/><span class="text-rose-300">2,500F (-500F)</span>
+        </button>
+        <button type="button" onclick="selectPromoModalPlan('Crunchyroll (2-Day Discount -300 FCFA)', 1700)" class="p-2.5 rounded-xl bg-orange-500/20 border border-orange-500/60 hover:bg-orange-500/40 text-xs font-bold text-white cursor-pointer">
+          Crunchyroll<br/><span class="text-orange-300">1,700F (-300F)</span>
+        </button>
+        <button type="button" onclick="selectPromoModalPlan('2-Day Promo Duo Pack (Netflix + Crunchyroll)', 4000)" class="p-2.5 rounded-xl bg-amber-500/20 border border-amber-400/60 hover:bg-amber-500/40 text-xs font-bold text-white cursor-pointer">
+          Duo Pack<br/><span class="text-amber-300">4,000F (-1,000F)</span>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-xl bg-black/50 border border-[var(--panel-border)] flex items-center justify-between">
+        <div>
+          <span class="text-[11px] uppercase block" style="color: var(--text-muted);">Selected Offer</span>
+          <strong id="ordModalPlan" class="text-sm sm:text-base">Netflix (1 Month On Demand)</strong>
+          <span id="ordModalBonusNote" class="hidden block text-xs text-emerald-400 font-semibold mt-0.5">🎁 Includes 1 Month Free Netflix Bonus!</span>
+        </div>
+        <span id="ordModalPrice" class="serif text-2xl font-bold" style="color: var(--accent);">3,000 FCFA</span>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="text-xs font-semibold block mb-1.5">Your Full Name *</label>
+          <input id="ordClientName" type="text" placeholder="e.g., Franck Ndongo" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-[var(--panel-border)] text-sm" />
+        </div>
+
+        <div>
+          <label class="text-xs font-semibold block mb-1.5">WhatsApp Phone Number (With Country Code) *</label>
+          <div class="grid grid-cols-12 gap-2">
+            <select id="ordCountryCode" class="col-span-5 px-2.5 py-3 rounded-xl bg-black/60 border border-[var(--panel-border)] text-xs mono">
+              <option value="+237" selected>🇨🇲 +237 (Cameroon)</option>
+              <option value="+225">🇨🇮 +225 (Côte d'Ivoire)</option>
+              <option value="+241">🇬🇦 +241 (Gabon)</option>
+              <option value="+221">🇸🇳 +221 (Senegal)</option>
+              <option value="+243">🇨🇩 +243 (DR Congo)</option>
+              <option value="+234">🇳🇬 +234 (Nigeria)</option>
+              <option value="+33">🇫🇷 +33 (France)</option>
+              <option value="+32">🇧🇪 +32 (Belgium)</option>
+              <option value="+44">🇬🇧 +44 (UK)</option>
+              <option value="+1">🇺🇸/🇨🇦 +1 (USA / Canada)</option>
+              <option value="+49">🇩🇪 +49 (Germany)</option>
+              <option value="+971">🇦🇪 +971 (UAE / Dubai)</option>
+            </select>
+            <input id="ordPhoneNum" type="tel" placeholder="698 945 916" oninput="validateModalReferralCode()" class="col-span-7 px-4 py-3 rounded-xl bg-black/50 border border-[var(--panel-border)] text-sm" />
+          </div>
+        </div>
+
+        <!-- Optional Referral ID / Loyalty Reward Code -->
+        <div>
+          <label class="text-xs font-semibold block mb-1.5">Referral ID / Promo Code <span class="font-normal opacity-70">(Optional — friend's code or your 3/3 reward code)</span></label>
+          <input id="ordReferralInput" type="text" placeholder="e.g., FRA-482" oninput="validateModalReferralCode()" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-[var(--panel-border)] text-sm uppercase mono tracking-wider" />
+          <div id="ordRefFeedback" class="hidden mt-1.5 text-xs font-semibold px-3 py-2 rounded-lg"></div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs leading-relaxed">
+          <strong>💳 Payment Instructions (Orange Money / MTN MoMo):</strong><br/>
+          Clicking below saves your Order ID and opens WhatsApp with our payment number (<strong>+237 698 945 916 — Bashimiki Paul Chris</strong>). Send the payment and reply with a screenshot (capture) for instant activation!
+        </div>
+
+        <button onclick="submitOrderAndRedirect()" class="btn-warm w-full">
+          Send Request & Get Payment Details on WhatsApp →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE ADMIN-BROADCAST 2-DAY PROMO POPUP TOAST (Fires automatically when Admin activates countdown) -->
+  <div id="livePromoPopupToast" style="display: none;" class="fixed top-24 right-4 z-[125] max-w-sm w-[92vw] glass-card p-4 border-2 border-rose-500 bg-black/95 shadow-[0_20px_60px_rgba(225,29,72,0.45)] space-y-2.5">
+    <div class="flex items-start justify-between gap-2">
+      <span class="px-2.5 py-0.5 rounded-full bg-rose-600 text-white mono text-[10px] font-extrabold uppercase animate-pulse">🔔 NEW PROMO ALERT</span>
+      <button type="button" onclick="dismissPromoPopup()" class="w-6 h-6 rounded-lg bg-white/10 text-xs font-bold text-white">✕</button>
+    </div>
+    <h4 class="font-bold text-sm text-white">🔥 2-Day Discount Countdown Activated!</h4>
+    <p class="text-xs text-zinc-300 leading-relaxed">
+      Subscribe within 48 hours for <strong class="text-rose-400">-500 FCFA off Netflix (2,500F)</strong> and <strong class="text-orange-400">-300 FCFA off Crunchyroll (1,700F)</strong>!
+    </p>
+    <div class="flex items-center justify-between gap-2 pt-1">
+      <span id="toastPromoTimer" class="mono text-xs font-extrabold text-amber-400">01d 23h 59m 59s</span>
+      <button type="button" onclick="dismissPromoPopup(); handlePromoBannerClick('Live Promo Popup Alert');" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs cursor-pointer">Claim Promo Now →</button>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       FLOATING INTERACTIVE CHATBOT WIDGET: Paul_x.01 (100% Reactive Assistant)
+       ===================================================================== -->
+  <div id="paulXLauncherWrap" class="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-[130] flex flex-col items-end gap-2.5 sm:gap-3">
+    <!-- Chat Drawer Window (Explicit display toggle — never clashes with Tailwind flex) -->
+    <div id="paulXChatWindow" style="display: none;" class="w-[calc(100vw-24px)] sm:w-[390px] max-w-[390px] max-h-[78vh] glass-card border-2 border-[#e5a97c]/75 shadow-[0_24px_75px_rgba(0,0,0,0.92)] overflow-hidden flex-col">
+      <!-- Chatbot Header -->
+      <div class="px-4 py-3.5 bg-gradient-to-r from-[#261a12] via-[#140f0c] to-[#1f150f] border-b border-[var(--panel-border)] flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#e5a97c] to-[#8c4f2b] text-[#090807] font-extrabold flex items-center justify-center shadow-md mono text-xs">
+            PX
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <strong class="text-sm text-white mono">Paul_x.01</strong>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+            <span class="text-[10px] block" style="color: var(--accent);">Chris Tech Trained Assistant • EN / FR</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="resetPaulXChat()" title="Clear conversation" class="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-zinc-200">↺</button>
+          <button type="button" onclick="togglePaulXChat(false)" title="Close chat" class="w-7 h-7 rounded-lg bg-white/10 hover:bg-rose-600 text-xs font-bold text-white">✕</button>
+        </div>
+      </div>
+
+      <!-- Messages Thread -->
+      <div id="paulXMessages" class="p-3.5 space-y-3 h-72 overflow-y-auto text-xs bg-black/75">
+        <div class="flex items-start gap-2">
+          <div class="w-6 h-6 rounded-lg bg-[#e5a97c]/20 border border-[#e5a97c]/50 text-[#e5a97c] font-bold flex items-center justify-center shrink-0 text-[10px] mono">PX</div>
+          <div class="p-3 rounded-2xl rounded-tl-sm bg-white/10 border border-white/10 text-zinc-100 leading-relaxed">
+            👋 Hi! I'm <strong>Paul_x.01</strong>, the trained assistant for <strong>CHRIS TECH (Bashimiki Paul Chris)</strong>.<br/><br/>
+            Ask me anything about <strong>Netflix</strong>, <strong>Crunchyroll</strong>, the <strong>2-Day Discount Countdown (-500F / -300F)</strong>, <strong>Orange Money / MTN MoMo</strong>, or ordering a <strong>custom website</strong>!
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Chips -->
+      <div class="px-3 py-2 border-t border-[var(--panel-border)] bg-black/80 flex flex-wrap gap-1.5">
+        <button type="button" onclick="askPaulX('What are Netflix and Crunchyroll prices?')" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-[#b47346] text-white text-[10px] font-semibold transition cursor-pointer">🎬 Streaming Prices</button>
+        <button type="button" onclick="askPaulX('Is there a 2-day discount promo?')" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-[#b47346] text-white text-[10px] font-semibold transition cursor-pointer">🔥 2-Day Discount</button>
+        <button type="button" onclick="askPaulX('How do I pay with Orange Money or MTN MoMo?')" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-[#b47346] text-white text-[10px] font-semibold transition cursor-pointer">💳 How to Pay</button>
+        <button type="button" onclick="askPaulX('What web services does Chris Tech offer?')" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-[#b47346] text-white text-[10px] font-semibold transition cursor-pointer">💻 Web Services</button>
+      </div>
+
+      <!-- Reactive Form Input Bar -->
+      <form onsubmit="event.preventDefault(); sendPaulXInput();" class="p-3 border-t border-[var(--panel-border)] bg-black/90 flex items-center gap-2">
+        <input id="paulXInput" type="text" autocomplete="off" placeholder="Type any question for Paul_x.01..." class="flex-1 px-3 py-2 rounded-xl bg-white/10 border border-[var(--panel-border)] text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-[var(--accent)]" />
+        <button type="submit" class="px-3.5 py-2 rounded-xl bg-[#b47346] hover:bg-[#e5a97c] hover:text-black text-white font-bold text-xs transition cursor-pointer">Send</button>
+      </form>
+    </div>
+
+    <!-- Floating Trigger Pill Button -->
+    <button type="button" onclick="togglePaulXChat()" class="group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#241810] to-[#120d0a] border-2 border-[#e5a97c] shadow-[0_12px_35px_rgba(0,0,0,0.85)] hover:scale-105 transition cursor-pointer">
+      <span class="w-7 h-7 rounded-full bg-[#e5a97c] text-[#090807] font-extrabold text-[11px] mono flex items-center justify-center">PX</span>
+      <span class="text-xs font-bold text-white pr-1">Chat with <span style="color: var(--accent);">Paul_x.01</span></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+    </button>
+  </div>
+
+  <script>
+    // 1. Always load the official cropped portrait (clear any old upload override)
+    try { localStorage.removeItem('bpc_portrait_data'); } catch (e) {}
+
+    // 2. Scroll Reveal Observer
+    const revObserver = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) en.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal-up').forEach(el => revObserver.observe(el));
+
+    // 3. Dark / Light Theme Switcher (Brew Haven Style)
+    let theme = localStorage.getItem('bpc_theme') || 'dark';
+    document.body.setAttribute('data-theme', theme);
+    document.getElementById('themeBtn').textContent = theme === 'dark' ? '☀' : '☾';
+
+    function toggleThemeMode() {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('bpc_theme', theme);
+      const icon = theme === 'dark' ? '☀' : '☾';
+      const tBtn = document.getElementById('themeBtn');
+      const mBtn = document.getElementById('mobThemeBtn');
+      if (tBtn) tBtn.textContent = icon;
+      if (mBtn) mBtn.innerHTML = `<span>${icon}</span><span>${theme === 'dark' ? 'Obsidian' : 'Pitch Black'}</span>`;
+      window.dispatchEvent(new CustomEvent('bpcThemeChanged', { detail: { theme } }));
+    }
+
+    function toggleMobMenu() {
+      const menu = document.getElementById('mobMenu');
+      const btn = document.getElementById('mobMenuBtn');
+      if (!menu) return;
+      const isHidden = menu.classList.toggle('hidden');
+      if (btn) {
+        btn.textContent = isHidden ? '☰' : '✕';
+        btn.setAttribute('aria-expanded', String(!isHidden));
+      }
+    }
+
+    function closeMobMenu() {
+      const menu = document.getElementById('mobMenu');
+      const btn = document.getElementById('mobMenuBtn');
+      if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (btn) {
+          btn.textContent = '☰';
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const header = document.getElementById('siteHeader');
+      if (header && !header.contains(e.target)) closeMobMenu();
+    });
+
+    // 4. Hero Interactive Preview Switcher
+    const heroPreviews = [
+      {
+        title: "Brew Haven — Specialty Coffee Roastery",
+        tag: "Three.js 3D Cup • Interactive Menu • Cart",
+        desc: "Interactive 3D coffee roastery platform with live dark/light ambiance, filterable espresso menu, and table reservations.",
+        img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80",
+        url: "../brew_haven_backup.html"
+      },
+      {
+        title: "Aurelia Delacroix — Contemporary Art & 3D Studio",
+        tag: "3D WebGL Sculpture • Pigment Mixer • Gallery",
+        desc: "Museum-grade art exhibition platform with an interactive 3D WebGL sculpture, 6 curated paintings, and a commission calculator.",
+        img: "../images/work-oil-horizon.jpg",
+        url: "./demos/aurelia_delacroix_demo.html"
+      },
+      {
+        title: "Maison Ndamen — Master Painter & Staff",
+        tag: "Vue 3 • Before/After Slider • 3D Rosette",
+        desc: "Bilingual luxury platform with interactive Before/After villa slider, 3D plaster rosette studio, and tropical color simulator.",
+        img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
+        url: "../index.html"
+      }
+    ];
+
+    function setHeroPreview(idx) {
+      const p = heroPreviews[idx];
+      document.getElementById('heroPrevImg').src = p.img;
+      document.getElementById('heroPrevTag').textContent = p.tag;
+      document.getElementById('heroPrevTitle').textContent = p.title;
+      document.getElementById('heroPrevDesc').textContent = p.desc;
+      document.getElementById('heroPrevTabBtn').href = p.url;
+      document.getElementById('heroPrevModalBtn').setAttribute('onclick', `openInspector('${p.url}', '${p.title}')`);
+
+      document.querySelectorAll('.h-tab').forEach((b, i) => {
+        b.className = i === idx
+          ? 'h-tab py-2 px-2 rounded-xl bg-[#b47346] text-white font-semibold text-xs truncate'
+          : 'h-tab py-2 px-2 rounded-xl bg-[var(--accent-glow)] text-xs truncate';
+      });
+    }
+
+    // 5. Filter Projects
+    function filterPortfolio(cat, btn) {
+      document.querySelectorAll('.p-tab').forEach(b => {
+        b.className = 'p-tab px-4 py-2 rounded-xl bg-[var(--accent-glow)] text-xs transition';
+      });
+      btn.className = 'p-tab px-4 py-2 rounded-xl bg-[#b47346] text-white font-semibold text-xs transition';
+
+      document.querySelectorAll('#portfolioGrid > article').forEach(card => {
+        const c = card.getAttribute('data-cat');
+        card.style.display = (cat === 'all' || c === cat) ? '' : 'none';
+      });
+    }
+
+    // 6. Live Modal Inspector
+    function openInspector(url, title) {
+      document.getElementById('modalProjTitle').textContent = title;
+      document.getElementById('modalIframe').src = url;
+      document.getElementById('modalFullLink').href = url;
+      document.getElementById('inspectorModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeInspector() {
+      document.getElementById('inspectorModal').classList.add('hidden');
+      document.getElementById('modalIframe').src = '';
+      document.body.style.overflow = '';
+    }
+    function setViewport(w) {
+      document.getElementById('modalIframe').style.width = w;
+    }
+
+    // 7. Currency Switcher (Default: FCFA)
+    let currMode = 'fcfa';
+    function toggleCurrency() {
+      currMode = currMode === 'fcfa' ? 'usd' : 'fcfa';
+      document.querySelectorAll('.price-switch').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currMode);
+      });
+    }
+
+    // 8. Bilingual Switcher (Covers Main Portfolio AND Streaming Store)
+    let langMode = 'en';
+    const langDict = {
+      en: {
+        nav_role: "Full-Stack Developer & Digital Solutions",
+        nav_about: "About Me",
+        nav_services: "Services",
+        nav_work: "8 Live Projects",
+        nav_pricing: "My Process",
+        nav_contact: "Contact",
+        nav_stream_btn: "🎬 Open Streaming Store",
+        hero_badge: "Available for Freelance & Client Projects • Cameroon & International",
+        hero_h1_1: "Crafting Clean, Reliable Websites &",
+        hero_h1_2: "Digital Systems That Grow Your Business.",
+        hero_p: "Hello, I’m Bashimiki Paul Chris. I design and develop custom websites, interactive ordering menus, medical & real estate portals, and business automation tools—complete with direct WhatsApp ordering and Mobile Money integration.",
+        hero_cta1: "Explore My 8 Live Projects",
+        hero_cta2: "Discuss a Project on WhatsApp",
+        about_title: "Proof Through Real Projects, Not Paper Diplomas.",
+        about_p1: "I am Bashimiki Paul Chris, a full-stack web developer and software builder based in Cameroon. I do not hold a traditional university diploma—instead, I forged every single one of my engineering skills through relentless hands-on practice, building real-world production projects from scratch, debugging complex systems, and solving practical business problems.",
+        about_p2: "Because I learned by doing, my focus is 100% practical: what actually works, what loads fast, and what helps a business owner win customers. Whether a restaurant needs a digital menu that dispatches orders to WhatsApp, a clinic needs an online patient pass system, or an entrepreneur needs a custom web application—I build and ship complete systems that deliver real results.",
+        srv_title: "How I Can Help Your Business Grow",
+        impact_title: "Why Businesses Switch to a Custom BPC Platform",
+        impact_sub: "See the difference between relying only on social media messages versus owning an automated 24/7 digital platform built specifically for your business.",
+        before_badge: "✕ Without a Modern Platform",
+        before_title: "Losing 70% of Impatient Mobile Buyers",
+        after_badge: "✓ With Your Custom BPC Platform",
+        after_title: "Automated 24/7 Orders, Bookings & Credibility",
+        stream_card_title: "Looking for On-Demand Netflix & Crunchyroll Subscriptions?",
+        stream_card_desc: "Visit our dedicated On-Demand Streaming Storefront to get instant 1-month Netflix, Crunchyroll Mega Fan (Ad-Free Anime), or the 'Otaku & Chill' Duo Pack with easy Orange Money & MTN MoMo activation—plus our special VIP Bonus for website clients!",
+        stream_card_cta: "Open Netflix & Crunchyroll Store →",
+        contact_h2: "Request Your Free Live Mockup",
+        contact_sub: "Fill in your details below to send your project request straight to my WhatsApp (+237 698 945 916).",
+        lbl_name: "Your Name",
+        lbl_biz: "Business Name & City",
+        lbl_srv: "Service Needed",
+        lbl_notes: "Project Details",
+        btn_send_brief: "Send Request to Bashimiki Paul Chris on WhatsApp →",
+        store_vip_banner: "🎁 Order Any Custom Business Website & Get 1 Month of Netflix FREE!",
+        store_vip_btn: "Order Website (+ Free Netflix)",
+        store_back_btn: "← Back to Portfolio",
+        store_flash_standby: "Random 48h Flash Drops — Check Back Anytime for the 4,000 FCFA Duo Flash Deal!",
+        store_flash_active_t: "Flash Duo Deal: Netflix + Crunchyroll for Only 4,000 FCFA!",
+        store_flash_active_d: "Save 1,000 FCFA off separate subscriptions before the 48-hour timer expires.",
+        store_flash_claim: "Claim 4,000 FCFA Flash Deal →",
+        store_eyebrow: "On-Demand Digital Streaming Store • Instant Activation",
+        store_h1: "Netflix & Crunchyroll Subscriptions in FCFA",
+        store_sub: "No international credit card needed. Pay easily via Orange Money or MTN MoMo and receive your dedicated account credentials directly on WhatsApp within minutes."
+      },
+      fr: {
+        nav_role: "Développeur Full-Stack & Solutions Digitales",
+        nav_about: "À Propos",
+        nav_services: "Mes Services",
+        nav_work: "8 Projets Live",
+        nav_pricing: "Mon Processus",
+        nav_contact: "Contact",
+        nav_stream_btn: "🎬 Boutique Streaming",
+        hero_badge: "Disponible pour Projets Clients & Freelance • Cameroun & International",
+        hero_h1_1: "Conception de Sites Web Épurés &",
+        hero_h1_2: "Systèmes Digitaux Pour Développer Votre Activité.",
+        hero_p: "Bonjour, je suis Bashimiki Paul Chris. Je conçois et développe des sites web sur-mesure, menus digitaux interactifs, portails médicaux et immobiliers, et outils d'automatisation avec commande directe sur WhatsApp et paiement Mobile Money.",
+        hero_cta1: "Explorer Mes 8 Projets Live",
+        hero_cta2: "Discuter sur WhatsApp",
+        about_title: "La Preuve par les Projets Réels, Pas par un Diplôme Papier.",
+        about_p1: "Je suis Bashimiki Paul Chris, développeur web full-stack basé au Cameroun. Je n'ai pas suivi la voie d'un diplôme universitaire classique : j'ai acquis chacune de mes compétences sur le terrain, en construisant de vrais projets complets, en résolvant des problèmes techniques complexes et en livrant des plateformes fonctionnelles.",
+        about_p2: "Parce que j'ai appris par la pratique, mon approche est 100% orientée résultats : ce qui fonctionne, ce qui charge vite et ce qui vous apporte des clients. Qu'il s'agisse d'un menu digital de commande WhatsApp pour un restaurant, d'un portail de clinique, d'un site immobilier ou d'une application sur-mesure, je livre des systèmes complets.",
+        srv_title: "Mes Services de Développement & Solutions Digitales",
+        impact_title: "Pourquoi Passer à une Plateforme Digitale Sur-Mesure",
+        impact_sub: "Découvrez la différence entre dépendre uniquement des messages sur les réseaux sociaux et posséder une plateforme automatisée 24h/24.",
+        before_badge: "✕ Sans Plateforme Moderne",
+        before_title: "Perte de 70% des Clients Mobiles Impatients",
+        after_badge: "✓ Avec Votre Plateforme BPC Sur-Mesure",
+        after_title: "Commandes, Réservations & Crédibilité 24h/24",
+        stream_card_title: "Vous Cherchez un Abonnement Netflix ou Crunchyroll à la Demande ?",
+        stream_card_desc: "Visitez notre boutique dédiée aux abonnements Streaming pour obtenir 1 mois de Netflix, Crunchyroll Mega Fan (Anime sans pub) ou le Pack Duo 'Otaku & Chill' payables par Orange Money & MTN MoMo — avec 1 mois de Netflix OFFERT pour toute commande de site web !",
+        stream_card_cta: "Ouvrir la Boutique Netflix & Crunchyroll →",
+        contact_h2: "Demander Votre Maquette Gratuite",
+        contact_sub: "Remplissez vos informations ci-dessous pour envoyer votre demande directement sur mon WhatsApp (+237 698 945 916).",
+        lbl_name: "Votre Nom",
+        lbl_biz: "Nom de l'Entreprise & Ville",
+        lbl_srv: "Service Souhaité",
+        lbl_notes: "Détails de Votre Projet",
+        btn_send_brief: "Envoyer Ma Demande sur WhatsApp →",
+        store_vip_banner: "🎁 Commandez N'importe Quel Site Web & Recevez 1 Mois de Netflix GRATUIT !",
+        store_vip_btn: "Commander un Site (+ Netflix Gratuit)",
+        store_back_btn: "← Retour au Portfolio",
+        store_flash_standby: "Ventes Flash Aléatoires 48h — Revenez à tout moment pour l'offre Duo Flash à 4 000 FCFA !",
+        store_flash_active_t: "Offre Flash Duo : Netflix + Crunchyroll à Seulement 4 000 FCFA !",
+        store_flash_active_d: "Économisez 1 000 FCFA avant la fin du compte à rebours de 48 heures.",
+        store_flash_claim: "Profiter de l'Offre Flash 4 000 FCFA →",
+        store_eyebrow: "Boutique Streaming à la Demande • Activation Instantanée",
+        store_h1: "Abonnements Netflix & Crunchyroll en FCFA",
+        store_sub: "Aucune carte bancaire requise. Payez simplement par Orange Money ou MTN MoMo et recevez vos accès dédiés directement sur WhatsApp en quelques minutes."
+      }
+    };
+    function toggleLang() {
+      langMode = langMode === 'en' ? 'fr' : 'en';
+      const d = langDict[langMode];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+    }
+
+    function sendWhatsAppBrief() {
+      const name = (document.getElementById('qName')?.value || '').trim();
+      const phone = (document.getElementById('qPhone')?.value || '').trim();
+      const biz = (document.getElementById('qBiz')?.value || '').trim();
+      const srv = document.getElementById('qDemo')?.value || 'Custom Business Website';
+      const lang = document.getElementById('qPkg')?.value || 'Bilingual (Français & English)';
+      const notes = (document.getElementById('qNotes')?.value || '').trim() || 'Interested in starting with a free interactive live mockup.';
+
+      if (!name || !phone || !biz) {
+        alert('Please fill in your Name, WhatsApp Phone Number, and Business Name & City so we can save your request and prepare your free live mockup.');
+        return;
+      }
+
+      // Save lead to shared CRM store so it appears inside admin-dashboard.html immediately with phone + service demanded
+      try {
+        const store = getCrmStore();
+        const nextId = store.orders.length > 0 ? Math.max(...store.orders.map(o => o.id)) + 1 : 1;
+        const orderCode = 'WEB-' + (1020 + nextId);
+        const leadOrder = {
+          id: nextId,
+          orderCode,
+          clientName: name,
+          countryCode: '',
+          phone,
+          category: 'WEBSITE',
+          serviceDemanded: srv,
+          businessName: biz,
+          preferredLang: lang,
+          projectDetails: notes,
+          planName: `${srv} — ${biz} (${lang})`,
+          basePriceFcfa: 0,
+          discountFcfa: 0,
+          priceFcfa: 0,
+          appliedReferralCode: null,
+          status: 'PENDING_PAYMENT',
+          freeNetflixEligible: true,
+          freeNetflixClaimed: false,
+          accountEmail: '',
+          accountPin: notes.slice(0, 140),
+          createdAt: new Date().toISOString(),
+          activatedAt: null,
+          expiresAt: null
+        };
+        store.orders.unshift(leadOrder);
+        if (!store.notifications) store.notifications = [];
+        store.notifications.unshift({
+          id: Date.now(),
+          type: 'NEW_WEBSITE_REQUEST',
+          customerName: name,
+          customerPhone: phone,
+          referralCode: orderCode,
+          message: `💻 NEW WEBSITE REQUEST (${orderCode}): ${name} (${phone}) requested "${srv}" for ${biz}.`,
+          isRead: false,
+          createdAt: new Date().toISOString()
+        });
+        saveCrmStore(store);
+        fetch(`${API_BASE}/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadOrder)
+        }).catch(() => {});
+      } catch (e) {}
+
+      const msg =
+`Hello Bashimiki Paul Chris (CHRIS TECH)! 👋
+
+I would like to request my *Free Live Mockup* for a project:
+━━━━━━━━━━━━━━━━━━
+• *Client Name:* ${name}
+• *WhatsApp / Phone:* ${phone || 'My current WhatsApp number'}
+• *Business Name & City:* ${biz}
+• *Service Needed:* ${srv}
+• *Preferred Language:* ${lang}
+• *Project Details & Features:*
+${notes}
+━━━━━━━━━━━━━━━━━━
+🎁 *VIP Bonus:* Eligible for 1 Month of Netflix FREE upon website commission!
+
+Looking forward to your reply!`;
+
+      // Show confirmation & exact pre-written message on page
+      const statusBox = document.getElementById('qBriefStatus');
+      const prevEl = document.getElementById('qBriefPreview');
+      if (statusBox && prevEl) {
+        prevEl.textContent = msg;
+        statusBox.classList.remove('hidden');
+      }
+
+      window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // 9. Brew Haven-Inspired Three.js 3D Ambient Background Engine
+    (function initThreeBg() {
+      const canvas = document.getElementById('three-bg');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = 22;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Floating Golden Dust Particles
+      const count = 110;
+      const pGeo = new THREE.BufferGeometry();
+      const pos = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        pos[i * 3] = (Math.random() - 0.5) * 45;
+        pos[i * 3 + 1] = (Math.random() - 0.5) * 30;
+        pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+      const pMat = new THREE.PointsMaterial({
+        color: theme === 'dark' ? 0xd89f76 : 0x8c4f2b,
+        size: 0.13,
+        transparent: true,
+        opacity: theme === 'dark' ? 0.35 : 0.22
+      });
+      const particles = new THREE.Points(pGeo, pMat);
+      scene.add(particles);
+
+      // Subtle 3D Architectural Torus Knot Sculpture on Right Side
+      const sculptureGroup = new THREE.Group();
+      const wireMat = new THREE.MeshPhongMaterial({
+        color: theme === 'dark' ? 0xd89f76 : 0x8c4f2b,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.14
+      });
+      const torusMesh = new THREE.Mesh(new THREE.TorusKnotGeometry(2.6, 0.65, 90, 14), wireMat);
+      sculptureGroup.add(torusMesh);
+      sculptureGroup.position.set(window.innerWidth <= 968 ? 0 : 7, 0.5, -2);
+      scene.add(sculptureGroup);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
+      dirLight.position.set(6, 12, 8);
+      scene.add(dirLight);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+      let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) / 120;
+        mouseY = (e.clientY - window.innerHeight / 2) / 120;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        sculptureGroup.position.x = window.innerWidth <= 968 ? 0 : 7;
+      });
+
+      window.addEventListener('bpcThemeChanged', (e) => {
+        const isDark = e.detail.theme === 'dark';
+        pMat.color.setHex(isDark ? 0xd89f76 : 0x8c4f2b);
+        wireMat.color.setHex(isDark ? 0xd89f76 : 0x8c4f2b);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const arr = particles.geometry.attributes.position.array;
+        for (let i = 0; i < arr.length; i += 3) {
+          arr[i + 1] += 0.01;
+          arr[i] += Math.sin(arr[i + 1] * 0.1) * 0.003;
+          if (arr[i + 1] > 16) arr[i + 1] = -16;
+        }
+        particles.geometry.attributes.position.needsUpdate = true;
+
+        const t = Date.now() * 0.0006;
+        sculptureGroup.rotation.y = t * 0.4;
+        sculptureGroup.rotation.x = Math.sin(t * 0.5) * 0.2;
+
+        targetX += (mouseX - targetX) * 0.05;
+        targetY += (mouseY - targetY) * 0.05;
+        camera.position.x = targetX;
+        camera.position.y = -targetY;
+        camera.lookAt(scene.position);
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // =========================================================================
+    // 10. SPA ROUTER (`/`, `/subscriptions`, `/admin`) & FULL-STACK CRM ENGINE
+    // =========================================================================
+    const API_BASE = 'http://localhost:4000/api';
+    const ADMIN_WA = '237698945916';
+    const ORANGE_MONEY_DISPLAY = '+237 698 945 916 (Bashimiki Paul Chris)';
+
+    const defaultCrmState = {
+      settings: {
+        flashEndsAt: null,
+        crunchyrollCost: 1500,
+        netflixCost: 1800
+      },
+      customers: [
+        {
+          id: 1,
+          name: 'Franck Ndongo',
+          phone: '+237691223344',
+          referralCode: 'FRA-482',
+          validReferralsCount: 3,
+          rewardAvailable: true,
+          totalRewardsRedeemed: 0,
+          createdAt: new Date(Date.now() - 28 * 86400000).toISOString()
+        },
+        {
+          id: 2,
+          name: 'Dr. Clarisse Mballa',
+          phone: '+237677889900',
+          referralCode: 'CLA-719',
+          validReferralsCount: 1,
+          rewardAvailable: false,
+          totalRewardsRedeemed: 0,
+          createdAt: new Date(Date.now() - 10 * 86400000).toISOString()
+        }
+      ],
+      notifications: [
+        {
+          id: 1,
+          type: 'REWARD_UNLOCKED',
+          customerName: 'Franck Ndongo',
+          customerPhone: '+237691223344',
+          referralCode: 'FRA-482',
+          message: '🎉 REWARD UNLOCKED: Franck Ndongo (FRA-482) reached 3/3 valid invites! Eligible for -500 FCFA on Netflix (2,500F) or -300 FCFA on Crunchyroll (1,700F).',
+          isRead: false,
+          createdAt: new Date(Date.now() - 2 * 3600000).toISOString()
+        }
+      ],
+      orders: [
+        {
+          id: 1,
+          orderCode: 'ORD-1021',
+          clientName: 'Franck Ndongo',
+          countryCode: '+237',
+          phone: '691223344',
+          category: 'STREAMING',
+          planName: 'Otaku & Chill Duo Pack (Netflix + Crunchyroll)',
+          priceFcfa: 4500,
+          discountFcfa: 0,
+          appliedReferralCode: null,
+          status: 'ACTIVE',
+          freeNetflixEligible: false,
+          freeNetflixClaimed: false,
+          accountEmail: 'stream.vip1@bpcstudio.cm',
+          accountPin: 'PIN: 4482',
+          createdAt: new Date(Date.now() - 28 * 86400000).toISOString(),
+          activatedAt: new Date(Date.now() - 28 * 86400000).toISOString(),
+          expiresAt: new Date(Date.now() + 2 * 86400000).toISOString()
+        },
+        {
+          id: 2,
+          orderCode: 'ORD-1022',
+          clientName: 'Dr. Clarisse Mballa',
+          countryCode: '+237',
+          phone: '677889900',
+          category: 'WEBSITE',
+          planName: 'Complete Business Flagship Website (+ 1 Month Free Netflix)',
+          priceFcfa: 150000,
+          discountFcfa: 0,
+          appliedReferralCode: null,
+          status: 'ACTIVE',
+          freeNetflixEligible: true,
+          freeNetflixClaimed: true,
+          accountEmail: 'clarisse.bonus@netflix.bpc',
+          accountPin: 'PIN: 9012',
+          createdAt: new Date(Date.now() - 10 * 86400000).toISOString(),
+          activatedAt: new Date(Date.now() - 10 * 86400000).toISOString(),
+          expiresAt: new Date(Date.now() + 20 * 86400000).toISOString()
+        }
+      ]
+    };
+
+    function normalizePhone(cc, num) {
+      return (String(cc || '') + String(num || '')).replace(/[^0-9+]/g, '');
+    }
+
+    function generateLocalReferralCode(name, customers) {
+      const prefix = String(name || 'USR').replace(/[^a-zA-Z]/g, '').toUpperCase().slice(0, 3).padEnd(3, 'X');
+      const used = new Set((customers || []).map(c => c.referralCode));
+      for (let i = 0; i < 40; i++) {
+        const code = `${prefix}-${Math.floor(100 + Math.random() * 900)}`;
+        if (!used.has(code)) return code;
+      }
+      return `${prefix}-${String(Date.now()).slice(-3)}`;
+    }
+
+    function getCrmStore() {
+      try {
+        const raw = localStorage.getItem('bpc_crm_store_v1');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (!parsed.customers) parsed.customers = defaultCrmState.customers;
+          if (!parsed.notifications) parsed.notifications = defaultCrmState.notifications;
+          return parsed;
+        }
+      } catch (e) {}
+      return JSON.parse(JSON.stringify(defaultCrmState));
+    }
+
+    function saveCrmStore(store) {
+      try { localStorage.setItem('bpc_crm_store_v1', JSON.stringify(store)); } catch (e) {}
+    }
+
+    // Detect ?ref=CODE from URL query or hash (#/subscriptions?ref=CODE)
+    function detectIncomingReferralCode() {
+      let code = '';
+      try {
+        const searchParams = new URLSearchParams(window.location.search);
+        code = searchParams.get('ref') || '';
+        if (!code && window.location.hash.includes('?')) {
+          const hashParams = new URLSearchParams(window.location.hash.split('?')[1]);
+          code = hashParams.get('ref') || '';
+        }
+        code = code.trim().toUpperCase();
+        if (code) localStorage.setItem('bpc_saved_ref_code', code);
+        else code = (localStorage.getItem('bpc_saved_ref_code') || '').trim().toUpperCase();
+      } catch (e) {}
+      const banner = document.getElementById('invitedRefBanner');
+      const badge = document.getElementById('invitedRefCodeBadge');
+      if (banner && badge) {
+        if (code) {
+          badge.textContent = code;
+          banner.classList.remove('hidden');
+        } else {
+          banner.classList.add('hidden');
+        }
+      }
+      return code;
+    }
+
+    function clearSavedRefCode() {
+      try { localStorage.removeItem('bpc_saved_ref_code'); } catch (e) {}
+      detectIncomingReferralCode();
+    }
+
+    // Sync with Node.js Backend if running
+    async function syncFromBackend() {
+      try {
+        const res = await fetch(`${API_BASE}/orders`);
+        if (res.ok) {
+          const data = await res.json();
+          const cur = getCrmStore();
+          saveCrmStore({
+            orders: data.orders || cur.orders,
+            settings: data.settings || cur.settings,
+            customers: data.customers || cur.customers,
+            notifications: data.notifications || cur.notifications
+          });
+          updateFlashBannerUI();
+        }
+      } catch (e) {}
+    }
+    syncFromBackend();
+
+    function switchAppRoute(route) {
+      const vp = document.getElementById('view-portfolio');
+      const vs = document.getElementById('view-subscriptions');
+      if (vp) vp.classList.add('hidden');
+      if (vs) vs.classList.add('hidden');
+
+      if (route === 'subscriptions') {
+        if (vs) vs.classList.remove('hidden');
+        updateFlashBannerUI();
+        detectIncomingReferralCode();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        if (vp) vp.classList.remove('hidden');
+      }
+    }
+
+    window.addEventListener('hashchange', () => {
+      const h = window.location.hash;
+      if (h.startsWith('#/subscriptions')) switchAppRoute('subscriptions');
+      else if (h === '#/') switchAppRoute('portfolio');
+    });
+    if (window.location.hash.startsWith('#/subscriptions') || window.location.search.includes('ref=')) {
+      switchAppRoute('subscriptions');
+    }
+
+    // Dynamic Plan Order Helpers (Automatically apply 2-Day Discount when Admin Countdown is Live)
+    function isPromoCountdownActive() {
+      const store = getCrmStore();
+      const endsAt = store.settings?.flashEndsAt ? new Date(store.settings.flashEndsAt).getTime() : 0;
+      return endsAt > Date.now();
+    }
+
+    function orderNetflixCard() {
+      if (isPromoCountdownActive()) {
+        openOrderModal('STREAMING', 'Netflix (1 Month — 2-Day Promo -500 FCFA)', 2500, false);
+      } else {
+        openOrderModal('STREAMING', 'Netflix (1 Month On Demand)', 3000, false);
+      }
+    }
+
+    function orderCrunchyrollCard() {
+      if (isPromoCountdownActive()) {
+        openOrderModal('STREAMING', 'Crunchyroll (1 Month — 2-Day Promo -300 FCFA)', 1700, false);
+      } else {
+        openOrderModal('STREAMING', 'Crunchyroll (1 Month On Demand)', 2000, false);
+      }
+    }
+
+    function orderDuoCard() {
+      if (isPromoCountdownActive()) {
+        openOrderModal('STREAMING', '2-Day Promo Duo Pack (Netflix + Crunchyroll)', 4000, false);
+      } else {
+        openOrderModal('STREAMING', 'Otaku & Chill Duo Pack (Netflix + Crunchyroll)', 4500, false);
+      }
+    }
+
+    // 2-Day Discount Banner Click Handler -> Immediately Notifies Admin Dashboard + Opens Promo Claim -> Notifies Owner WhatsApp
+    function handlePromoBannerClick(sourceLabel) {
+      const store = getCrmStore();
+      if (!store.notifications) store.notifications = [];
+      const timeStr = new Date().toLocaleTimeString();
+      store.notifications.unshift({
+        id: Date.now(),
+        type: 'PROMO_BANNER_CLICK',
+        customerName: 'Storefront Visitor',
+        customerPhone: '',
+        referralCode: '2DAY-PROMO',
+        message: `🔥 2-DAY DISCOUNT BANNER CLICKED (${timeStr}): A visitor clicked "${sourceLabel}" to claim the -500F Netflix / -300F Crunchyroll deal!`,
+        isRead: false,
+        createdAt: new Date().toISOString()
+      });
+      saveCrmStore(store);
+
+      switchAppRoute('subscriptions');
+      openOrderModal('STREAMING', 'Netflix (2-Day Discount -500 FCFA)', 2500, false, true);
+    }
+
+    function selectPromoModalPlan(planName, priceFcfa) {
+      pendingOrderDraft.planName = planName;
+      pendingOrderDraft.basePriceFcfa = priceFcfa;
+      pendingOrderDraft.priceFcfa = priceFcfa;
+      document.getElementById('ordModalPlan').textContent = planName;
+      document.getElementById('ordModalPrice').textContent = Number(priceFcfa).toLocaleString() + ' FCFA';
+      validateModalReferralCode();
+    }
+
+    // Order Capture Modal Logic + Live 3-Invite Referral Validation
+    let pendingOrderDraft = { category: 'STREAMING', planName: '', basePriceFcfa: 3000, priceFcfa: 3000, discountFcfa: 0, freeNetflixEligible: false, appliedReferralCode: '', fromPromoBanner: false };
+
+    function openOrderModal(category, planName, priceFcfa, freeNetflixEligible, fromPromoBanner) {
+      pendingOrderDraft = { category, planName, basePriceFcfa: priceFcfa, priceFcfa, discountFcfa: 0, freeNetflixEligible, appliedReferralCode: '', fromPromoBanner: Boolean(fromPromoBanner) };
+      document.getElementById('ordModalCatBadge').textContent = fromPromoBanner
+        ? '🔥 2-DAY DISCOUNT CLAIM (-500F / -300F)'
+        : (category === 'WEBSITE' ? 'WEBSITE COMMISSION + FREE NETFLIX' : 'ON-DEMAND STREAMING');
+      document.getElementById('ordModalPlan').textContent = planName;
+      document.getElementById('ordModalPrice').textContent = Number(priceFcfa).toLocaleString() + ' FCFA';
+      const promoPicker = document.getElementById('ordPromoPlanPicker');
+      if (promoPicker) promoPicker.classList.toggle('hidden', !fromPromoBanner);
+      const bonusEl = document.getElementById('ordModalBonusNote');
+      if (freeNetflixEligible) bonusEl.classList.remove('hidden');
+      else bonusEl.classList.add('hidden');
+      const savedRef = detectIncomingReferralCode();
+      const refInput = document.getElementById('ordReferralInput');
+      if (refInput) refInput.value = savedRef || '';
+      document.getElementById('orderCaptureModal').classList.remove('hidden');
+      validateModalReferralCode();
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderCaptureModal').classList.add('hidden');
+    }
+
+    function validateModalReferralCode() {
+      const refEl = document.getElementById('ordReferralInput');
+      const fbEl = document.getElementById('ordRefFeedback');
+      const priceEl = document.getElementById('ordModalPrice');
+      if (!refEl || !fbEl || !priceEl) return;
+
+      const code = refEl.value.trim().toUpperCase();
+      const fullPhone = normalizePhone(document.getElementById('ordCountryCode')?.value, document.getElementById('ordPhoneNum')?.value);
+      pendingOrderDraft.discountFcfa = 0;
+      pendingOrderDraft.priceFcfa = pendingOrderDraft.basePriceFcfa;
+      pendingOrderDraft.appliedReferralCode = code;
+
+      if (!code) {
+        fbEl.classList.add('hidden');
+        priceEl.textContent = Number(pendingOrderDraft.basePriceFcfa).toLocaleString() + ' FCFA';
+        return;
+      }
+
+      const store = getCrmStore();
+      const owner = (store.customers || []).find(c => c.referralCode === code);
+      if (!owner) {
+        fbEl.className = 'mt-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30';
+        fbEl.textContent = `✕ Code "${code}" not recognized yet. Leave blank if you don't have one.`;
+        priceEl.textContent = Number(pendingOrderDraft.basePriceFcfa).toLocaleString() + ' FCFA';
+        return;
+      }
+
+      const planLower = pendingOrderDraft.planName.toLowerCase();
+      const isNetflix = planLower.includes('netflix') && !planLower.includes('duo');
+      const isCrunchy = planLower.includes('crunchy') && !planLower.includes('duo');
+
+      if (owner.rewardAvailable && (isNetflix || isCrunchy) && (!fullPhone || owner.phone === fullPhone)) {
+        const disc = isNetflix ? 500 : 300;
+        pendingOrderDraft.discountFcfa = disc;
+        pendingOrderDraft.priceFcfa = Math.max(0, pendingOrderDraft.basePriceFcfa - disc);
+        fbEl.className = 'mt-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/50';
+        fbEl.textContent = `🎉 3-Invite Reward Applied (${owner.name})! Instant -${disc} FCFA discount unlocked: ${pendingOrderDraft.basePriceFcfa.toLocaleString()}F → ${pendingOrderDraft.priceFcfa.toLocaleString()} FCFA!`;
+        priceEl.innerHTML = `<span class="line-through text-sm opacity-60 mr-1.5">${pendingOrderDraft.basePriceFcfa.toLocaleString()}F</span>${pendingOrderDraft.priceFcfa.toLocaleString()} FCFA`;
+      } else if (fullPhone && owner.phone === fullPhone) {
+        fbEl.className = 'mt-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30';
+        fbEl.textContent = `ℹ️ Your code ${code} currently has ${owner.validReferralsCount}/3 paid invites. Reach 3/3 to unlock -500F Netflix / -300F Crunchyroll!`;
+        priceEl.textContent = Number(pendingOrderDraft.basePriceFcfa).toLocaleString() + ' FCFA';
+      } else {
+        fbEl.className = 'mt-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
+        fbEl.textContent = `✓ Valid friend invite from ${owner.name} (${code})! They will earn +1 invite credit once your payment is verified.`;
+        priceEl.textContent = Number(pendingOrderDraft.basePriceFcfa).toLocaleString() + ' FCFA';
+      }
+    }
+
+    async function submitOrderAndRedirect() {
+      const clientName = document.getElementById('ordClientName').value.trim();
+      const countryCode = document.getElementById('ordCountryCode').value;
+      const phone = document.getElementById('ordPhoneNum').value.trim();
+      if (!clientName || !phone) {
+        alert('Please enter your Full Name and WhatsApp Phone Number.');
+        return;
+      }
+
+      validateModalReferralCode();
+      const store = getCrmStore();
+      const nextId = store.orders.length > 0 ? Math.max(...store.orders.map(o => o.id)) + 1 : 1;
+      const orderCode = 'ORD-' + (1020 + nextId);
+
+      const newOrder = {
+        id: nextId,
+        orderCode,
+        clientName,
+        countryCode,
+        phone,
+        category: pendingOrderDraft.category,
+        planName: pendingOrderDraft.planName,
+        basePriceFcfa: pendingOrderDraft.basePriceFcfa,
+        discountFcfa: pendingOrderDraft.discountFcfa || 0,
+        priceFcfa: pendingOrderDraft.priceFcfa,
+        appliedReferralCode: pendingOrderDraft.appliedReferralCode || null,
+        status: 'PENDING_PAYMENT',
+        freeNetflixEligible: pendingOrderDraft.freeNetflixEligible,
+        freeNetflixClaimed: false,
+        accountEmail: '',
+        accountPin: '',
+        createdAt: new Date().toISOString(),
+        activatedAt: null,
+        expiresAt: null
+      };
+
+      store.orders.unshift(newOrder);
+      if (!store.notifications) store.notifications = [];
+      store.notifications.unshift({
+        id: Date.now(),
+        type: pendingOrderDraft.fromPromoBanner ? 'PROMO_BANNER_CLAIM' : 'NEW_ORDER_ALERT',
+        customerName: clientName,
+        customerPhone: `${countryCode} ${phone}`,
+        referralCode: orderCode,
+        message: pendingOrderDraft.fromPromoBanner
+          ? `🔥 2-DAY PROMO CLAIMED (${orderCode}): ${clientName} (${countryCode} ${phone}) clicked the 2-Day Discount Banner & ordered ${newOrder.planName} (${newOrder.priceFcfa.toLocaleString()} FCFA)!`
+          : `🛒 NEW ORDER (${orderCode}): ${clientName} (${countryCode} ${phone}) requested ${newOrder.planName} (${newOrder.priceFcfa.toLocaleString()} FCFA).`,
+        isRead: false,
+        createdAt: new Date().toISOString()
+      });
+      saveCrmStore(store);
+
+      // Post to Node.js backend if running
+      try {
+        await fetch(`${API_BASE}/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder)
+        });
+      } catch (e) {}
+
+      // Ask permission for future browser promo push alerts cleanly on user gesture
+      try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (e) {}
+
+      closeOrderModal();
+
+      const promoBannerLine = pendingOrderDraft.fromPromoBanner ? `\n🔥 *Source:* Clicked 2-Day Discount Countdown Banner!` : '';
+      const bonusLine = newOrder.freeNetflixEligible ? `\n🎁 *VIP Bonus:* Eligible for 1 Month of Netflix FREE!` : '';
+      const refLine = newOrder.appliedReferralCode
+        ? `\n🎟️ *Referral Code:* ${newOrder.appliedReferralCode}${newOrder.discountFcfa > 0 ? ` (-${newOrder.discountFcfa} FCFA Reward Applied!)` : ''}`
+        : '';
+      const waMsg = `Hello Bashimiki Paul Chris (CHRIS TECH)! 👋\n\nNew Order Request:\n• *Order ID:* ${orderCode}\n• *Client Name:* ${clientName}\n• *WhatsApp / Phone:* ${countryCode} ${phone}\n• *Service / Plan:* ${newOrder.planName}\n• *Amount:* ${newOrder.priceFcfa.toLocaleString()} FCFA${promoBannerLine}${refLine}${bonusLine}\n\n💳 *Payment Instruction:* I am sending the payment to your Orange Money / MTN MoMo number (${ORANGE_MONEY_DISPLAY}) and will reply here with a screenshot (capture) of my transaction!`;
+      window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMsg)}`, '_blank');
+    }
+
+    // 2-Day Admin-Activated Discount Countdown UI + Live Cross-Tab & Native Browser Broadcast Notification
+    let dismissedPromoKey = '';
+    let lastNotifiedPromoIso = '';
+    function dismissPromoPopup() {
+      const store = getCrmStore();
+      dismissedPromoKey = store.settings?.flashEndsAt || 'dismissed';
+      const toast = document.getElementById('livePromoPopupToast');
+      if (toast) toast.style.display = 'none';
+    }
+
+    function triggerBrowserPromoNotification(endsAtIso) {
+      if (!endsAtIso || lastNotifiedPromoIso === endsAtIso) return;
+      lastNotifiedPromoIso = endsAtIso;
+      try {
+        if ('Notification' in window && Notification.permission === 'granted') {
+          new Notification('🔥 CHRIS TECH 2-Day Discount LIVE!', {
+            body: 'Subscribe within 48 hours for Netflix 2,500 FCFA (-500F) & Crunchyroll 1,700 FCFA (-300F)!'
+          });
+        }
+      } catch (e) {}
+    }
+
+    function updateFlashBannerUI() {
+      const store = getCrmStore();
+      const endsAtIso = store.settings?.flashEndsAt || null;
+      const endsAt = endsAtIso ? new Date(endsAtIso).getTime() : 0;
+      const diff = endsAt - Date.now();
+      const ac = document.getElementById('flashBannerActive');
+      const gBar = document.getElementById('globalPromoAlertBar');
+      const gTimer = document.getElementById('globalPromoTimerText');
+      const toast = document.getElementById('livePromoPopupToast');
+      const toastTimer = document.getElementById('toastPromoTimer');
+
+      const pNet = document.getElementById('priceNetflixDisplay');
+      const bNet = document.getElementById('btnNetflixOrder');
+      const bgNet = document.getElementById('badgeNetflixPromo');
+      const pCru = document.getElementById('priceCrunchyDisplay');
+      const bCru = document.getElementById('btnCrunchyOrder');
+      const bgCru = document.getElementById('badgeCrunchyPromo');
+      const pDuo = document.getElementById('priceDuoDisplay');
+      const bDuo = document.getElementById('btnDuoOrder');
+      const bgDuo = document.getElementById('badgeDuoPromo');
+
+      if (diff > 0) {
+        const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
+        const hrs = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+        const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        const compact = `${days}d ${hrs}h ${mins}m ${secs}s`;
+
+        if (ac) ac.classList.remove('hidden');
+        if (gBar) gBar.classList.remove('hidden');
+        if (gTimer) gTimer.textContent = compact;
+        if (toastTimer) toastTimer.textContent = compact;
+        if (toast && dismissedPromoKey !== endsAtIso) toast.style.display = 'block';
+        triggerBrowserPromoNotification(endsAtIso);
+
+        const dEl = document.getElementById('cdDays');
+        const hEl = document.getElementById('cdHrs');
+        const mEl = document.getElementById('cdMin');
+        const sEl = document.getElementById('cdSec');
+        if (dEl) dEl.textContent = days;
+        if (hEl) hEl.textContent = hrs;
+        if (mEl) mEl.textContent = mins;
+        if (sEl) sEl.textContent = secs;
+
+        // Live Discounted Prices (-500 FCFA Netflix, -300 FCFA Crunchyroll, 4,000F Duo)
+        if (pNet) pNet.innerHTML = `2,500 FCFA <span class="text-sm font-normal line-through opacity-60">3,000F</span>`;
+        if (bNet) bNet.textContent = 'Order Netflix Promo (2,500 FCFA) →';
+        if (bgNet) { bgNet.textContent = '🔥 -500 FCFA'; bgNet.className = 'px-2.5 py-1 rounded-full bg-rose-600 text-white mono text-[11px] font-extrabold animate-pulse'; }
+
+        if (pCru) pCru.innerHTML = `1,700 FCFA <span class="text-sm font-normal line-through opacity-60">2,000F</span>`;
+        if (bCru) bCru.textContent = 'Order Crunchyroll Promo (1,700 FCFA) →';
+        if (bgCru) { bgCru.textContent = '🔥 -300 FCFA'; bgCru.className = 'px-2.5 py-1 rounded-full bg-orange-500 text-slate-950 mono text-[11px] font-extrabold animate-pulse'; }
+
+        if (pDuo) pDuo.innerHTML = `4,000 FCFA <span class="text-sm font-normal line-through opacity-60">5,000F</span>`;
+        if (bDuo) bDuo.textContent = 'Order 2-Day Promo Duo (4,000 FCFA) →';
+        if (bgDuo) bgDuo.textContent = '🔥 SAVE 1,000 FCFA';
+      } else {
+        if (ac) ac.classList.add('hidden');
+        if (gBar) gBar.classList.add('hidden');
+        if (toast) toast.style.display = 'none';
+
+        if (pNet) pNet.innerHTML = `3,000 FCFA <span class="text-xs font-normal" style="color: var(--text-muted);">/ 30 Days</span>`;
+        if (bNet) bNet.textContent = 'Order Netflix (3,000 FCFA) →';
+        if (bgNet) { bgNet.textContent = '● Instant'; bgNet.className = 'px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 mono text-[11px] font-bold'; }
+
+        if (pCru) pCru.innerHTML = `2,000 FCFA <span class="text-xs font-normal" style="color: var(--text-muted);">/ 30 Days</span>`;
+        if (bCru) bCru.textContent = 'Order Crunchyroll (2,000 FCFA) →';
+        if (bgCru) { bgCru.textContent = '● Instant'; bgCru.className = 'px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 mono text-[11px] font-bold'; }
+
+        if (pDuo) pDuo.innerHTML = `4,500 FCFA <span class="text-xs font-normal line-through opacity-60">5,000 FCFA</span>`;
+        if (bDuo) bDuo.textContent = 'Order Duo Pack (4,500 FCFA) →';
+        if (bgDuo) bgDuo.textContent = '★ SAVE 500 FCFA';
+      }
+    }
+
+    // Listen in real time when Admin activates/stops the 2-Day Countdown from admin-dashboard.html!
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'bpc_crm_store_v1') {
+        dismissedPromoKey = '';
+        updateFlashBannerUI();
+      }
+    });
+    setInterval(updateFlashBannerUI, 1000);
+    setInterval(syncFromBackend, 15000);
+    updateFlashBannerUI();
+
+    // =========================================================================
+    // 11. Paul_x.01 100% REACTIVE TRAINED CHATBOT ENGINE (EN & FR)
+    // =========================================================================
+    function togglePaulXChat(forceOpen) {
+      const win = document.getElementById('paulXChatWindow');
+      if (!win) return;
+      const isOpen = win.style.display === 'flex';
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !isOpen;
+      win.style.display = shouldOpen ? 'flex' : 'none';
+      if (shouldOpen) {
+        setTimeout(() => {
+          const inp = document.getElementById('paulXInput');
+          if (inp) inp.focus();
+        }, 60);
+      }
+    }
+
+    function resetPaulXChat() {
+      const box = document.getElementById('paulXMessages');
+      if (!box) return;
+      box.innerHTML = `
+        <div class="flex items-start gap-2">
+          <div class="w-6 h-6 rounded-lg bg-[#e5a97c]/20 border border-[#e5a97c]/50 text-[#e5a97c] font-bold flex items-center justify-center shrink-0 text-[10px] mono">PX</div>
+          <div class="p-3 rounded-2xl rounded-tl-sm bg-white/10 border border-white/10 text-zinc-100 leading-relaxed">
+            👋 Chat cleared! I'm <strong>Paul_x.01</strong>. Ask me anything about <strong>CHRIS TECH</strong>, <strong>Netflix</strong>, <strong>Crunchyroll</strong>, the <strong>2-Day Discount Countdown</strong>, or ordering a website!
+          </div>
+        </div>`;
+    }
+
+    function appendPaulXBubble(sender, htmlContent, bubbleId) {
+      const box = document.getElementById('paulXMessages');
+      if (!box) return null;
+      const row = document.createElement('div');
+      if (bubbleId) row.id = bubbleId;
+      if (sender === 'user') {
+        row.className = 'flex justify-end';
+        row.innerHTML = `<div class="max-w-[82%] p-3 rounded-2xl rounded-tr-sm bg-[#b47346] text-white font-medium leading-relaxed shadow">${htmlContent}</div>`;
+      } else {
+        row.className = 'flex items-start gap-2';
+        row.innerHTML = `<div class="w-6 h-6 rounded-lg bg-[#e5a97c]/20 border border-[#e5a97c]/50 text-[#e5a97c] font-bold flex items-center justify-center shrink-0 text-[10px] mono">PX</div><div class="max-w-[86%] p-3 rounded-2xl rounded-tl-sm bg-white/10 border border-white/10 text-zinc-100 leading-relaxed shadow">${htmlContent}</div>`;
+      }
+      box.appendChild(row);
+      box.scrollTop = box.scrollHeight;
+      return row;
+    }
+
+    function getPaulXReply(raw) {
+      const q = raw.toLowerCase();
+      const isFr = /\b(bonjour|salut|prix|combien|payer|comment|site|parrainage|gratuit|qui|contact|garantie|promo|reduction)\b/.test(q);
+      const promoLive = isPromoCountdownActive();
+
+      if (/(flash|48h|2-day|2 day|countdown|promo|discount|reduc|500|300|2500|1700|4000)/.test(q)) {
+        if (promoLive) {
+          return `🔥 <strong>YES! The 2-Day Discount Countdown is LIVE RIGHT NOW!</strong><br/>Subscribe before the clock hits zero:<br/>• <strong>Netflix 4K:</strong> <span class="text-rose-400 font-bold">2,500 FCFA</span> (-500 FCFA!)<br/>• <strong>Crunchyroll Mega Fan:</strong> <span class="text-orange-400 font-bold">1,700 FCFA</span> (-300 FCFA!)<br/>• <strong>Duo Pack (Both):</strong> <span class="text-amber-300 font-bold">4,000 FCFA</span>!<br/><button type="button" onclick="togglePaulXChat(false); switchAppRoute('subscriptions');" class="mt-2 px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-[11px] cursor-pointer">Claim Promo Now →</button>`;
+        }
+        return `🔥 <strong>2-Day Discount Countdown (-500F Netflix / -300F Crunchyroll):</strong><br/>Whenever Bashimiki Paul Chris activates a 2-day promo event from his Admin Dashboard, a live <code>DAYS : HRS : MIN : SEC</code> banner appears at the top of the Streaming Storefront dropping <strong>Netflix to 2,500 FCFA (-500F)</strong> and <strong>Crunchyroll to 1,700 FCFA (-300F)</strong>!<br/><button type="button" onclick="togglePaulXChat(false); switchAppRoute('subscriptions');" class="mt-2 px-3 py-1.5 rounded-lg bg-[#b47346] text-white font-bold text-[11px] cursor-pointer">Open Streaming Store →</button>`;
+      }
+
+      if (/(netflix|crunchyroll|price|prix|combien|tarif|cost|duo|otaku|plan|abonnement|stream)/.test(q)) {
+        const netP = promoLive ? '2,500 FCFA (🔥 2-Day Promo!)' : '3,000 FCFA';
+        const cruP = promoLive ? '1,700 FCFA (🔥 2-Day Promo!)' : '2,000 FCFA';
+        const duoP = promoLive ? '4,000 FCFA (🔥 2-Day Promo!)' : '4,500 FCFA';
+        return isFr
+          ? `🎬 <strong>Tarifs Streaming CHRIS TECH (30 jours) :</strong><br/>• <strong>Netflix 4K (Profil privé + PIN) :</strong> ${netP}<br/>• <strong>Crunchyroll Mega Fan :</strong> ${cruP}<br/>• <strong>Pack Duo "Otaku & Chill" :</strong> ${duoP}<br/><button type="button" onclick="togglePaulXChat(false); switchAppRoute('subscriptions');" class="mt-2 px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-[11px] cursor-pointer">Ouvrir la Boutique →</button>`
+          : `🎬 <strong>CHRIS TECH On-Demand Streaming Prices (30 Days):</strong><br/>• <strong>Netflix Ultra HD 4K (Private Profile + PIN):</strong> ${netP}<br/>• <strong>Crunchyroll Mega Fan (Ad-Free Anime):</strong> ${cruP}<br/>• <strong>"Otaku & Chill" Duo Pack (Both):</strong> ${duoP}<br/><button type="button" onclick="togglePaulXChat(false); switchAppRoute('subscriptions');" class="mt-2 px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-[11px] cursor-pointer">Open Streaming Store →</button>`;
+      }
+
+      if (/(refer|invite|parrain|code|3\/3|reward|loyalty|fidel)/.test(q)) {
+        return isFr
+          ? `🏆 <strong>Système de Parrainage 3 Invités :</strong><br/>Après activation de votre premier abonnement payé, vous recevez un code unique (ex: <code>PAU-482</code>). Invitez <strong>3 amis</strong> pour débloquer <strong>-500 FCFA sur Netflix (2 500F)</strong> ou <strong>-300 FCFA sur Crunchyroll (1 700F)</strong> !`
+          : `🏆 <strong>3-Invite Referral & Loyalty Program:</strong><br/>After your first paid subscription is activated, you get a unique Referral Code (e.g., <code>PAU-482</code>). Invite <strong>3 new friends</strong> who activate a plan to unlock <strong>-500 FCFA off Netflix (2,500F)</strong> or <strong>-300 FCFA off Crunchyroll (1,700F)</strong>!`;
+      }
+
+      if (/(pay|orange|mtn|momo|money|card|carte|fcfa|sendwave|taptap|capture|screenshot)/.test(q)) {
+        return isFr
+          ? `💳 <strong>Paiement Orange Money / MTN MoMo :</strong><br/>Envoyez le montant en FCFA au <strong>+237 698 945 916 (Bashimiki Paul Chris)</strong> et envoyez la capture sur WhatsApp. Activation garantie en <strong>5 minutes</strong> !`
+          : `💳 <strong>Easy Local & International Payment:</strong><br/>No credit card needed! Pay via <strong>Orange Money or MTN MoMo</strong> to <strong>+237 698 945 916 (Bashimiki Paul Chris)</strong> and send your payment screenshot on WhatsApp. Delivery takes under <strong>5 minutes</strong>!`;
+      }
+
+      if (/(free|gratuit|bonus|vip|website.*netflix|netflix.*website)/.test(q)) {
+        return `🎁 <strong>VIP Website Client Bonus:</strong><br/>Every client who commissions a custom business website, digital menu, or web portal from <strong>CHRIS TECH</strong> automatically gets <strong>1 Full Month of Netflix Ultra HD 4K FREE (0 FCFA)</strong>!`;
+      }
+
+      if (/(device|tv|phone|iphone|android|laptop|pc|smart|download|offline|warranty|garantie|pin|private)/.test(q)) {
+        return `📱 <strong>Devices, Privacy & 30-Day Guarantee:</strong><br/>• Works on <strong>Android, iPhone, Laptops, Tablets, Smart TVs & Consoles</strong>.<br/>• Dedicated private Netflix profile locked with your own <strong>4-digit PIN</strong>.<br/>• Full <strong>30-day warranty & instant WhatsApp support</strong>.`;
+      }
+
+      if (/(who|qui|about|paul|chris|diploma|diplome|based|yaounde|cameroon|story|bio)/.test(q)) {
+        return `👨‍💻 <strong>About Bashimiki Paul Chris (CHRIS TECH):</strong><br/>Based in <strong>Yaoundé, Cameroon</strong>, Bashimiki Paul Chris is a self-taught Full-Stack Developer who built every skill through real production projects rather than a paper diploma. Tech stack: Vue 3, React, Tailwind CSS, Node.js, SQLite, Python & Three.js.`;
+      }
+
+      if (/(service|web|site|build|develop|app|menu|clinic|real estate|scrap|automation|mockup|delivery|time|hours)/.test(q)) {
+        return `💻 <strong>CHRIS TECH Web & Software Services:</strong><br/>1. Custom Business Websites & Landing Pages<br/>2. Restaurant/Café Digital Menus + WhatsApp Cart<br/>3. Clinics, Real Estate & FinTech SaaS Portals<br/>4. Python/Node.js Web Scraping & Automation<br/>5. Bug Fixing & Redesign<br/><br/>⚡ Turnaround: <strong>48–72 hours</strong> + <strong>Free Live Mockup First</strong> + <strong>1 Month Free Netflix</strong>!<br/><a href="#contact" onclick="togglePaulXChat(false); switchAppRoute('portfolio');" class="inline-block mt-2 px-3 py-1.5 rounded-lg bg-[#b47346] text-white font-bold text-[11px]">Request Free Mockup →</a>`;
+      }
+
+      if (/(project|demo|portfolio|brew|aurelia|ndamen|tandoori|prestige|medicare|maison|nexapay)/.test(q)) {
+        return `🚀 <strong>8 Live Playable Projects:</strong><br/>Test <strong>Brew Haven 3D Café</strong>, <strong>Aurelia Delacroix 3D Art Gallery</strong>, <strong>Maison Ndamen</strong>, <strong>Le Tandoori Yaoundé</strong>, <strong>Prestige Immo</strong>, <strong>MediCare+ Clinic</strong>, <strong>Maison M Hair Salon</strong>, and <strong>NexaPay FinTech SaaS</strong> live on this page!`;
+      }
+
+      if (/(contact|email|phone|whatsapp|github|number|numero|call|reach)/.test(q)) {
+        return `📞 <strong>Direct Contact — CHRIS TECH (Bashimiki Paul Chris):</strong><br/>• <strong>WhatsApp / Phone:</strong> <a href="https://wa.me/237698945916" target="_blank" class="underline text-amber-300">+237 698 945 916</a><br/>• <strong>Email:</strong> <a href="mailto:bashimikipaulchris992@gmail.com" class="underline text-amber-300">bashimikipaulchris992@gmail.com</a><br/>• <strong>GitHub:</strong> <a href="https://github.com/paulChris410" target="_blank" class="underline text-amber-300">github.com/paulChris410</a><br/>• <strong>Location:</strong> Yaoundé, Cameroon`;
+      }
+
+      if (/(hi|hello|hey|bonjour|salut|yo|good|merci|thank)/.test(q)) {
+        return isFr
+          ? `👋 Bonjour ! Je suis <strong>Paul_x.01</strong>. Comment puis-je vous aider aujourd'hui ? Demandez-moi les tarifs <strong>Netflix / Crunchyroll</strong>, le <strong>paiement Orange Money / MTN MoMo</strong>, la <strong>promo 2 jours</strong>, ou nos <strong>services web</strong> !`
+          : `👋 Hello! I'm <strong>Paul_x.01</strong>. How can I help you today? Ask me about <strong>Netflix & Crunchyroll prices</strong>, <strong>Orange Money / MTN MoMo</strong>, the <strong>2-Day Discount Countdown</strong>, or <strong>CHRIS TECH web services</strong>!`;
+      }
+
+      return `🤖 Thanks for asking! Here is how <strong>CHRIS TECH</strong> can help you immediately:<br/>• <strong>Streaming:</strong> Netflix (${promoLive ? '2,500F Promo!' : '3,000F'}), Crunchyroll (${promoLive ? '1,700F Promo!' : '2,000F'}), Duo Pack (${promoLive ? '4,000F Promo!' : '4,500F'})<br/>• <strong>Web Development:</strong> Free live mockup first, 48–72h delivery + 1 Month Free Netflix<br/>• <strong>WhatsApp Direct:</strong> <a href="https://wa.me/237698945916" target="_blank" class="underline text-amber-300">+237 698 945 916</a>`;
+    }
+
+    function askPaulX(questionText) {
+      const q = String(questionText || '').trim();
+      if (!q) return;
+      togglePaulXChat(true);
+      appendPaulXBubble('user', q.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+      const typingId = 'px-typing-' + Date.now();
+      appendPaulXBubble('bot', '<span class="italic opacity-75 animate-pulse">Paul_x.01 is typing...</span>', typingId);
+      setTimeout(() => {
+        const tEl = document.getElementById(typingId);
+        if (tEl) tEl.remove();
+        appendPaulXBubble('bot', getPaulXReply(q));
+      }, 360);
+    }
+
+    function sendPaulXInput() {
+      const inp = document.getElementById('paulXInput');
+      if (!inp) return;
+      const val = inp.value.trim();
+      if (!val) return;
+      inp.value = '';
+      askPaulX(val);
+    }
+  </script>
+</body>
+</html>
