@@ -314,7 +314,8 @@
     </div>
   </div>
   <script>
-    const API_BASE = 'http://localhost:4000/api';
+    const IS_LOCAL_EXPRESS = window.location.origin === 'http://localhost:4000';
+    const API_BASE = IS_LOCAL_EXPRESS ? '/api' : null;
     const STORE_KEY = 'bpc_crm_store_v1';
     const VALID_PASSCODES = ['admin237', 'christech2026', 'paulchris2026'];
 
@@ -402,6 +403,7 @@
     }
 
     async function syncWithServer() {
+      if (!API_BASE) return;
       try {
         const res = await fetch(`${API_BASE}/orders`);
         if (res.ok) {
@@ -453,11 +455,13 @@
       store.settings.flashEndsAt = active ? new Date(Date.now() + 48 * 3600 * 1000).toISOString() : null;
       saveStore(store);
 
-      fetch(`${API_BASE}/settings/flash-drop`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ active })
-      }).catch(() => {});
+      if (API_BASE) {
+        fetch(`${API_BASE}/settings/flash-drop`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ active })
+        }).catch(() => {});
+      }
 
       updateAdminCountdown();
       renderAdminCrm();
@@ -633,7 +637,9 @@
       }
 
       saveStore(store);
-      fetch(`${API_BASE}/admin/orders/${id}/approve`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ACTIVATE_30_DAYS' }) }).catch(() => {});
+      if (API_BASE) {
+        fetch(`${API_BASE}/admin/orders/${id}/approve`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'ACTIVATE_30_DAYS' }) }).catch(() => {});
+      }
       renderAdminCrm();
     }
 

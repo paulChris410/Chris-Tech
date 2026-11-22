@@ -1,8 +1,15 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "dist",
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "version": 2,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/how%20to%20make%20money/portfolio.html",
+      "permanent": false
+    },
+    {
+      "source": "/subscriptions",
+      "destination": "/how%20to%20make%20money/portfolio.html#/subscriptions",
+      "permanent": false
+    }
   ]
 }
