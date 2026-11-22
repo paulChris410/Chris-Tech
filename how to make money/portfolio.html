@@ -14,7 +14,6 @@
   <meta property="og:image" content="./favicon.png" />
   <meta property="og:type" content="website" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -415,8 +414,8 @@
           </div>
         </div>
 
-        <!-- Right 5 Cols: Floating Interactive Showcase Card -->
-        <aside class="lg:col-span-5 float-slow">
+        <!-- Right 5 Cols: Clean Interactive Showcase Card (No Floating Bob) -->
+        <aside class="lg:col-span-5">
           <div class="glass-card p-5 sm:p-6">
             <div class="flex items-center justify-between pb-3 mb-4 border-b border-[var(--panel-border)]">
               <span class="text-xs font-semibold" style="color: var(--accent);">✦ Featured Live Platforms</span>
@@ -1960,199 +1959,178 @@ Looking forward to your reply!`;
       window.open(`https://wa.me/237698945916?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // 9. iPhone 12 Pro & Desktop 60fps 3D Ambient Background Engine (Three.js + Automatic 2D Canvas 3D Fallback)
-    (function initThreeBg() {
+    // 9. CHRIS TECH High-Tech Cyber-Grid Horizon & Neural Circuit Constellation Engine (60fps Native Canvas — iPhone & Desktop Crisp)
+    (function initTechAnimation() {
       const canvas = document.getElementById('three-bg');
       if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-      function start2DCanvasFallback() {
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        let W = canvas.width = window.innerWidth;
-        let H = canvas.height = window.innerHeight;
-        window.addEventListener('resize', () => {
-          W = canvas.width = window.innerWidth;
-          H = canvas.height = window.innerHeight;
-        });
+      let W = 0, H = 0, dpr = 1;
+      let nodes = [];
+      let pulses = [];
+      let pointer = { x: -9999, y: -9999 };
 
-        const dots = Array.from({ length: 130 }, () => ({
+      function buildScene() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const isMob = W <= 768;
+        const count = isMob ? 34 : 58;
+        nodes = Array.from({ length: count }, () => ({
           x: Math.random() * W,
-          y: Math.random() * H,
-          r: 1.1 + Math.random() * 2.2,
-          vy: -(0.25 + Math.random() * 0.65),
-          vx: (Math.random() - 0.5) * 0.3,
-          a: 0.35 + Math.random() * 0.55
+          y: Math.random() * (H * 0.85),
+          vx: (Math.random() - 0.5) * (isMob ? 0.35 : 0.45),
+          vy: (Math.random() - 0.5) * (isMob ? 0.35 : 0.45),
+          r: 1.5 + Math.random() * 1.8,
+          isCyan: Math.random() < 0.38
         }));
+      }
 
-        function drawFrame() {
-          requestAnimationFrame(drawFrame);
-          ctx.clearRect(0, 0, W, H);
-          const t = Date.now() * 0.0008;
+      buildScene();
+      window.addEventListener('resize', buildScene);
+      window.addEventListener('mousemove', (e) => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) { pointer.x = e.touches[0].clientX; pointer.y = e.touches[0].clientY; }
+      }, { passive: true });
+      window.addEventListener('mouseleave', () => { pointer.x = -9999; pointer.y = -9999; });
 
-          // Glowing floating golden dust particles
-          dots.forEach(d => {
-            d.y += d.vy;
-            d.x += d.vx + Math.sin(t + d.y * 0.015) * 0.25;
-            if (d.y < -10) { d.y = H + 10; d.x = Math.random() * W; }
-            if (d.x < -10) d.x = W + 10;
-            if (d.x > W + 10) d.x = -10;
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(243, 190, 142, ${d.a})`;
-            ctx.fill();
-          });
+      let gridOffset = 0;
 
-          // Rotating 3D-projected Torus Knot Wireframe Sculpture
-          const cx = W <= 968 ? W * 0.5 : W * 0.72;
-          const cy = W <= 968 ? H * 0.34 : H * 0.48;
-          const scale = W <= 968 ? Math.min(W, H) * 0.24 : Math.min(W, H) * 0.22;
-          ctx.strokeStyle = 'rgba(229, 169, 124, 0.34)';
-          ctx.lineWidth = 1.25;
+      function drawPerspectiveCyberGrid() {
+        const horizonY = H * 0.68;
+        const bottomY = H;
+        const vpX = W * 0.5;
+        gridOffset = (gridOffset + 0.008) % 1;
+
+        ctx.save();
+        // Horizontal glowing horizon line
+        const hGrad = ctx.createLinearGradient(0, horizonY, W, horizonY);
+        hGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+        hGrad.addColorStop(0.25, 'rgba(56, 189, 248, 0.22)');
+        hGrad.addColorStop(0.5, 'rgba(229, 169, 124, 0.35)');
+        hGrad.addColorStop(0.75, 'rgba(56, 189, 248, 0.22)');
+        hGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        ctx.strokeStyle = hGrad;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(0, horizonY);
+        ctx.lineTo(W, horizonY);
+        ctx.stroke();
+
+        // Moving horizontal depth lines
+        const rows = 10;
+        for (let i = 0; i < rows; i++) {
+          const prog = (i + gridOffset) / rows;
+          const eased = prog * prog;
+          const y = horizonY + eased * (bottomY - horizonY);
+          const alpha = 0.04 + eased * 0.16;
+          ctx.strokeStyle = `rgba(229, 169, 124, ${alpha.toFixed(3)})`;
+          ctx.lineWidth = 1;
           ctx.beginPath();
-          const steps = 160;
-          for (let i = 0; i <= steps; i++) {
-            const u = (i / steps) * Math.PI * 2;
-            const r = Math.cos(3 * u) + 2;
-            let x = r * Math.cos(2 * u) * 0.36;
-            let y = r * Math.sin(2 * u) * 0.36;
-            let z = -Math.sin(3 * u) * 0.45;
-            // Rotate Y & X
-            const x1 = x * Math.cos(t) - z * Math.sin(t);
-            const z1 = x * Math.sin(t) + z * Math.cos(t);
-            const y2 = y * Math.cos(t * 0.6) - z1 * Math.sin(t * 0.6);
-            const z2 = y * Math.sin(t * 0.6) + z1 * Math.cos(t * 0.6);
-            const p = 2.6 / (3.4 - z2);
-            const sx = cx + x1 * scale * p;
-            const sy = cy + y2 * scale * p;
-            if (i === 0) ctx.moveTo(sx, sy);
-            else ctx.lineTo(sx, sy);
-          }
+          ctx.moveTo(0, y);
+          ctx.lineTo(W, y);
           ctx.stroke();
         }
-        drawFrame();
-      }
 
-      if (typeof THREE === 'undefined') {
-        start2DCanvasFallback();
-        return;
-      }
-
-      let renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'default' });
-      } catch (err) {
-        start2DCanvasFallback();
-        return;
-      }
-
-      const isMob = () => window.innerWidth <= 968;
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = isMob() ? 18 : 22;
-
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-      // Floating Glowing Golden Dust Particles (Concentrated inside mobile viewport!)
-      const count = 165;
-      const pGeo = new THREE.BufferGeometry();
-      const pos = new Float32Array(count * 3);
-      const spreadX = isMob() ? 14 : 42;
-      for (let i = 0; i < count; i++) {
-        pos[i * 3] = (Math.random() - 0.5) * spreadX;
-        pos[i * 3 + 1] = (Math.random() - 0.5) * 32;
-        pos[i * 3 + 2] = (Math.random() - 0.5) * 14;
-      }
-      pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-
-      const pMat = new THREE.PointsMaterial({
-        color: 0xf3be8e,
-        size: isMob() ? 0.30 : 0.22,
-        transparent: true,
-        opacity: isMob() ? 0.82 : 0.65,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-      const particles = new THREE.Points(pGeo, pMat);
-      scene.add(particles);
-
-      // Prominent Rotating 3D Architectural Torus Knot + Orbiting Ring (100% Visible on iPhone 12 Pro & Desktop)
-      const sculptureGroup = new THREE.Group();
-      const wireMat = new THREE.MeshBasicMaterial({
-        color: 0xe5a97c,
-        wireframe: true,
-        transparent: true,
-        opacity: isMob() ? 0.34 : 0.24
-      });
-      const torusMesh = new THREE.Mesh(new THREE.TorusKnotGeometry(2.5, 0.62, 84, 14), wireMat);
-      sculptureGroup.add(torusMesh);
-
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xfde68a,
-        wireframe: true,
-        transparent: true,
-        opacity: isMob() ? 0.22 : 0.16
-      });
-      const haloRing = new THREE.Mesh(new THREE.TorusGeometry(4.1, 0.05, 8, 48), ringMat);
-      haloRing.rotation.x = Math.PI / 3;
-      sculptureGroup.add(haloRing);
-
-      function positionSculpture() {
-        const mob = isMob();
-        camera.position.z = mob ? 18 : 22;
-        sculptureGroup.position.set(mob ? 0 : 6.8, mob ? 1.8 : 0.5, mob ? -1 : -2);
-        sculptureGroup.scale.setScalar(mob ? 0.92 : 1.05);
-        pMat.size = mob ? 0.30 : 0.22;
-        wireMat.opacity = mob ? 0.34 : 0.24;
-      }
-      positionSculpture();
-      scene.add(sculptureGroup);
-
-      let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-      window.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX - window.innerWidth / 2) / 120;
-        mouseY = (e.clientY - window.innerHeight / 2) / 120;
-      }, { passive: true });
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches[0]) {
-          mouseX = (e.touches[0].clientX - window.innerWidth / 2) / 90;
-          mouseY = (e.touches[0].clientY - window.innerHeight / 2) / 90;
+        // Perspective radial grid spokes
+        const cols = W <= 768 ? 10 : 18;
+        for (let i = -cols; i <= cols; i++) {
+          const spread = (i / cols) * W * 1.45;
+          ctx.strokeStyle = i % 2 === 0 ? 'rgba(56, 189, 248, 0.09)' : 'rgba(229, 169, 124, 0.08)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(vpX + spread * 0.12, horizonY);
+          ctx.lineTo(vpX + spread, bottomY);
+          ctx.stroke();
         }
-      }, { passive: true });
+        ctx.restore();
+      }
 
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        positionSculpture();
-      });
+      function drawTechConstellation() {
+        const maxDist = W <= 768 ? 115 : 145;
+        const maxDistSq = maxDist * maxDist;
 
-      window.addEventListener('bpcThemeChanged', () => {
-        pMat.color.setHex(0xf3be8e);
-        wireMat.color.setHex(0xe5a97c);
-      });
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          a.x += a.vx;
+          a.y += a.vy;
+          if (a.x < 0 || a.x > W) a.vx *= -1;
+          if (a.y < 0 || a.y > H * 0.82) a.vy *= -1;
+
+          // Subtle magnetic drift toward pointer
+          const dxp = pointer.x - a.x;
+          const dyp = pointer.y - a.y;
+          const dpSq = dxp * dxp + dyp * dyp;
+          if (dpSq < 19000 && dpSq > 100) {
+            a.x += dxp * 0.004;
+            a.y += dyp * 0.004;
+          }
+
+          // Connect neighboring circuit nodes
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dSq = dx * dx + dy * dy;
+            if (dSq < maxDistSq) {
+              const alpha = (1 - Math.sqrt(dSq) / maxDist) * 0.22;
+              ctx.strokeStyle = (a.isCyan && b.isCyan)
+                ? `rgba(56, 189, 248, ${alpha.toFixed(3)})`
+                : `rgba(229, 169, 124, ${alpha.toFixed(3)})`;
+              ctx.lineWidth = 0.9;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+
+              // Occasional glowing data packet pulse traveling along circuit link
+              if (pulses.length < 14 && Math.random() < 0.0007) {
+                pulses.push({ a, b, t: 0, speed: 0.015 + Math.random() * 0.018, cyan: a.isCyan });
+              }
+            }
+          }
+
+          // Crisp tech node dot
+          ctx.beginPath();
+          ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+          ctx.fillStyle = a.isCyan ? 'rgba(56, 189, 248, 0.55)' : 'rgba(229, 169, 124, 0.55)';
+          ctx.fill();
+        }
+
+        // Render traveling micro-data packets
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          const p = pulses[i];
+          p.t += p.speed;
+          if (p.t >= 1) { pulses.splice(i, 1); continue; }
+          const px = p.a.x + (p.b.x - p.a.x) * p.t;
+          const py = p.a.y + (p.b.y - p.a.y) * p.t;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.3, 0, Math.PI * 2);
+          ctx.fillStyle = p.cyan ? 'rgba(125, 211, 252, 0.95)' : 'rgba(253, 230, 138, 0.95)';
+          ctx.fill();
+        }
+      }
 
       function animate() {
         requestAnimationFrame(animate);
-        const arr = particles.geometry.attributes.position.array;
-        for (let i = 0; i < arr.length; i += 3) {
-          arr[i + 1] += 0.018;
-          arr[i] += Math.sin(arr[i + 1] * 0.14) * 0.005;
-          if (arr[i + 1] > 16) arr[i + 1] = -16;
-        }
-        particles.geometry.attributes.position.needsUpdate = true;
+        ctx.clearRect(0, 0, W, H);
+        drawPerspectiveCyberGrid();
+        drawTechConstellation();
 
-        const t = Date.now() * 0.00075;
-        sculptureGroup.rotation.y = t * 0.55;
-        sculptureGroup.rotation.x = Math.sin(t * 0.5) * 0.28 + (window.scrollY || 0) * 0.0006;
-        haloRing.rotation.z = -t * 0.4;
-
-        targetX += (mouseX - targetX) * 0.06;
-        targetY += (mouseY - targetY) * 0.06;
-        camera.position.x = targetX;
-        camera.position.y = -targetY;
-        camera.lookAt(scene.position);
-        renderer.render(scene, camera);
+        // Smart soft center readability vignette: keeps EVERY word 100% razor-sharp while tech animation shines cleanly!
+        const rad = ctx.createRadialGradient(W * 0.5, H * 0.42, Math.min(W, H) * 0.08, W * 0.5, H * 0.45, Math.max(W, H) * 0.72);
+        rad.addColorStop(0, 'rgba(7, 6, 5, 0.48)');
+        rad.addColorStop(0.55, 'rgba(7, 6, 5, 0.18)');
+        rad.addColorStop(1, 'rgba(7, 6, 5, 0)');
+        ctx.fillStyle = rad;
+        ctx.fillRect(0, 0, W, H);
       }
       animate();
     })();
